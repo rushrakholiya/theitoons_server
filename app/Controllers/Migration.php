@@ -1,24 +1,18 @@
 <?php
  
-defined('BASEPATH') OR exit('No direct script access allowed');
- 
-class Migration extends CI_Controller{
-    
-    function __construct()
-    {
-        parent::__construct();
-        $this->load->library('migration');
-    }
-    
+namespace App\Controllers;
+
+class Migrate extends \CodeIgniter\Controller
+{
     public function index()
     {
-            
-        if ($this->migration->current() === FALSE)
-        {
-                show_error($this->migration->error_string());
+        $migrate = \Config\Services::migrations();
+
+        try {
+            $migrate->latest();
+            echo "Done";
+        } catch (\Throwable $e) {
+            echo "Not Done";// Do something with the error here...
         }
-        
-        echo "Done";
     }
 }
- 
