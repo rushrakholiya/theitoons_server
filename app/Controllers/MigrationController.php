@@ -3,7 +3,11 @@
  class MigrationController extends CI_Controller
  {
          public function index()
-         {    
+         {
+            echo ‘Controller file index method run.’;
+         } 
+         public function CreateMigration() 
+         {  
                echo "<title> Tutorial and Example </title>"; 
                  $this->load->library('migration'); // load migration library
                  if ($this->migration->current() === False)
