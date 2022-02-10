@@ -2,22 +2,16 @@
  defined(' BASEPATH ') OR exit('No direct script access allowed');
  class MigrationController extends CI_Controller
  {
-         public function index()
-         {
-            echo ‘Controller file index method run.’;
-         } 
-         public function CreateMigration() 
-         {  
-               echo "<title> Tutorial and Example </title>"; 
-                 $this->load->library('migration'); // load migration library
-                 if ($this->migration->current() === False)
-                 {
-                         show_error($this->migration->error_string()); /* if current version is not found, it returns an error message. */
-                 }
-                 else
-                 { 
-                     echo "<h2> Migration table has been created </h2>";
-                 }
-         }
+        public function index($version){
+            $this->load->library("migration");
+
+            if(!$this->migration->version($version)){
+              show_error($this->migration->error_string());
+            }   
+            else
+            { 
+                 echo "<h2> Migration table has been created </h2>";
+            }
+        }
  }
  ?> 
