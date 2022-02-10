@@ -1,7 +1,9 @@
 <?php
- defined(' BASEPATH ') OR exit('No direct script access allowed');
- class MigrationController extends CI_Controller
- {
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class MigrationController extends CI_Controller
+{
         public function index($version){
             $this->load->library("migration");
 
@@ -13,5 +15,4 @@
                  echo "<h2> Migration table has been created </h2>";
             }
         }
- }
- ?> 
+}
