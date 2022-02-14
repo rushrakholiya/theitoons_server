@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php $base_url = base_url("/public/assets");?>
+  <?php $base_url = base_url("/public/assets");
+  echo site_url()."<br>";
+  echo base_url()."<br>";
+  echo site_url(uri_string())."<br>";
+  echo current_url()."<br>";?>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login - TheIToons</title>
