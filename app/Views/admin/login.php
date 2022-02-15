@@ -1,7 +1,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">   
   <div class="login-logo">
-    <img src="<?php echo $base_url;?>/dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="width: 15%;"><br>
+    <img src="<?php echo base_url("/public/assets");?>/dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="width: 15%;"><br>
     <!--<span class="brand-text font-weight-light">TheIToons</span><br>-->
     <b>Login</b>
   </div>
@@ -10,7 +10,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Login to start your session</p>
 
-      <form action="<?php echo $site_url;?>/admin/dashboard" method="post">
+      <form action="<?php echo base_url();?>/admin/dashboard" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -56,10 +56,10 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1 mt-4">
-        <a href="<?php echo $site_url;?>/admin/forgot_password">I forgot my password</a>
+        <a href="<?php echo base_url();?>/admin/forgot_password">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="<?php echo $site_url;?>/admin/register" class="text-center">Register a new membership</a>
+        <a href="<?php echo base_url();?>/admin/register" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.login-card-body -->

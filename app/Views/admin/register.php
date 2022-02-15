@@ -1,7 +1,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <img src="<?php echo $base_url;?>/dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="width: 15%;"><br>
+    <img src="<?php echo base_url("/public/assets");?>/dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="width: 15%;"><br>
     <!--<span class="brand-text font-weight-light">TheIToons</span><br>-->
     <b>Registration</b>
   </div>
@@ -10,7 +10,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="<?php echo $site_url;?>/admin/dashboard" method="post">
+      <form action="<?php echo base_url();?>/admin/dashboard" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Full name">
           <div class="input-group-append">
@@ -72,7 +72,7 @@
         </a>
       </div>-->
       <p class="mb-1 mt-4">
-        <a href="<?php echo $site_url;?>/admin" class="text-center">I already have a membership</a>
+        <a href="<?php echo base_url();?>/admin" class="text-center">I already have a membership</a>
       </p>
 
     </div>
