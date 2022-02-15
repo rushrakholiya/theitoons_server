@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php echo $title; ?></title>
+  <title><?php echo esc($title); ?></title>
   <link rel="icon" href="<?php echo base_url("/public/assets");?>/dist/img/logo.png">
 
   <!-- Google Font: Source Sans Pro -->
