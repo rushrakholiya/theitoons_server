@@ -1,6 +1,10 @@
 <!-- Navbar -->
-<?php $uri = new \CodeIgniter\HTTP\URI(current_url());
-      $menu_name = $uri->getSegment(2);
+<?php //$uri = new \CodeIgniter\HTTP\URI(current_url());
+      //$menu_name = $uri->getSegment(2);
+      $uri = current_url();
+      $uriarray = explode('/', $uri);
+      $mainuri=array_reverse($uriarray);
+      $menu_name = $mainuri[0];
       //echo $menu_name;?>
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->

@@ -14,8 +14,12 @@
 </div>
 <!-- ./wrapper -->
 
-<?php $uri = new \CodeIgniter\HTTP\URI(current_url());
-$menu_name = $uri->getSegment(2);
+<?php //$uri = new \CodeIgniter\HTTP\URI(current_url());
+//$menu_name = $uri->getSegment(2);
+$uri = current_url();
+$uriarray = explode('/', $uri);
+$mainuri=array_reverse($uriarray);
+$menu_name = $mainuri[0];
 if($menu_name=="dashboard"){?>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url();?>/public/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
