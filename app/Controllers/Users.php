@@ -87,6 +87,7 @@ class Users extends HF_Controller
         }
         else
         {
+            $data = [];
             return $this->headerfooter('editUser',$data);
         }
     }
