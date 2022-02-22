@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\RegisterModel;
+use App\Helper\Formerror;
 
 class Register extends HF_Controller
 {
