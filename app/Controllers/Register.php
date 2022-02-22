@@ -46,6 +46,7 @@ class Register extends HF_Controller
             }
             else{
                 $data['validation'] = $this->validator;
+                return $this->loginheaderfooter('register',$data);
             }
         }
         else
