@@ -3,23 +3,22 @@
 namespace App\Controllers;
 
 use App\Models\RegisterModel;
-use App\Helper\Formerror;
 
 class Register extends HF_Controller
 {
     public $registerModel;
     public function __construct()
     {
-        helper(['form', 'url','formerror']);
+        helper(['form', 'url']);
         $this->registerModel = new RegisterModel();
         $this->session = \Config\Services::session();
     }
     public function index()
     {        
-        
+        $data = [];
+        $data['validation'] = null;
         if( $this->request->getMethod() == "post" ){
-            $data = [];
-            $data['validation'] = null;
+            
             $rules = [
             'username'     => 'required|min_length[4]|max_length[20]',
             'email'        => 'required|valid_email|is_unique[users.user_email]',
