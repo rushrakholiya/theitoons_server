@@ -1,5 +1,5 @@
 <?php
-if(!function_exists('display_error')) {
+/*if(!function_exists('display_error')) {
 	function display_error($validation,$field)
 	{
 		if(isset($validation))
@@ -16,5 +16,5 @@ if(!function_exists('display_error')) {
 		}
 
 	}
-}
+}*/
 ?>
