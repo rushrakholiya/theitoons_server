@@ -18,88 +18,73 @@
       echo $result->user_name;
       print_r($result);*/
       if($session->getTempdata('error')){?>
-          <span class="text-danger input-group mt-1 ml-1 mb-1"><?= $session->getTempdata('error'); ?></span>
+        <span class="text-danger input-group mt-1 ml-1 mb-1"><?= $session->getTempdata('error'); ?></span>
       <?php }?>
 
       <?= form_open(); ?>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username *" name="username" value="<?= set_value('username');?>">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Username *" name="username" value="<?= set_value('username');?>">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-user"></span>
+          </div>
+        </div>
+        <?php if(isset($validation)){?>
+        <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'username'); ?></span> <?php }?>       
+      </div>
+      <div class="input-group mb-3">
+        <input type="email" class="form-control" placeholder="Email *" name="email" value="<?= set_value('email');?>">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-envelope"></span>
+          </div>
+        </div>
+        <?php if(isset($validation)){?>
+        <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'email'); ?></span><?php }?>  
+      </div>
+      <div class="input-group mb-3">
+        <input type="password" class="form-control" placeholder="Password *" name="password">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+        <?php if(isset($validation)){?>
+        <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'password'); ?></span><?php }?>
+      </div>
+      <div class="input-group mb-3">
+        <input type="password" class="form-control" placeholder="Retype password *" name="pass_confirm">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+        <?php if(isset($validation)){?>
+        <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'pass_confirm'); ?></span><?php }?>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="icheck-primary">
+            <input type="checkbox" id="agreeTerms" name="terms" value="1" <?= set_checkbox('terms', '1'); ?>>
+            <label for="agreeTerms">
+             Please confirm that you agree to our <a href="#">privacy policy</a>
+            </label>
           </div>
           <?php if(isset($validation)){?>
-          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'username'); ?></span> <?php }?>       
+          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'terms'); ?></span><?php }?>
         </div>
-
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email *" name="email" value="<?= set_value('email');?>">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-          <?php if(isset($validation)){?>
-          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'email'); ?></span><?php }?>  
+      </div>
+      <div class="row justify-content-center">
+        <!-- /.col -->
+        <div class="col-6">
+          <button type="submit" class="btn btn-primary btn-block">Create Account</button>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password *" name="password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-          <?php if(isset($validation)){?>
-          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'password'); ?></span><?php }?>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password *" name="pass_confirm">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-          <?php if(isset($validation)){?>
-          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'pass_confirm'); ?></span><?php }?>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="1" <?= set_checkbox('terms', '1'); ?>>
-              <label for="agreeTerms">
-               Please confirm that you agree to our <a href="#">privacy policy</a>
-              </label>
-            </div>
-            <?php if(isset($validation)){?>
-            <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'terms'); ?></span><?php }?>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <!-- /.col -->
-          <div class="col-6">
-            <button type="submit" class="btn btn-primary btn-block">Create Account</button>
-          </div>
-          <!-- /.col -->
-        </div>
+        <!-- /.col -->
+      </div>
       <?= form_close(); ?>
-      
-      <!--<div class="social-auth-links text-center">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i>
-          Sign up using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
-          Sign up using Google+
-        </a>
-      </div>-->
-
       <p class="mb-1 mt-4 text-center">
           Already have an account? <a href="<?= base_url();?>/login">Login here</a>
       </p>
-
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
