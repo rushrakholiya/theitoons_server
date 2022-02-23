@@ -50,7 +50,7 @@ class Users extends HF_Controller
             $data = []; 
             $path = "";
             $file =  $this->request->getFile('avatar');
-            if($file->move(FCPATH.'public\profiles', $file->getName()))
+            if($file->move(FCPATH.'public/profiles', $file->getName()))
             {
                 $path = base_url().'/public/profiles/'.$file->getName();
             } 
