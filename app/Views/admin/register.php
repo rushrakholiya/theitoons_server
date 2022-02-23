@@ -29,7 +29,7 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><?php //echo display_error($validation,'username'); ?></span>         
+          <span class="text-danger input-group mt-1 ml-1"><?php echo display_error($validation,'username'); ?></span>         
         </div>
 
         <div class="input-group mb-3">
@@ -62,7 +62,7 @@
         <div class="row mb-3">
           <div class="col-12">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="1" <?= set_checkbox('terms', '1') ?>>
+              <input type="checkbox" id="agreeTerms" name="terms" value="1" <?= set_checkbox('terms', '1'); ?>>
               <label for="agreeTerms">
                Please confirm that you agree to our <a href="#">privacy policy</a>
               </label>
