@@ -11,7 +11,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Get ready to scale</p>
 
-      <?php 
+      <?php echo "here".test_ran();
       /*$db = db_connect();
       $query = $db->query("SELECT * FROM `users` WHERE `user_id` = 1");
       $result = $query->getRow();
