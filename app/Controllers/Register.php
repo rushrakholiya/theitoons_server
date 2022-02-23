@@ -9,7 +9,7 @@ class Register extends HF_Controller
     public $registerModel;
     public function __construct()
     {
-        helper(['form', 'url']);
+        helper(['form', 'url', 'usermeta']);
         $this->registerModel = new RegisterModel();
         $this->session = \Config\Services::session();
     }
