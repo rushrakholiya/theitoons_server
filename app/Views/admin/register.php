@@ -29,7 +29,7 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><!-- <?// echo display_error($validation,'username'); ?> --></span>        
+          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'username'); ?></span>        
         </div>
 
         <div class="input-group mb-3">
@@ -39,7 +39,7 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><!-- <?// echo display_error($validation,'email'); ?> --></span>
+          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'email'); ?></span>
         </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Password *" name="password">
