@@ -9,12 +9,13 @@ class Register extends HF_Controller
     public $registerModel;
     public function __construct()
     {
-        helper(['form', 'url']);
+        helper(['form', 'url','test']);
         $this->registerModel = new RegisterModel();
         $this->session = \Config\Services::session();
     }
     public function index()
     {        
+        echo test_ran();
         $data = [];
         $data['validation'] = null;
         if( $this->request->getMethod() == "post" ){
