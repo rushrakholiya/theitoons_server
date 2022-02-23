@@ -32,7 +32,7 @@ class Users extends Migration
             'user_status'    => [
                 'type'       => 'INT',
                 'constraint' => 11,
-                'default'    => 0,
+                'default'    => 1,
             ],
             'registered_date datetime default current_timestamp',
         ]);
