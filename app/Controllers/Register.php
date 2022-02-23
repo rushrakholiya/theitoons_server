@@ -15,7 +15,7 @@ class Register extends HF_Controller
     }
     public function index()
     {        
-        //echo test_ran();
+        echo test_ran();
         $data = [];
         $data['validation'] = null;
         if( $this->request->getMethod() == "post" ){
