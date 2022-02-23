@@ -51,7 +51,6 @@ class Register extends HF_Controller
         }
         else
         {
-            $data = [];
             return $this->loginheaderfooter('register',$data);
         }
         
