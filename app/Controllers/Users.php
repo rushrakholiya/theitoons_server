@@ -9,7 +9,7 @@ class Users extends HF_Controller
     public $usersModel;
     public function __construct()
     {
-        helper(['form', 'url','usermeta']);
+        helper(['form', 'url','usererror']);
         $this->usersModel = new UsersModel();
         $this->session = \Config\Services::session();
     }
