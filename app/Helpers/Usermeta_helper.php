@@ -1,5 +1,5 @@
 <?php
-if(!function_exists('display_error')) {
+if(!function_exists('getUserMeta')) {
 	function getUserMeta($metakey,$id)
 	{
 		$db      = \Config\Database::connect();
