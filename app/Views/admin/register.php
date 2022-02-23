@@ -29,7 +29,8 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><?php echo display_error($validation,'username'); ?></span>         
+          <?php if(isset($validation)){?>
+          <span class="text-danger input-group mt-1 ml-1"><?= display_error($validation,'username'); ?></span><?php }?>         
         </div>
 
         <div class="input-group mb-3">
@@ -39,7 +40,8 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><? //echo display_error($validation,'email'); ?></span>
+          <?php if(isset($validation)){?>
+          <span class="text-danger input-group mt-1 ml-1"><?= display_error($validation,'email'); ?></span><?php }?> 
         </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Password *" name="password">
@@ -48,7 +50,8 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><? //echo display_error($validation,'password'); ?></span>
+          <?php if(isset($validation)){?>
+          <span class="text-danger input-group mt-1 ml-1"><?= display_error($validation,'password'); ?></span><?php }?> 
         </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Retype password *" name="pass_confirm">
@@ -57,7 +60,8 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><? //echo display_error($validation,'pass_confirm'); ?></span>
+          <?php if(isset($validation)){?>
+          <span class="text-danger input-group mt-1 ml-1"><?= display_error($validation,'pass_confirm'); ?></span><?php }?> 
         </div>
         <div class="row mb-3">
           <div class="col-12">
@@ -67,7 +71,8 @@
                Please confirm that you agree to our <a href="#">privacy policy</a>
               </label>
             </div>
-            <span class="text-danger input-group mt-1 ml-1"><? //echo display_error($validation,'terms'); ?></span>
+            <?php if(isset($validation)){?>
+            <span class="text-danger input-group mt-1 ml-1"><?= display_error($validation,'terms'); ?></span><?php }?> 
           </div>
         </div>
         <div class="row justify-content-center">
