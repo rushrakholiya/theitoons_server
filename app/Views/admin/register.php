@@ -12,6 +12,7 @@
       <p class="login-box-msg">Get ready to scale</p>
 
       <?php echo "here".test_ran();
+      print_r($validation);
       /*$db = db_connect();
       $query = $db->query("SELECT * FROM `users` WHERE `user_id` = 1");
       $result = $query->getRow();
@@ -29,7 +30,8 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'username'); ?></span>        
+          <?php if(isset($validation)){?>
+          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'username'); ?></span> <?php }?>       
         </div>
 
         <div class="input-group mb-3">
@@ -39,7 +41,7 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-          <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'email'); ?></span>
+          <span class="text-danger input-group mt-1 ml-1"><?php //echo displayError($validation,'email'); ?></span>
         </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Password *" name="password">
