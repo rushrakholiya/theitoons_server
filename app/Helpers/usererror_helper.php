@@ -28,4 +28,23 @@ if(!function_exists('getUserMeta')) {
 		return $query->getRow();
 	}
 }
+
+if(!function_exists('getLoggedInUserData')) {
+	function getLoggedInUserData($id)
+	{
+		$db      = \Config\Database::connect();
+		$builder = $db->table('users');
+		$builder->select('*');
+		$query = $builder->where('user_id',$id);
+		$result = $query->get();
+		if(count($result->getResultArray()) == 1)
+		{
+			return $result->getRow();
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
 ?>
