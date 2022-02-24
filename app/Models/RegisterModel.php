@@ -35,6 +35,7 @@ class RegisterModel extends Model
 			$resmeta = $buildermetadata->insertBatch($metadata);
 			if( $this->db->affectedRows() > 0 )
 			{
+				$this->session->set('logged_user',$userid);
 				return true;
 			}
 			else
