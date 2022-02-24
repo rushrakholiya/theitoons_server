@@ -1,9 +1,5 @@
   <footer class="main-footer">
     <strong>© TheIToons - 2022</strong>
-    <!--All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>-->
   </footer>
 
   <!-- Control Sidebar -->
@@ -14,12 +10,9 @@
 </div>
 <!-- ./wrapper -->
 
-<?php //$uri = new \CodeIgniter\HTTP\URI(current_url());
-//$menu_name = $uri->getSegment(2);
-$uri = current_url();
+<?php $uri = current_url();
 $uriarray = explode('/', $uri);
-$mainuri=array_reverse($uriarray);
-$menu_name = $mainuri[0];
+if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
 if($menu_name=="dashboard"){?>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url();?>/public/assets/plugins/jquery-ui/jquery-ui.min.js"></script>

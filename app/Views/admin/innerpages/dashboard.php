@@ -28,10 +28,8 @@
         </div><!-- /.row -->
 
         <?php if($session->getTempdata('success')){?>
-          <div class="row mb-2">
-              <div class="col-sm-6">
-                <small class="badge badge-success"><?= $session->getTempdata('success'); ?></small>
-              </div><!-- /.col -->
+          <div class="alert alert-success">
+            <?= $session->getTempdata('success'); ?>
           </div>
         <?php }?>
         

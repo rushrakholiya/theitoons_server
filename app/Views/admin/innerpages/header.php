@@ -13,12 +13,10 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/adminlte.min.css"> 
   
-  <?php //$uri = new \CodeIgniter\HTTP\URI(current_url());
-  //$menu_name = $uri->getSegment(2);
+  <?php 
   $uri = current_url();
   $uriarray = explode('/', $uri);
-  $mainuri=array_reverse($uriarray);
-  $menu_name = $mainuri[0];
+  if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
   if($menu_name=="dashboard"){?>
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">

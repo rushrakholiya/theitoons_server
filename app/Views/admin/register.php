@@ -18,7 +18,7 @@
       echo $result->user_name;
       print_r($result);*/
       if($session->getTempdata('error')){?>
-        <span class="text-danger input-group mt-1 ml-1 mb-1"><?= $session->getTempdata('error'); ?></span>
+        <span class="text-danger input-group mt-1 ml-1 mb-2"><?= $session->getTempdata('error'); ?></span>
       <?php }?>
 
       <?= form_open(); ?>
@@ -53,14 +53,14 @@
         <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'password'); ?></span><?php }?>
       </div>
       <div class="input-group mb-3">
-        <input type="password" class="form-control" placeholder="Retype password *" name="pass_confirm">
+        <input type="password" class="form-control" placeholder="Retype password *" name="confirm_password">
         <div class="input-group-append">
           <div class="input-group-text">
             <span class="fas fa-lock"></span>
           </div>
         </div>
         <?php if(isset($validation)){?>
-        <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'pass_confirm'); ?></span><?php }?>
+        <span class="text-danger input-group mt-1 ml-1"><?php echo displayError($validation,'confirm_password'); ?></span><?php }?>
       </div>
       <div class="row mb-3">
         <div class="col-12">
