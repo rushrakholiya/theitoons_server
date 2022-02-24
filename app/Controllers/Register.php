@@ -23,7 +23,7 @@ class Register extends HF_Controller
             'username'     => 'required|min_length[4]|max_length[20]',
             'email'        => 'required|valid_email|is_unique[users.user_email]',
             'password'     => 'required|min_length[6]|max_length[16]',
-            'pass_confirm' => 'required|matches[password]',
+            'confirm_password' => 'required|matches[password]',
             'terms'        => 'required',
             ];      
         
@@ -36,7 +36,7 @@ class Register extends HF_Controller
                 if($this->registerModel->createUser($userdata))
                 {
                     $this->session->setTempdata('success','Welcome! Account created Successfully.',2);
-                    return redirect()->to('dashboard'); 
+                    return redirect()->to(base_url().'/dashboard'); 
                 }
                 else
                 {
