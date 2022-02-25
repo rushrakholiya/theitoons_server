@@ -100,7 +100,6 @@ class Login extends HF_Controller
                        $email->setFrom('me@preraktrivedi.com','TheIToons');
                        $email->setSubject($subject);
                        $email->setMessage($message);
-                       $email->set_mailtype("html");
 
                        if($email->send())
                        {
