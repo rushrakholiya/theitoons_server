@@ -46,7 +46,7 @@ class Login extends HF_Controller
                         }
                         else
                         {
-                            $this->session->setTempdata('error','Please activate your account, Contact Sdmin.',2);
+                            $this->session->setTempdata('error','Please activate your account, Contact Admin.',2);
                             return redirect()->to(current_url());
                         }
                     }
