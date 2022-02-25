@@ -7,6 +7,7 @@ class RegisterModel extends Model
 {
 	public function createUser($data)
 	{
+		$this->session = \Config\Services::session();
 		$builder = $this->db->table('users');
 		$res = $builder->insert($data);
 		$userid = $this->db->insertID();		
