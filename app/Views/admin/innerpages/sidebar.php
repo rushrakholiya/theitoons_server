@@ -1,5 +1,6 @@
 <!-- Navbar -->
 <?php $session = \Config\Services::session();
+      $menu_name ="";
       $uri = current_url();
       $uriarray = explode('/', $uri);
       if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}

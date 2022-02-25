@@ -10,7 +10,8 @@
 </div>
 <!-- ./wrapper -->
 
-<?php $uri = current_url();
+<?php $menu_name ="";
+$uri = current_url();
 $uriarray = explode('/', $uri);
 if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
 if($menu_name=="dashboard"){?>

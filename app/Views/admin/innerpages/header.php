@@ -13,11 +13,11 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/adminlte.min.css"> 
   
-  <?php 
+  <?php $menu_name ="";
   $uri = current_url();
   $uriarray = explode('/', $uri);
   if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
-  if($menu_name=="dashboard"){?>
+  if($menu_name =="dashboard"){?>
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
