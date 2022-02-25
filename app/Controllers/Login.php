@@ -93,7 +93,7 @@ class Login extends HF_Controller
                        $to = $useremail;
                        $subject = 'Reset Password Link | theitoons.com';
                        $token = $userdata['user_id'];
-                       $message = 'Hi '.$userdata['user_name'].'<br><br> Your reset password request has been received. Please click the below link to reset your password.<br><br><a href="'.base_url().'/login/reset_password/'.$token.'" target="_blank">Click here to reset password</a><br><br> Thanks<br>TheIToons';
+                       $message = 'Hi '.$userdata['user_name'].',<br><br> Your reset password request has been received. Please click the below link to reset your password.<br><br><a href="'.base_url().'/login/reset_password/'.$token.'" target="_blank">Click here to reset password</a><br><br> Thanks,<br>TheIToons';
                        $email = \Config\Services::email();
                        $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                        $email->setTo($to);
