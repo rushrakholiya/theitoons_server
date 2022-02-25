@@ -19,7 +19,7 @@ class SiteDetail extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '100',
             ],
-            'opion_value'       => [
+            'option_value'       => [
                 'type'          => 'LONGTEXT',
             ],
         ]);
