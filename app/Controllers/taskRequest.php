@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\TaskrequestModel;
 
-class taskRequest extends HF_Controller
+class TaskRequest extends HF_Controller
 {    
     public function __construct()
     {
@@ -15,15 +15,15 @@ class taskRequest extends HF_Controller
     public function index()
     {    
         $data = [];
-        /*if(!session()->has('logged_user_client'))
+        if(!session()->has('logged_user_client'))
         {
             return redirect()->to(base_url()."/login");
         }
         else
         {
             $data = [];
-            $data['validation'] = null;*/
-            /*if( $this->request->getMethod() == "post" )
+            $data['validation'] = null;
+            if( $this->request->getMethod() == "post" )
             {                
                 $rules = [
                 'title'     => 'required',
@@ -84,12 +84,9 @@ class taskRequest extends HF_Controller
                 }
             }
             else
-            {*/
-                //return $this->loginheaderfooter('task_request',$data);
-                 echo view('loginheader',$data);
-                 echo view('task_request',$data);
-                 echo view('loginfooter',$data);
-            //}                    
-        //}    
+            {
+                return $this->loginheaderfooter('task_request',$data);
+            }                    
+        }    
     }    
 }
