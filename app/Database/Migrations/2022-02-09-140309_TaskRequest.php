@@ -27,10 +27,6 @@ class TaskRequest extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'task_url'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-            ],
             'task_comment_count'  => [
                 'type'       => 'BIGINT',
                 'constraint' => 20,
