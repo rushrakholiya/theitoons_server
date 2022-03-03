@@ -15,14 +15,14 @@ class taskRequest extends HF_Controller
     public function index()
     {    
         $data = [];
-        if(!session()->has('logged_user_client'))
+        /*if(!session()->has('logged_user_client'))
         {
             return redirect()->to(base_url()."/login");
         }
         else
         {
             $data = [];
-            $data['validation'] = null;
+            $data['validation'] = null;*/
             /*if( $this->request->getMethod() == "post" )
             {                
                 $rules = [
@@ -90,6 +90,6 @@ class taskRequest extends HF_Controller
                  echo view('task_request',$data);
                  echo view('loginfooter',$data);
             //}                    
-        }    
+        //}    
     }    
 }
