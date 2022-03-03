@@ -2,7 +2,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-  <?= $this->include("admin/innerpages/sidebar");?>
+  <?= $this->include("admin/sidebar");?>
 
     <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -12,12 +12,6 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Users</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?= base_url();?>/dashboard">Home</a></li>
-              <li class="breadcrumb-item active">Users</li>
-            </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -45,19 +39,8 @@
       <?php }?>
 
       <?php if(isset($userinfo)){
-        $id = $userinfo->user_id;
-          /*echo "<pre>";
-          print_r($userinfo);
-          echo "</pre>";
-          
-          echo $userinfo->user_name;
-          echo $userinfo->user_email;
-          echo $userinfo->user_status;        
-
-          $result = getUserMeta("nickname", $id);
-          echo $result->meta_value;*/
-      ?>
-      <?= form_open_multipart('users/editUser/'.$id , 'id="fileForm"'); ?>
+        $id = $userinfo->user_id;?>
+      <?= form_open_multipart('admin/users/editUser/'.$id , 'id="fileForm"'); ?>
       <div class="row ml-1">
         <div class="col-md-8">
           <div class="card card-primary">
@@ -175,12 +158,12 @@
             </div>          
             <div class="card-body">
               <div class="form-group">
-                  <img class="img-circle" src="<?= $profile_picture->meta_value;?>" height="160px" width="160px">
+                  <img class="img-circle mx-auto d-block" src="<?= $profile_picture->meta_value;?>" height="160px" width="160px">
               </div>
             </div>
           </div>
         </div>
-      <?php }?>
+        <?php }?>
       </div>
 
       <div class="row ml-1">
@@ -188,6 +171,7 @@
           <input type="submit" value="Save Changes" class="btn btn-success float-right">
         </div>
       </div>
+      <?= form_close();?>
 
       <script>
         setTimeout(function(){
@@ -232,93 +216,4 @@
         });
     });
   </script>
-  <style>
-.userProfilePicture {line-height: 1.2;}
-.has-success .help-block,
-.has-success .control-label,
-.has-success .radio,
-.has-success .checkbox,
-.has-success .radio-inline,
-.has-success .checkbox-inline {
- color:#3c763d
-}
-.has-success .form-control {
- border-color:#3c763d;
- -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
- box-shadow:inset 0 1px 1px rgba(0,0,0,.075)
-}
-.has-success .form-control:focus {
- border-color:#2b542c;
- -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168;
- box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168
-}
-.has-success .input-group-addon {
- color:#3c763d;
- background-color:#dff0d8;
- border-color:#3c763d
-}
-.has-success .form-control-feedback {
- color:#3c763d
-}
-.has-warning .help-block,
-.has-warning .control-label,
-.has-warning .radio,
-.has-warning .checkbox,
-.has-warning .radio-inline,
-.has-warning .checkbox-inline {
- color:#8a6d3b
-}
-.has-warning .form-control {
- border-color:#8a6d3b;
- -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
- box-shadow:inset 0 1px 1px rgba(0,0,0,.075)
-}
-.has-warning .form-control:focus {
- border-color:#66512c;
- -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #c0a16b;
- box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #c0a16b
-}
-.has-warning .input-group-addon {
- color:#8a6d3b;
- background-color:#fcf8e3;
- border-color:#8a6d3b
-}
-.has-warning .form-control-feedback {
- color:#8a6d3b
-}
-.has-error .help-block,
-.has-error .control-label,
-.has-error .radio,
-.has-error .checkbox,
-.has-error .radio-inline,
-.has-error .checkbox-inline {
- color:#a94442
-}
-.has-error .form-control {
- border-color:#a94442;
- -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
- box-shadow:inset 0 1px 1px rgba(0,0,0,.075)
-}
-.has-error .form-control:focus {
- border-color:#843534;
- -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
- box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483
-}
-.has-error .input-group-addon {
- color:#a94442;
- background-color:#f2dede;
- border-color:#a94442
-}
-.has-error .form-control-feedback {
- color:#a94442
-}
-.has-feedback label.sr-only~.form-control-feedback {
- top:0
-}
-.help-block {
- display:block;
- margin-top:5px;
- margin-bottom:10px;
- color:#737373
-}
-  </style>
+ <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css"> 

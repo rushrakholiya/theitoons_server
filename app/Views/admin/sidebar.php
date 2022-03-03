@@ -5,6 +5,9 @@
       $uriarray = explode('/', $uri);
       if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
       if (in_array("users", $uriarray)) { $menu_name = 'users';}
+      if (in_array("addNewUser", $uriarray)) { $menu_name = 'addNewUser';}
+      if (in_array("settings", $uriarray)) { $menu_name = 'settings';}
+      
       //echo $menu_name;?>
 
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -52,8 +55,8 @@
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <a href="<?= base_url();?>/users/viewUser/<?= $id;?>" class="btn btn-default btn-flat">Profile</a>
-                <a href="<?= base_url();?>/dashboard/logout" class="btn btn-default btn-flat float-right">Logout</a>
+                <a href="<?= base_url();?>/admin/users/viewUser/<?= $id;?>" class="btn btn-default btn-flat">Profile</a>
+                <a href="<?= base_url();?>/admin/dashboard/logout" class="btn btn-default btn-flat float-right">Logout</a>
               </li>
             </ul>
           </li>
@@ -71,9 +74,15 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<?= base_url();?>/dashboard" class="brand-link">
-      <img src="<?= base_url();?>/public/assets/dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3">
-      <span class="brand-text font-weight-light">TheIToons</span>
+    <a href="<?= base_url();?>/admin/dashboard" class="brand-link">
+      <?php $site_logo=getGeneralData("site_logo");
+          if(!empty($site_logo->option_value))
+            {$site_logo=$site_logo->option_value;}else{$site_logo = base_url()."/public/assets/dist/img/logo.png";}?>
+      <img src="<?= $site_logo;?>" alt="Logo" class="brand-image img-circle elevation-3">
+      <?php $site_name = getGeneralData("site_name");
+        if(!empty($site_name->option_value))
+        {$sitename=$site_name->option_value;}else{$sitename="TheIToons";}?>
+      <span class="brand-text font-weight-light"><?= $sitename;?></span>
     </a>
 
     <!-- Sidebar -->
@@ -84,16 +93,37 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?= base_url();?>/dashboard" class="nav-link <?php if($menu_name=="dashboard"){?>active<?php }?>">
+            <a href="<?= base_url();?>/admin/dashboard" class="nav-link <?php if($menu_name=="dashboard"){?>active<?php }?>">
               <i class="nav-icon fa fa-tachometer-alt"></i>
               <p> Dashboard </p>
             </a>            
           </li> 
 
-          <li class="nav-item">
-            <a href="<?= base_url();?>/users" class="nav-link <?php if($menu_name=="users"){?>active<?php }?>">
+          <li class="nav-item <?php if($menu_name=="users" || $menu_name=="addNewUser"){?>menu-open<?php }?>">
+            <a href="" class="nav-link <?php if($menu_name=="users" || $menu_name=="addNewUser"){?>active<?php }?>">
               <i class="nav-icon fa fa-user"></i>
-              <p> Users </p>
+              <p> Users <i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url();?>/admin/users" class="nav-link <?php if($menu_name=="users"){?>active<?php }?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/admin/users/addNewUser" class="nav-link <?php if($menu_name=="addNewUser"){?>active<?php }?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New User</p>
+                </a>
+              </li>
+            </ul>       
+          </li> 
+
+          <li class="nav-item">
+            <a href="<?= base_url();?>/admin/settings" class="nav-link <?php if($menu_name=="settings"){?>active<?php }?>">
+              <i class="nav-icon fa fa-cog"></i>
+              <p> Settings </p>
             </a>            
           </li> 
 

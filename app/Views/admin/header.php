@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= esc($title); ?></title>
-  <link rel="icon" href="<?= base_url();?>/public/assets/dist/img/logo.png">
+  <?php $site_favicon=getGeneralData("site_favicon");
+          if(!empty($site_favicon->option_value))
+            {$site_favicon=$site_favicon->option_value;}else{$site_favicon = base_url()."/public/assets/dist/img/logo.png";}?>
+  <link rel="icon" href="<?= $site_favicon;?>">
   
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

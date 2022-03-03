@@ -2,7 +2,11 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <img src="<?= base_url();?>/public/assets/dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="width: 20%;"><br>
+    <?php $site_logo=getGeneralData("site_logo");
+          if(!empty($site_logo->option_value))
+            {$site_logo=$site_logo->option_value;}else{$site_logo = base_url()."/public/assets/dist/img/logo.png";}?>
+    <img src="<?= $site_logo;?>" alt="Logo" class="brand-image img-circle elevation-3" style="width: 20%;">
+    <br>
     <!--<span class="brand-text font-weight-light">TheIToons</span><br>-->
     <b>Reset Password</b>
   </div>

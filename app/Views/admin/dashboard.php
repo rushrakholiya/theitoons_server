@@ -5,10 +5,13 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="<?= base_url();?>/public/assets/dist/img/logo.png" alt="ALogo" height="60" width="60">
+    <?php $site_logo=getGeneralData("site_logo");
+          if(!empty($site_logo->option_value))
+            {$site_logo=$site_logo->option_value;}else{$site_logo = base_url()."/public/assets/dist/img/logo.png";}?>
+    <img class="animation__shake" src="<?= $site_logo;?>" alt="ALogo" height="60" width="60">
   </div>
 
-  <?= $this->include("admin/innerpages/sidebar");?>
+  <?= $this->include("admin/sidebar");?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -18,12 +21,6 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?= base_url();?>/dashboard">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
 

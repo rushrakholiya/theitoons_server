@@ -1,5 +1,8 @@
   <footer class="main-footer">
-    <strong>© TheIToons - 2022</strong>
+    <?php $site_name = getGeneralData("site_name");
+        if(!empty($site_name->option_value))
+        {$sitename=$site_name->option_value;}else{$sitename="TheIToons";}?>
+    <strong>© <?= $sitename;?> - 2022</strong>
   </footer>
 
   <!-- Control Sidebar -->

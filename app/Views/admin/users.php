@@ -2,7 +2,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-  <?= $this->include("admin/innerpages/sidebar");?>
+  <?= $this->include("admin/sidebar");?>
 
     <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -13,12 +13,6 @@
           <div class="col-sm-6">
             <h1>Users</h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?= base_url();?>/dashboard">Home</a></li>
-              <li class="breadcrumb-item active">Users</li>
-            </ol>
-          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -27,15 +21,15 @@
     <section class="content">
 
       <!-- Default box -->
-      <?php if($session->getTempdata('successdelete')){?>
+      <?php if($session->getTempdata('success')){?>
         <div class="alert alert-success">
-          <?= $session->getTempdata('successdelete');?>
+          <?= $session->getTempdata('success');?>
         </div>
       <?php }?>
 
-      <?php if($session->getTempdata('errordelete')){?>
+      <?php if($session->getTempdata('error')){?>
         <div class="alert alert-danger">
-          <?= $session->getTempdata('errordelete');?>
+          <?= $session->getTempdata('error');?>
         </div>
       <?php }?>
 
@@ -79,12 +73,12 @@
                        }
                     echo "</td>";
                     echo '<td class="project-actions text-right">
-                          <a class="btn btn-info btn-sm" href="'.base_url().'/users/viewUser/'.$row->user_id.'">
+                          <a class="btn btn-info btn-sm" href="'.base_url().'/admin/users/viewUser/'.$row->user_id.'">
                               <i class="fas fa-pencil-alt">
                               </i>
                               Edit
                           </a>
-                          <a class="btn btn-danger btn-sm" href="'.base_url().'/users/deleteUser/'.$row->user_id.'">
+                          <a class="btn btn-danger btn-sm" href="'.base_url().'/admin/users/deleteUser/'.$row->user_id.'">
                               <i class="fas fa-trash">
                               </i>
                               Delete
