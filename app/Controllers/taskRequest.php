@@ -85,7 +85,10 @@ class taskRequest extends HF_Controller
             }
             else
             {*/
-                return $this->loginheaderfooter('task_request',$data);
+                //return $this->loginheaderfooter('task_request',$data);
+                 echo view('loginheader',$data);
+                 echo view('task_request',$data);
+                 echo view('loginfooter',$data);
             //}                    
         }    
     }    
