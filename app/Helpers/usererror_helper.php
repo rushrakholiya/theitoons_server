@@ -29,6 +29,25 @@ if(!function_exists('getUserMeta')) {
 	}
 }
 
+if(!function_exists('getGeneralData')) {
+	function getGeneralData($option_name)
+	{
+		$db      = \Config\Database::connect();
+		$builder = $db->table('site_details');
+		$builder->select('option_value');
+		$query = $builder->where('option_name',$option_name);
+		$result = $query->get();
+		if(count($result->getResultArray()) == 1)
+		{
+			return $result->getRow();
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
 if(!function_exists('getLoggedInUserData')) {
 	function getLoggedInUserData($id)
 	{
