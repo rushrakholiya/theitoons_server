@@ -17,6 +17,11 @@ class Login extends HF_Controller
             session()->remove('logged_user');
             session()->destroy();
         }
+        if(session()->has('logged_user_client'))
+        {
+            session()->remove('logged_user_client');
+            session()->destroy();
+        }
     }
     public function index()
     {       
@@ -40,9 +45,16 @@ class Login extends HF_Controller
                     {
                         if($userdata['user_status']==1 )
                         {
-                            $this->session->set('logged_user',$userdata['user_id']);
-                            //$this->session->setTempdata('success','Welcome! Account created Successfully.',2);
-                            return redirect()->to(base_url()."/dashboard");
+                            $user_role = getUserMeta("user_role", $userdata['user_id']);
+                            if($user_role->meta_value=="admin"){ 
+                                $this->session->set('logged_user',$userdata['user_id']);
+                                return redirect()->to(base_url()."/admin/dashboard");
+                            }
+                            else
+                            {
+                                $this->session->set('logged_user_client',$userdata['user_id']);
+                                return redirect()->to(base_url()."/taskRequest");
+                            }
                         }
                         else
                         {
@@ -90,14 +102,20 @@ class Login extends HF_Controller
                 $userdata = $this->loginModel->verifyUser($useremail);
                 if($userdata)
                 {
+                       $site_name = getGeneralData("site_name");
+                        if(!empty($site_name->option_value))
+                        {$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
+                       $admin_email = getGeneralData("admin_email");
+                        if(!empty($admin_email->option_value))
+                        {$admin_email=$admin_email->option_value;}else{$admin_email="me@preraktrivedi.com";}
                        $to = $useremail;
-                       $subject = 'Reset Password Link | theitoons.com';
+                       $subject = 'Reset Password Link | '.$sitename;
                        $token = $userdata['user_id'];
-                       $message = 'Hi '.$userdata['user_name'].',<br><br> Your reset password request has been received. Please click the below link to reset your password.<br><br><a href="'.base_url().'/login/resetPassword/'.$token.'" target="_blank">Click here to reset password</a><br><br> Thanks,<br>TheIToons';
+                       $message = 'Hi '.$userdata['user_name'].',<br><br> Your reset password request has been received. Please click the below link to reset your password.<br><br><a href="'.base_url().'/login/resetPassword/'.$token.'" target="_blank">Click here to reset password</a><br><br> Thanks,<br>'.$sitename;
                        $email = \Config\Services::email();
                        $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                        $email->setTo($to);
-                       $email->setFrom('me@preraktrivedi.com','TheIToons');
+                       $email->setFrom($admin_email,$sitename);
                        $email->setSubject($subject);
                        $email->setMessage($message);
 

@@ -36,7 +36,7 @@ class Register extends HF_Controller
                 if($this->registerModel->createUser($userdata))
                 {
                     $this->session->setTempdata('success','Welcome! Account created Successfully.',2);
-                    return redirect()->to(base_url().'/dashboard'); 
+                    return redirect()->to(base_url().'/taskRequest'); 
                 }
                 else
                 {

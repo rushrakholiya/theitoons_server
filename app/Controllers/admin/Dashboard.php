@@ -1,8 +1,8 @@
 <?php
  
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
-class Dashboard extends HF_Controller
+class Dashboard extends \App\Controllers\Admin\HFA_Controller
 {
     public $dashboardModel;
     public function __construct()
