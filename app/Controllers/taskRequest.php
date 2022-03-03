@@ -23,7 +23,7 @@ class taskRequest extends HF_Controller
         {
             $data = [];
             $data['validation'] = null;
-            if( $this->request->getMethod() == "post" )
+            /*if( $this->request->getMethod() == "post" )
             {                
                 $rules = [
                 'title'     => 'required',
@@ -84,9 +84,9 @@ class taskRequest extends HF_Controller
                 }
             }
             else
-            {
+            {*/
                 return $this->loginheaderfooter('task_request',$data);
-            }                    
+            //}                    
         }    
     }    
 }
