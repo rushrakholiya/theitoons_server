@@ -21,6 +21,33 @@ class UsersModel extends Model
 		$query = $builder->getWhere(['user_id' => $id], 1);
 		return $query->getRow();	   
 	}
+	public function addNewUser($userdata)
+	{		
+		$builder = $this->db->table('users');
+		$res = $builder->insert($userdata);
+		$userid = $this->db->insertID();		
+		if( ($this->db->affectedRows()) == 1 && (!empty($userid)) )
+		{			
+			return $userid ;	
+		}
+		else
+		{
+			return false;
+		}	
+	}
+	public function addNewUserMeta($usermetadata)
+	{
+		$buildermetadata = $this->db->table('user_meta');
+		$resmeta = $buildermetadata->insertBatch($usermetadata);
+		if( $this->db->affectedRows() > 0 )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	public function editUser($id,$userdata,$usermetadata)
 	{		
 		$builder = $this->db->table('users');

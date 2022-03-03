@@ -21,7 +21,7 @@ class RegisterModel extends Model
 			    ['user_id' => $userid,'meta_key' => 'first_name','meta_value' => '',],
 			    ['user_id' => $userid,'meta_key' => 'last_name','meta_value' => '',],
 			    ['user_id' => $userid,'meta_key' => 'user_description','meta_value' => '',],
-			    ['user_id' => $userid,'meta_key' => 'user_role','meta_value' => 'admin',],
+			    ['user_id' => $userid,'meta_key' => 'user_role','meta_value' => 'client',],
 			    ['user_id' => $userid,'meta_key' => 'company_name','meta_value' => '',],
 			    ['user_id' => $userid,'meta_key' => 'address_one','meta_value' => '',],
 			    ['user_id' => $userid,'meta_key' => 'address_two','meta_value' => '',],
@@ -36,7 +36,7 @@ class RegisterModel extends Model
 			$resmeta = $buildermetadata->insertBatch($metadata);
 			if( $this->db->affectedRows() > 0 )
 			{
-				$this->session->set('logged_user',$userid);
+				$this->session->set('logged_user_client',$userid);
 				return true;
 			}
 			else
