@@ -26,9 +26,9 @@ class TaskRequest extends HF_Controller
             if( $this->request->getMethod() == "post" )
             {                
                 $rules = [
-                'title'     => 'required',
-                'priority'  => 'required',
-                'task_description' => 'required',
+                    'title'     => 'required',
+                    'priority'  => 'required',
+                    'task_description' => 'required',
                 ];      
             
                 if( $this->validate($rules) ){
@@ -61,6 +61,7 @@ class TaskRequest extends HF_Controller
                         ];
                         if($this->taskrequestModel->addNewTaskRequestMeta($taskmetadata))
                         {
+                            //sent mail to admin and client remaining
                             $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
                             return redirect()->to(base_url().'/taskRequest'); 
                         }
