@@ -9,7 +9,6 @@
     <b>Task Request</b>
 
     <a href="<?= base_url();?>/admin/dashboard/logout" style="color: #007bff;text-decoration: none;font-size: 1rem;" class="float-right pt-4 pr-1">Logout</a>
-
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -97,8 +96,8 @@
         <div class="form-group mb-4">
           <label for="deadline" class="mb-0 ml-1">Deadline</label>
           <small class="form-text text-muted mt-0 pb-2 ml-1">Set a deadline</small>
-          <div class="input-group datepicker date">
-            <input type="text" class="form-control" placeholder="Set a deadline" name="deadline" id="deadline"/>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Set a deadline" name="deadline" id="datepicker"/>
             <div class="input-group-append">
                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
             </div>

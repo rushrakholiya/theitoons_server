@@ -20,6 +20,12 @@
   $uri = current_url();
   $uriarray = explode('/', $uri);
   if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
+  if (in_array("allTaskRequests", $uriarray)) { $menu_name = 'allTaskRequests';}?>
+  
+  <?php if($menu_name =="allTaskRequests"){?>
+  <link rel="stylesheet" href="?= base_url();?>/public/assets/plugins/ekko-lightbox/ekko-lightbox.css">
+  <?php }
+
   if($menu_name =="dashboard"){?>
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">

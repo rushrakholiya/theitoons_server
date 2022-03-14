@@ -17,6 +17,28 @@
 $uri = current_url();
 $uriarray = explode('/', $uri);
 if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
+if (in_array("allTaskRequests", $uriarray)) { $menu_name = 'allTaskRequests';}?>
+
+<?php if($menu_name =="allTaskRequests"){?>
+<!-- Ekko Lightbox -->
+<script src="<?= base_url();?>/public/assets/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<script>
+  $(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
+    });
+  })
+</script>
+<?php }
+
 if($menu_name=="dashboard"){?>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url();?>/public/assets/plugins/jquery-ui/jquery-ui.min.js"></script>

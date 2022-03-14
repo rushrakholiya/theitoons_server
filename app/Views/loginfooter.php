@@ -34,13 +34,6 @@ $(document).ready(function() {
     });
 });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script> 
-	$(".datepicker").datepicker({
-            clearBtn: true,
-            format: "dd/mm/yyyy",
-        });
-</script>
 <!-- Bootstrap slider -->
 <script src="<?= base_url();?>/public/assets/plugins/bootstrap-slider/bootstrap-slider.min.js"></script>
 <script>
@@ -53,6 +46,16 @@ $("#budget").on("slide", function(slideEvt) {
 	$("#demo").text('$' + slideEvt.value + '.00');
 });
 </script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>-->
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script> 
+    $("#datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            minDate: 0,
+        });
+</script>
+
 <?php }?>
 </body>
 </html>
