@@ -66,4 +66,15 @@ if(!function_exists('getLoggedInUserData')) {
 		}
 	}
 }
+
+if(!function_exists('getTaskRequestMeta')) {
+	function getTaskRequestMeta($metakey,$id)
+	{
+		$db      = \Config\Database::connect();
+		$builder = $db->table('task_request_meta');
+		$builder->select('task_request_meta.meta_value');
+		$query = $builder->getWhere(['task_id' => $id,'meta_key'=> $metakey], 1);
+		return $query->getRow();
+	}
+}
 ?>
