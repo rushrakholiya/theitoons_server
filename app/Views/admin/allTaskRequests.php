@@ -63,10 +63,20 @@
                   {
                     $userdata = getLoggedInUserData($row->user_id);
                     if(!empty($userdata)){ $task_useremail = $userdata->user_email;}
+                    if($row->task_status=="pending"){$color = "bg-secondary";}
+                    elseif($row->task_status=="processing"){$color = "bg-secondary";}
+                    elseif($row->task_status=="in_review"){$color = "bg-orange";}
+                    elseif($row->task_status=="accepted"){$color = "bg-success";}
+                    elseif($row->task_status=="completed"){$color = "bg-success";}
+                    elseif($row->task_status=="cancelled"){$color = "bg-danger";}
+                    elseif($row->task_status=="declined"){$color = "bg-danger";}
+                    elseif($row->task_status=="refunded"){$color = "bg-black";}
+                    $taskstatus = ucwords(str_replace("_"," ",$row->task_status));
+                    
                     echo "<tr>";
                     echo "<td>".$row->task_id."</td>";
                     echo "<td>".$row->task_title."</td>";
-                    echo "<td>".$row->task_status."</td>";
+                    echo "<td><span class='btn-sm ".$color."'><span class='text-white'>".$taskstatus."</span></span></td>";
                     echo "<td>".$task_useremail."</td>";
                     echo "<td>".$row->meta_value."</td>";
                     echo "<td>".$row->task_date."</td>";
