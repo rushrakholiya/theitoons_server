@@ -5,6 +5,16 @@ use \CodeIgniter\Model;
 
 class TaskrequestModel extends Model
 {
+	public function viewAllTaskRequestByUserid($uid)
+	{
+		$builder = $this->db->table('task_requests');
+		$builder->select('*');
+		$where = "user_id='".$uid."' AND task_status='pending' OR task_status='processing' OR task_status='in_review'";
+		$query = $builder->where($where);
+		$result = $query->get();
+		$totaltaskno = count($result->getResultArray());
+		return $totaltaskno;		
+	}
 	public function addNewTaskRequest($taskdata)
 	{		
 		$builder = $this->db->table('task_requests');
@@ -39,7 +49,6 @@ class TaskrequestModel extends Model
 		$builder->select('task_requests.*,task_request_meta.meta_key,task_request_meta.meta_value');
 	    $query = $builder->get();
 	    return $query->getResult();
-
 	}
 	public function viewTaskRequest($id)
 	{
