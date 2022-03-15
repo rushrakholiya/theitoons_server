@@ -23,6 +23,13 @@
         <span class="text-danger input-group mt-1 ml-1 mb-2"><?= $session->getTempdata('error'); ?></span>
       <?php }?>
 
+      <?php if(isset($totaltaskno)){?>
+      <div class="btn btn-block btn-info btn-sm">
+        <?= $totaltaskno;?>
+      </div>
+      <style>#taskrequestForm{display: none;}</style>
+      <?php } else{?><style>#taskrequestForm{display: block;}</style><?php }?>
+
       <?= form_open_multipart('','id="taskrequestForm"'); ?>
         <div class="input-group mb-3">
           <div class='col text-center'>

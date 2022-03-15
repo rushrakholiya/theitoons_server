@@ -140,7 +140,7 @@
               </div>
             </div>
             <div class="card-footer">
-              <a class="btn btn-danger" href="'.base_url().'/admin/allTaskRequests/deleteTaskRequest/'.$row->task_id.'"><i class="fas fa-trash"></i> Delete</a>
+              <a class="btn btn-danger" href="<?= base_url();?>/admin/allTaskRequests/deleteTaskRequest/<?= $id;?>"><i class="fas fa-trash"></i> Delete</a>
               <button type="submit" class="btn btn-success float-right">Save Changes</button>
             </div>
           </div>
