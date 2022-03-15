@@ -23,6 +23,14 @@ class TaskRequest extends HF_Controller
         {
             $data = [];
             $data['validation'] = null;
+            $data['totaltaskno'] = null;
+            if(session()->has('logged_user_client')){$uid=session()->get('logged_user_client'); }
+
+            $totaltask = $this->taskrequestModel->viewAllTaskRequestByUserid($uid);
+            if(!empty($totaltask) && $totaltask >= 3){
+                //$data['totaltaskno'] = $totaltask;
+                $data['totaltaskno'] = "There are 3 requests open, you will be able to submit new requests once any one requests gets resolved";
+            }
             if( $this->request->getMethod() == "post" )
             {                
                 $rules = [
