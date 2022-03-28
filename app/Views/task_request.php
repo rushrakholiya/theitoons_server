@@ -52,6 +52,16 @@
               <span>Retainer</span>
             </label>
           </div>
+          <div class='col text-center'>
+            <input type="radio" name="requesttype" id="research" class="d-none imgbgchk" value="research">
+            <label for="research" class="form-check-label">
+              <img src="<?= base_url();?>/public/assets/dist/img/research-development-icon.png" alt="Research">
+              <div class="tick_container">
+                <div class="tick"><i class="fa fa-check"></i></div>
+              </div>
+              <span>Research & Development</span>
+            </label>
+          </div>
         </div>
 
         <div class="form-group mb-4">
@@ -138,7 +148,8 @@
 <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css"> 
 <style>
 .col img{
-  height:150px;
+  /*height:150px;*/
+  height:115px;
   width: 100%;
   cursor: pointer;
   transition: transform 1s;
@@ -160,7 +171,8 @@
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 20px;
+  /*top: 20px;*/
+  top: 15px;
   right: -10px;
   left: inherit;
   transform: translate(-50%, -50%);
@@ -171,10 +183,13 @@
 .tick {
   background-color: #FFFFFF;
   color: #999999;
-  font-size: 20px;
   text-align: center;
+  /*font-size: 20px;  
   height: 30px;
-  width: 30px;
+  width: 30px;*/
+  font-size: 15px;  
+  height: 22px;
+  width: 22px;
   border-radius: 100%;
 }
 </style>
