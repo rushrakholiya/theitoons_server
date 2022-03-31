@@ -1,7 +1,7 @@
 <?php
 namespace App\Libraries;
 
-//include("./vendor/autoload.php"); 
+//include("./vendor/autoload.php");
 
 use Omnipay\Omnipay;
 use Omnipay\Common\CreditCard;
@@ -33,9 +33,9 @@ class Omnipaygateway extends Omnipay {
            // 'card'=> $card
         );
         $response = $this->gateway->purchase($payArray)->send();
-        echo '<pre>';
+        /*echo '<pre>';
         print_r($response);
-        echo '</pre>';
+        echo '</pre>';*/
         /*if($response->isSuccessful()){
             $paypalResponse = $response->getData();
         }elseif($response->isRedirect()){
@@ -48,17 +48,30 @@ class Omnipaygateway extends Omnipay {
         return $paypalResponse;*/
         if ($response->isSuccessful())
         {    
-            $paypalResponse = $response->getData();
+            //$paypalResponse = $response->getData();
+            echo 'Success';
+            echo '<pre>';
+            print_r($response);
+            echo '</pre>';
         } 
         elseif ($response->isRedirect())
         {
-            $response->redirect();
+            //$response->redirect();
             //$paypalResponse = $response->getRedirectData();
+            echo 'Redirect';
+            echo '<pre>';
+            print_r($response);
+            echo '</pre>';
 
         } else 
         {
-            $paypalResponse = $response->getMessage();
+            //$paypalResponse = $response->getMessage();
+            echo 'nothing';
+            echo '<pre>';
+            print_r($response);
+            echo '</pre>';
         }
-        return $paypalResponse;
+        
+        //return $paypalResponse;
     }
 }
