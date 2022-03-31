@@ -52,8 +52,8 @@ class Omnipaygateway extends Omnipay {
         } 
         elseif ($response->isRedirect())
         {
-            //$response->redirect();
-            $paypalResponse = $response->getRedirectData();
+            $response->redirect();
+            //$paypalResponse = $response->getRedirectData();
 
         } else 
         {
