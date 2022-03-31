@@ -32,12 +32,6 @@ class Payment extends HF_Controller
             'expiryMonth'=> 06,
             'expiryYear'=> 30,
             'email'=> 'test@gmail.com');*/
-            $formData = [
-                'number' => '4242424242424242',
-                'expiryMonth' => '6',
-                'expiryYear' => '2016',
-                'cvv' => '123'
-            ];
             $valTransc = array(
                 //amount' => number_format(2, 2,'.',' '),
                 'amount' => 10.00,
