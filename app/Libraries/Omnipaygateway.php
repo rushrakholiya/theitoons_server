@@ -1,7 +1,7 @@
 <?php
 namespace App\Libraries;
 
-include("./vendor/autoload.php"); 
+//include("./vendor/autoload.php"); 
 
 use Omnipay\Omnipay;
 use Omnipay\Common\CreditCard;
@@ -52,8 +52,8 @@ class Omnipaygateway extends Omnipay {
         } 
         elseif ($response->isRedirect())
         {
-            $response->redirect();
-            //$paypalResponse = $response->getRedirectData();
+            //$response->redirect();
+            $paypalResponse = $response->getRedirectData();
 
         } else 
         {
