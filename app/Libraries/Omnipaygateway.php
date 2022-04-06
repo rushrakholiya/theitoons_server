@@ -18,6 +18,7 @@ class Omnipaygateway extends Omnipay {
 
     public function sendPurchase($valTransaction)
     {
+        $paypalResponse = "";
         $payArray = array(
             'amount' => $valTransaction['amount'],
             'currency' => $valTransaction['currency'],
@@ -46,6 +47,7 @@ class Omnipaygateway extends Omnipay {
     public function complete($parameters)
     {
 
+        $paypalResponsecomplete = "";
         $response = $this->gateway->completePurchase($parameters)->send();
 
         //return $response;
