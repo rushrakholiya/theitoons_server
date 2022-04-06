@@ -9,7 +9,6 @@ class Payment extends HF_Controller
     public function __construct()
     {
         helper(['form', 'url','usererror']);
-        //$this->taskrequestModel = new TaskrequestModel();
         $this->session = \Config\Services::session();
         $this->purchaseProc = new Omnipaygateway('PayPal_Express', true);
     }
@@ -22,30 +21,48 @@ class Payment extends HF_Controller
         }
         else
         {
-            //return $this->loginheaderfooter('payment',$data);
             echo "Paypal Integration";
-            /*$cardInput = array(
-            'firstName'=>'test',
-            'lastName'=>'test',
-            'number'=>'4111 1111 1111 1111 ',
-            'cvv'=>'132',
-            'expiryMonth'=> 06,
-            'expiryYear'=> 30,
-            'email'=> 'test@gmail.com');*/
-            $valTransc = array(
-                //amount' => number_format(2, 2,'.',' '),
-                'amount' => 10.00,
-                //'transactionId'=>3,
-                //'description' => 'test',
-                'currency'=>'USD',
-                //'clientIp'=>'',
-                'returnUrl'=> base_url()."/payment",
-                'cancelUrl'=> base_url()."/payment");
-            //$data = $this->purchaseProc->sendPurchase($cardInput,$valTransc);
-            $data1 = $this->purchaseProc->sendPurchase($valTransc);
-            echo '<pre>'; 
-            print_r($data1);
-            echo '</pre>';                 
+            if($_GET['token'] && $_GET['PayerID']){
+                $parameters = array(
+                    'amount' => 10.00,
+                    'currency'=>'USD',
+                    'token' => $_GET['token'],
+                    'payerid' => $_GET['PayerID'],
+                    'returnUrl'=> base_url()."/payment",
+                    'cancelUrl'=> base_url()."/payment");
+                $datacomplete = $this->purchaseProc->complete($parameters);
+                echo '<pre>'; 
+                print_r($datacomplete);
+                echo '</pre>';
+            }
+            elseif($_GET['token'])
+            {
+                echo "<br><br>You have cancelled your recent PayPal payment, Please try again!<br>";
+                $valTransc = array(
+                    'amount' => 10.00,
+                    'currency'=>'USD',
+                    'returnUrl'=> base_url()."/payment",
+                    'cancelUrl'=> base_url()."/payment");
+                $datapurchase = $this->purchaseProc->sendPurchase($valTransc);
+                echo '<pre>'; 
+                print_r($datapurchase);
+                echo '</pre>';
+            } 
+            else
+            {
+                $valTransc = array(
+                    'amount' => 10.00,
+                    'currency'=>'USD',
+                    'returnUrl'=> base_url()."/payment",
+                    'cancelUrl'=> base_url()."/payment");
+                $datapurchase = $this->purchaseProc->sendPurchase($valTransc);
+                echo '<pre>'; 
+                print_r($datapurchase);
+                echo '</pre>';
+
+            }
+            
+            
         }    
     }
 }
