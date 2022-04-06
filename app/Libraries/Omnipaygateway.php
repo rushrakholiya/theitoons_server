@@ -1,10 +1,7 @@
 <?php
 namespace App\Libraries;
 
-//include("./vendor/autoload.php");
-
 use Omnipay\Omnipay;
-use Omnipay\Common\CreditCard;
 
 class Omnipaygateway extends Omnipay {
 
@@ -21,57 +18,45 @@ class Omnipaygateway extends Omnipay {
 
     public function sendPurchase($valTransaction)
     {
-        //$card = new CreditCard($cardInput);
         $payArray = array(
-            'amount'=> $valTransaction['amount'],
-            //'transactionId' => $valTransaction['transactionId'],
-           // 'description'=> $valTransaction['description'],
-            'currency'=> $valTransaction['currency'],
-            //'clientIp'=> $valTransaction['clientIp'],
-            'returnUrl'=> $valTransaction['returnUrl'],
-            'cancelUrl'=> $valTransaction['cancelUrl'],
-           // 'card'=> $card
+            'amount' => $valTransaction['amount'],
+            'currency' => $valTransaction['currency'],
+            'returnUrl' => $valTransaction['returnUrl'],
+            'cancelUrl' => $valTransaction['cancelUrl']
         );
-        $response = $this->gateway->purchase($payArray)->send();
-        /*echo '<pre>';
-        print_r($response);
-        echo '</pre>';*/
-        /*if($response->isSuccessful()){
+        $response = $this->gateway->purchase($payArray)->send();        
+        if($response->isSuccessful())
+        {
             $paypalResponse = $response->getData();
-        }elseif($response->isRedirect()){
-            //$response->redirect();
-            $paypalResponse = $response->getRedirectData();
-        }else{
+        }
+        elseif($response->isRedirect())
+        {
+            if ($response->getRedirectMethod() == "GET"){?>
+            <h4>Amount : <?= $valTransaction['amount']." ".$valTransaction['currency'];?></h4>
+            <p><a href="<?= $response->getRedirectUrl();?>" class="btn btn-success">Pay Now </a></p><?php 
+            } 
+        }
+        else
+        {
             $paypalResponse = $response->getMessage();
-            //echo $response->getMessage();
-        }
-        return $paypalResponse;*/
-        if ($response->isSuccessful())
-        {    
-            //$paypalResponse = $response->getData();
-            echo 'Success';
-            echo '<pre>';
-            print_r($response);
-            echo '</pre>';
-        } 
-        elseif ($response->isRedirect())
-        {
-            //$response->redirect();
-            //$paypalResponse = $response->getRedirectData();
-            echo 'Redirect';
-            echo '<pre>';
-            print_r($response);
-            echo '</pre>';
-
-        } else 
-        {
-            //$paypalResponse = $response->getMessage();
-            echo 'nothing';
-            echo '<pre>';
-            print_r($response);
-            echo '</pre>';
-        }
-        
-        //return $paypalResponse;
+        }       
+        return $paypalResponse;       
     }
+
+    public function complete($parameters)
+    {
+
+        $response = $this->gateway->completePurchase($parameters)->send();
+
+        //return $response;
+        if ($response->isSuccessful()) {
+            //$paypalResponse = $response->getTransactionReference();
+            $paypalResponsecomplete = $response->getData();
+        }
+        else{
+            $paypalResponsecomplete = $response->getMessage();
+        }
+        return $paypalResponsecomplete;
+    }   
+            
 }
