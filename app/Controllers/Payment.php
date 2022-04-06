@@ -22,7 +22,7 @@ class Payment extends HF_Controller
         else
         {
             echo "Paypal Integration";
-            if($_GET['token'] && $_GET['PayerID']){
+            if(isset($_GET['token']) && isset($_GET['PayerID'])){
                 $parameters = array(
                     'amount' => 10.00,
                     'currency'=>'USD',
@@ -35,7 +35,7 @@ class Payment extends HF_Controller
                 print_r($datacomplete);
                 echo '</pre>';
             }
-            elseif($_GET['token'])
+            elseif(isset($_GET['token']))
             {
                 echo "<br><br>You have cancelled your recent PayPal payment, Please try again!<br>";
                 $valTransc = array(
