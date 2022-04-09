@@ -13,30 +13,45 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Paypal Payment</p>
+      <p class="login-box-msg">Paypal Payment Integration</p>
 
       <?php if($session->getTempdata('success')){?>
-        <span class="text-success input-group mt-1 ml-1 mb-2"><?= $session->getTempdata('success'); ?></span>
+        <span class="text-success input-group mt-1 ml-1 mb-2 text-center"><?= $session->getTempdata('success'); ?></span>
       <?php }?>
 
       <?php if($session->getTempdata('error')){?>
-        <span class="text-danger input-group mt-1 ml-1 mb-2"><?= $session->getTempdata('error'); ?></span>
+        <span class="text-danger input-group mt-1 ml-1 mb-2 text-center"><?= $session->getTempdata('error'); ?></span>
       <?php }?>
 
-      <?= form_open(); ?>
-        <div class="form-group mb-4">
-          <label for="budget" class="mb-0 ml-1">Your Total Amount : <span id="demo">$20.00</span></label>
-          <input type='hidden' name='amount' value='20'>
-        </div>
+      <?php if(isset($paypalerror)){?>
+        <span class="text-danger input-group mt-1 ml-1 mb-2 text-center"><?= $paypalerror; ?></span>
+      <?php }?>
 
-        <div class="row justify-content-center">          
-          <!-- /.col -->
-          <div class="col-8">
-            <button type="submit" class="btn btn-primary btn-block">pay with paypal</button>
-          </div>
-          <!-- /.col -->
+      <?php if(isset($datacomplete)){
+        //print_r($datacomplete);?>
+        <span class="text-success input-group mt-1 ml-1 mb-2"> <?php echo "Status: ".$datacomplete['PAYMENTINFO_0_PAYMENTSTATUS']."<br>Transaction Id: ".$datacomplete['PAYMENTINFO_0_TRANSACTIONID'];?></span>
+      <?php }?>
+
+      <?php if(isset($datapurchasec)){?>
+        <span class="text-danger input-group mt-1 ml-1 mb-2 text-center"><?php echo "You have cancelled your recent PayPal payment, Please try again!"; ?></span>
+      <?php }?>
+
+      <?php if(isset($datapurchase) || isset($datapurchasec)){?>      
+      <div class="form-group mb-4 text-center">
+        <label for="budget" class="mb-0 ml-1">Your Total Amount : <span id="demo">$10.00</span></label>
+        <input type='hidden' name='amount' value='10'>
+      </div>
+
+      <div class="row justify-content-center">          
+        <!-- /.col -->
+        <div class="col-8">
+          <!-- <button type="submit" class="btn btn-primary btn-block">pay with paypal</button> -->
+          <?php if(isset($datapurchase)){ echo $datapurchase; }if(isset($datapurchasec)){ echo $datapurchasec; }?>
         </div>
-      <?= form_close(); ?>
+        <!-- /.col -->
+      </div>
+
+      <?php }?>     
      
     </div>
     <!-- /.login-card-body -->

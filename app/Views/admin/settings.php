@@ -212,7 +212,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <script src="//geodata.solutions/includes/countrystatecity.js"></script>
+  <!--<script src="//geodata.solutions/includes/countrystatecity.js"></script>-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
   <script>
     $(document).ready(function() {
