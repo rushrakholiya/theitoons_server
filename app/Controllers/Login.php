@@ -12,6 +12,22 @@ class Login extends HF_Controller
         helper(['form', 'url','usererror']);
         $this->loginModel = new LoginModel();
         $this->session = \Config\Services::session();
+        /*if(session()->has('logged_user'))
+        {
+            session()->remove('logged_user');
+            session()->destroy();
+        }
+        if(session()->has('logged_user_client'))
+        {
+            session()->remove('logged_user_client');
+            session()->destroy();
+        }*/
+    }
+    public function index()
+    {       
+        $data = [];
+        $data['validation'] = null;
+
         if(session()->has('logged_user'))
         {
             session()->remove('logged_user');
@@ -22,11 +38,7 @@ class Login extends HF_Controller
             session()->remove('logged_user_client');
             session()->destroy();
         }
-    }
-    public function index()
-    {       
-        $data = [];
-        $data['validation'] = null;
+        
         if( $this->request->getMethod() == "post" )
         {
             $rules = [
@@ -53,7 +65,8 @@ class Login extends HF_Controller
                             else
                             {
                                 $this->session->set('logged_user_client',$userdata['user_id']);
-                                return redirect()->to(base_url()."/taskRequest");
+                                //return redirect()->to(base_url()."/taskRequest");
+                                return redirect()->to(base_url()."/dashboard");
                             }
                         }
                         else
@@ -201,6 +214,12 @@ class Login extends HF_Controller
             return $this->loginheaderfooter('reset_password',$data); 
         }
         
+    }
+    public function logout()
+    {       
+        session()->remove('logged_user_client');
+        session()->destroy();
+        return redirect()->to(base_url()."/login");            
     }
     
 }

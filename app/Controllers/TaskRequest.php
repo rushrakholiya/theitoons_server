@@ -71,7 +71,7 @@ class TaskRequest extends HF_Controller
                         {
                             //sent mail to admin and client remaining
                             $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
-                            return redirect()->to(base_url().'/taskRequest'); 
+                            return redirect()->to(base_url().'/dashboard'); 
                         }
                         else
                         {
