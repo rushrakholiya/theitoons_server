@@ -8,7 +8,7 @@
     <img src="<?= $site_logo;?>" alt="Logo" class="brand-image img-circle elevation-3" style="width: 20%;"><br>
     <b>Paypal Payment</b>
 
-    <a href="<?= base_url();?>/admin/dashboard/logout" style="color: #007bff;text-decoration: none;font-size: 1rem;" class="float-right pt-4 pr-1">Logout</a>
+    <a href="<?= base_url();?>/login/logout" style="color: #007bff;text-decoration: none;font-size: 1rem;" class="float-right pt-4 pr-1">Logout</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

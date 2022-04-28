@@ -51,7 +51,7 @@ $("#budget").on("slide", function(slideEvt) {
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script> 
     $("#datepicker").datepicker({
-            dateFormat: "dd/mm/yy",
+            dateFormat: "dd-mm-yy",
             minDate: 0,
         });
 </script>
