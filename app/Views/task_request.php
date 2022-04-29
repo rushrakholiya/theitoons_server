@@ -31,19 +31,19 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid text-center mt-4">        
-        <h3>Task Request</h3>
+        <h3>Submit your request</h3>
       </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-sm-4">       
+        <div class="col-sm-3">       
         </div>
-        <div class="col-sm-4">          
+        <div class="col-sm-6">          
           <div class="card">
-            <div class="card-body login-card-body">
-              <p class="login-box-msg">Submit your request</p>
+            <div class="card-body">
+              <!-- <p class="login-box-msg">Submit your request</p> -->
 
               <?php if($session->getTempdata('success')){?>
                 <span class="text-success input-group mt-1 ml-1 mb-2"><?= $session->getTempdata('success'); ?></span>
@@ -164,7 +164,7 @@
 
                 <div class="row justify-content-center">          
                   <!-- /.col -->
-                  <div class="col-8">
+                  <div class="col-6">
                     <button type="submit" class="btn btn-primary btn-block">Submit your request</button>
                   </div>
                   <!-- /.col -->
@@ -175,7 +175,7 @@
             <!-- /.login-card-body -->
           </div>          
         </div>
-        <div class="col-sm-4">       
+        <div class="col-sm-3">       
         </div>
       </div>
     </section>
@@ -197,8 +197,14 @@
 <!-- ./wrapper -->
 <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css"> 
 <style>
+.taskdashboard .navbar-light .navbar-nav .nav-link {
+    color: rgba(0,0,0,.9);
+}
+.taskdashboard .card {
+  box-shadow: unset;
+}
 .taskdashboard .content-wrapper {
-     background-color: #fff;
+  background-color: #fff;
 }
 .taskdashboard .main-header, .taskdashboard .main-footer, .taskdashboard .content-header, .taskdashboard .content-wrapper{
   margin-left:0px !important;
@@ -221,8 +227,7 @@
   display: inline-block;
   padding-bottom: 30px;
 }
-.taskdashboard .tbp
-{
+.taskdashboard .tbp{
   cursor: text !important;
   border: none !important;
 }
@@ -234,13 +239,12 @@
   background-color: #dc3545;
 }
 .taskdashboard .tbp:focus,.taskdashboard .tbp:hover,.taskdashboard .tbp:active, {
-    text-decoration: none !important;
-    box-shadow: unset !important;
-    border: none !important;
+  text-decoration: none !important;
+  box-shadow: unset !important;
+  border: none !important;
 }
 .col img{
-  /*height:150px;*/
-  height:115px;
+  /*height:115px;*/
   width: 100%;
   cursor: pointer;
   transition: transform 1s;
@@ -262,9 +266,8 @@
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  /*top: 20px;*/
-  top: 15px;
-  right: -10px;
+  top: 20px;
+  right: -5px;
   left: inherit;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -275,12 +278,9 @@
   background-color: #FFFFFF;
   color: #999999;
   text-align: center;
-  /*font-size: 20px;  
-  height: 30px;
-  width: 30px;*/
-  font-size: 15px;  
-  height: 22px;
-  width: 22px;
+  font-size: 17px;  
+  height: 25px;
+  width: 25px;
   border-radius: 100%;
 }
 </style>
