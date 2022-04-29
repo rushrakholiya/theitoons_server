@@ -14,7 +14,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a href="<?= base_url();?>/dashboard" class="nav-link">Dashboard</a>
       </li>
       <li class="nav-item">
@@ -144,6 +144,9 @@
 </div>
 <!-- ./wrapper -->
 <style>
+.taskdashboard .navbar-light .navbar-nav .nav-link {
+    color: rgba(0,0,0,.9);
+}
 .taskdashboard .content-wrapper {
    background-color: #fff;
 }
