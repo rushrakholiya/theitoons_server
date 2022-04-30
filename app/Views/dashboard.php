@@ -37,9 +37,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <div class="col-sm-2">       
-        </div>
+      <div class="row justify-content-center">        
         <div class="col-sm-8">          
           <!-- Default box -->
           <?php if($session->getTempdata('success')){?>
@@ -82,10 +80,12 @@
                       {
                         
                         $priority = getTaskRequestMeta("priority",$row->task_id);
-                        if(!empty($priority)){$task_priority = $priority->meta_value;}
+                        if(!empty($priority->meta_value)){$task_priority = $priority->meta_value;}
+                        else{$task_priority = "-";}
 
                         $deadline = getTaskRequestMeta("deadline",$row->task_id);
-                        if(!empty($deadline)){$task_deadline = date("d-m-Y", strtotime($deadline->meta_value));}
+                        if(!empty($deadline->meta_value)){$task_deadline = $deadline->meta_value;}
+                        else{$task_deadline = "-";}
                         
                         if($task_priority=="urgent"){$color = "bg-danger";}
                         elseif($task_priority=="high"){$color = "bg-success";}
@@ -95,17 +95,24 @@
 
                         $taskstatus = ucwords(str_replace("_"," ",$row->task_status));
                         
+                        $task_submitted_date = date("d-m-Y", strtotime($row->task_date));
+                        $task_submitted_time = date("h:i a", strtotime($row->task_date));
                         echo "<tr>";
                         echo "<td>".$row->task_title."</td>";
                         echo "<td><span class='tbp btn btn-sm ".$color."'><span>".$taskpriority."</span></span></td>";
                         echo "<td>".$task_deadline."</td>";                        
                         echo "<td>".$taskstatus."</td>";   
-                        echo "<td>".$row->task_date."</td>";
-                        echo '<td class="project-actions">-</td>';
-                        /*echo '<td class="project-actions">
-                              <a class="btn btn-info btn-sm" href="'.base_url().'/admin/allTaskRequests/viewTaskRequest/'.$row->task_id.'"><i class="fas fa-pencil-alt"></i> Edit</a>
-                              <a class="btn btn-danger btn-sm" href="'.base_url().'/admin/allTaskRequests/deleteTaskRequest/'.$row->task_id.'"><i class="fas fa-trash"></i> Delete</a>
-                          </td>';*/
+                        echo '<td>'.$task_submitted_date.'<span style="font-weight: 600;font-size: 10px;color: #939393;text-transform: uppercase;">  '.$task_submitted_time.'</span></td>';
+                        echo '<td class="project-actions">';
+                        echo '<a class="contactentryview" href="'.base_url().'/dashboard/viewTaskRequest/'.$row->task_id.'" title="View Request"> 👁 </a>';
+                        if($row->task_status=="pending"){
+                        echo '<a href="'.base_url().'/dashboard/editTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Edit Request"> 📝 </a>';
+                        echo '<a href="'.base_url().'/dashboard/deleteTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Delete Request"> ❌ </a>';
+                        }
+                        if($row->task_status=="in_review"){
+                        echo '<a href="'.base_url().'/dashboard/completeTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Complete Request"> ✔ </a>';
+                        }
+                        echo '</td>';
                         echo "</tr>";
                       }?>
                   </tbody>
@@ -122,9 +129,7 @@
             </div></div></div>
           <?php } else {?><div class="text-center"><div class="newtaskbtn"><a class="btn btn-block btn-primary" href="<?= base_url();?>/taskRequest">Submit a new request</a></div></div><?php }?>
 
-        </div>
-        <div class="col-sm-2">       
-        </div>
+        </div>        
       </div>
     </section>
     <!-- /.content -->
@@ -143,49 +148,3 @@
 
 </div>
 <!-- ./wrapper -->
-<style>
-.taskdashboard .navbar-light .navbar-nav .nav-link {
-    color: rgba(0,0,0,.9);
-}
-.taskdashboard .content-wrapper {
-   background-color: #fff;
-}
-.taskdashboard .main-header, .taskdashboard .main-footer, .taskdashboard .content-header, .taskdashboard .content-wrapper{
-  margin-left:0px !important;
-}
-/*.taskdashboard .main-header, .taskdashboard .main-footer{
-  padding-left: 30px;
-  padding-right: 30px;
-}*/
-.site-description{
-  margin-left: 0.4em;
-  margin-top: 0.7em;
-  text-transform: uppercase;
-  font-size: 1.4em;
-}
-.taskdashboard .content-wrapper>.content{
-  padding: 1em 2em 2em 2em;
-}
-.taskdashboard .newtaskbtn{
-  padding-top: 25px;
-  display: inline-block;
-  padding-bottom: 30px;
-}
-.taskdashboard .tbp
-{
-  cursor: text !important;
-  border: none !important;
-}
-.taskdashboard .newtaskbtn .btn,.taskdashboard .newtaskbtnd .btn {
-  padding: 0.75rem 1.75rem;
-}
-.taskdashboard .newtaskbtnd .btn:focus,.taskdashboard .newtaskbtnd .btn:hover,.taskdashboard .newtaskbtnd .btn:active {
-  color: #fff;
-  background-color: #17a2b8;
-}
-.taskdashboard .tbp:focus,.taskdashboard .tbp:hover,.taskdashboard .tbp:active, {
-    text-decoration: none !important;
-    box-shadow: unset !important;
-    border: none !important;
-}
-</style>

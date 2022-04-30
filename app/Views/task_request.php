@@ -6,7 +6,7 @@
   if(!empty($site_logo->option_value))
   {$site_logo=$site_logo->option_value;}else{$site_logo = base_url()."/public/assets/dist/img/logo.png";}?>
 <body class="hold-transition layout-fixed taskdashboard">
-<div class="wrapper">
+<div class="wrapper taskrequest">
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <img src="<?= $site_logo;?>" alt="Logo" style="width: 5%;">
@@ -195,92 +195,3 @@
 
 </div>
 <!-- ./wrapper -->
-<link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css"> 
-<style>
-.taskdashboard .navbar-light .navbar-nav .nav-link {
-    color: rgba(0,0,0,.9);
-}
-.taskdashboard .card {
-  box-shadow: unset;
-}
-.taskdashboard .content-wrapper {
-  background-color: #fff;
-}
-.taskdashboard .main-header, .taskdashboard .main-footer, .taskdashboard .content-header, .taskdashboard .content-wrapper{
-  margin-left:0px !important;
-}
-/*.taskdashboard .main-header, .taskdashboard .main-footer{
-  padding-left: 30px;
-  padding-right: 30px;
-}*/
-.site-description{
-  margin-left: 0.4em;
-  margin-top: 0.7em;
-  text-transform: uppercase;
-  font-size: 1.4em;
-}
-.taskdashboard .content-wrapper>.content{
-  padding: 1em 2em 2em 2em;
-}
-.taskdashboard .newtaskbtn{
-  padding-top: 25px;
-  display: inline-block;
-  padding-bottom: 30px;
-}
-.taskdashboard .tbp{
-  cursor: text !important;
-  border: none !important;
-}
-.taskdashboard .newtaskbtn .btn,.taskdashboard .newtaskbtnd .btn {
-  padding: 0.75rem 1.75rem;
-}
-.taskdashboard .newtaskbtnd .btn:focus,.taskdashboard .newtaskbtnd .btn:hover,.taskdashboard .newtaskbtnd .btn:active {
-  color: #fff;
-  background-color: #dc3545;
-}
-.taskdashboard .tbp:focus,.taskdashboard .tbp:hover,.taskdashboard .tbp:active, {
-  text-decoration: none !important;
-  box-shadow: unset !important;
-  border: none !important;
-}
-.col img{
-  /*height:115px;*/
-  width: 100%;
-  cursor: pointer;
-  transition: transform 1s;
-  object-fit: cover;
-}
-.col label{
-  overflow: hidden;
-  position: relative;
-}
-.imgbgchk:checked + label>.tick_container{
-  opacity: 1;
-}
-/*ANIMATION */
-.imgbgchk:checked + label>img{
-  background-color: #000;
-  opacity: .4;
-}
-.tick_container {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 20px;
-  right: -5px;
-  left: inherit;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  cursor: pointer;
-  text-align: center;
-}
-.tick {
-  background-color: #FFFFFF;
-  color: #999999;
-  text-align: center;
-  font-size: 17px;  
-  height: 25px;
-  width: 25px;
-  border-radius: 100%;
-}
-</style>
