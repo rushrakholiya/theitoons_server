@@ -62,7 +62,7 @@ class DashboardModel extends Model
 		$query = $builder->getWhere(['task_id' => $id], 1);
 		return $query->getRow();	   
 	}
-	/*public function editTaskRequest($id,$taskdata,$taskmetadata)
+	public function editTaskRequest($id,$taskdata,$taskmetadata)
 	{		
 		$builder = $this->db->table('task_requests');
 		$builder->where('task_id', $id);
@@ -74,5 +74,4 @@ class DashboardModel extends Model
 
 		return true;		
 	}
-	*/
 }
