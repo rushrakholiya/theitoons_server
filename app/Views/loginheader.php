@@ -23,12 +23,17 @@ $uriarray = explode('/', $uri);
 if (in_array("taskRequest", $uriarray)) { $menu_name = 'taskRequest';}
 if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
 if (in_array("viewTaskRequest", $uriarray)) { $menu_name = 'viewTaskRequest';}
+if (in_array("editTaskRequest", $uriarray)) { $menu_name = 'editTaskRequest';}
 
-if($menu_name=="taskRequest" || $menu_name=="dashboard" || $menu_name=="viewTaskRequest"){?>
+if($menu_name=="taskRequest" || $menu_name=="dashboard" || $menu_name=="viewTaskRequest" || $menu_name=="editTaskRequest"){?>
   <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/taskdashboard.css">
 <?php }
 
-if($menu_name=="taskRequest"){?>
+if($menu_name =="editTaskRequest"){?>
+  <link rel="stylesheet" href="?= base_url();?>/public/assets/plugins/ekko-lightbox/ekko-lightbox.css">
+<?php }
+
+if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
   <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css">
   <!-- bootstrap slider -->
   <link rel="stylesheet" href="<?= base_url();?>/public/assets/plugins/bootstrap-slider/css/bootstrap-slider.min.css">

@@ -59,7 +59,7 @@
               </div>
               <div class="form-group">
                 <label for="userProfilePicture" class="control-label">Profile Picture</label>
-                <input type="file" class="form-control userProfilePicture" name="avatar" />                 
+                <input type="file" class="form-control userProfilePicture" name="avatar" />  
               </div>
               <div class="form-group">
                 <label for="firstname">First Name</label>

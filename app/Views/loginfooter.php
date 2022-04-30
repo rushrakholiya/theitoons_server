@@ -9,11 +9,13 @@
 $uri = current_url();
 $uriarray = explode('/', $uri);
 if (in_array("taskRequest", $uriarray)) { $menu_name = 'taskRequest';}
-if($menu_name=="taskRequest"){?>
+if (in_array("editTaskRequest", $uriarray)) { $menu_name = 'editTaskRequest';}
+
+if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 <script>
 $(document).ready(function() {
-    $('#taskrequestForm').bootstrapValidator({
+    $('.taskrequestForm').bootstrapValidator({
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
@@ -29,7 +31,28 @@ $(document).ready(function() {
                         message: 'The selected file is not valid (only jpg,jpeg,png,gif,pdf allow)'
                     }
                 }
-            }
+            },
+            title: {
+                validators: {
+                    notEmpty: {
+                        message: 'The title field is required.'
+                    },
+                }
+            },
+            priority: {
+                validators: {
+                    notEmpty: {
+                        message: 'The priority field is required.'
+                    },
+                }
+            },
+            task_description: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Task Description field is required.'
+                    },
+                }
+            },
         }
     });
 });
@@ -57,5 +80,26 @@ $("#budget").on("slide", function(slideEvt) {
 </script>
 
 <?php }?>
+
+<?php if($menu_name =="editTaskRequest"){?>
+<!-- Ekko Lightbox -->
+<script src="<?= base_url();?>/public/assets/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<script>
+  $(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
+    });
+  })
+</script>
+<?php }?>
+
 </body>
 </html>
