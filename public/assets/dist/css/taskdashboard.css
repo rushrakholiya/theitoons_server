@@ -1,0 +1,221 @@
+.taskdashboard .navbar-light .navbar-nav .nav-link {
+    color: rgba(0,0,0,.9);
+}
+.taskdashboard .content-wrapper {
+   background-color: #fff;
+}
+.taskdashboard .main-header, .taskdashboard .main-footer, .taskdashboard .content-header, .taskdashboard .content-wrapper{
+  margin-left:0px !important;
+}
+/*.taskdashboard .main-header, .taskdashboard .main-footer{
+  padding-left: 30px;
+  padding-right: 30px;
+}*/
+.site-description{
+  margin-left: 0.4em;
+  margin-top: 0.7em;
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+.taskdashboard .content-wrapper>.content{
+  padding: 1em 2em 2em 2em;
+}
+.taskdashboard .newtaskbtn{
+  padding-top: 25px;
+  display: inline-block;
+  padding-bottom: 30px;
+}
+.taskdashboard .tbp
+{
+  cursor: text !important;
+  border: none !important;
+}
+.taskdashboard .newtaskbtn .btn,.taskdashboard .newtaskbtnd .btn {
+  padding: 0.75rem 1.75rem;
+}
+.taskdashboard .newtaskbtnd .btn:focus,.taskdashboard .newtaskbtnd .btn:hover,.taskdashboard .newtaskbtnd .btn:active {
+  color: #fff;
+  background-color: #17a2b8;
+}
+.taskdashboard .tbp:focus,.taskdashboard .tbp:hover,.taskdashboard .tbp:active, {
+    text-decoration: none !important;
+    box-shadow: unset !important;
+    border: none !important;
+}
+.taskrequest .card {
+  box-shadow: unset;
+}
+.taskrequest .col img{
+  /*height:115px;*/
+  width: 100%;
+  cursor: pointer;
+  transition: transform 1s;
+  object-fit: cover;
+}
+.taskrequest .col label{
+  overflow: hidden;
+  position: relative;
+}
+.taskrequest .imgbgchk:checked + label>.tick_container{
+  opacity: 1;
+}
+/*ANIMATION */
+.taskrequest .imgbgchk:checked + label>img{
+  background-color: #000;
+  opacity: .4;
+}
+.taskrequest .tick_container {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 20px;
+  right: -5px;
+  left: inherit;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  cursor: pointer;
+  text-align: center;
+}
+.taskrequest .tick {
+  background-color: #FFFFFF;
+  color: #999999;
+  text-align: center;
+  font-size: 17px;  
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+}
+.viewrequest .icon{
+  color: #9892B0 !important;
+}
+.viewrequest .hover:hover{
+  text-decoration: none !important;
+}
+.viewrequest .span-like{
+  color: #9892B0 !important;
+  font-size: 18px !important;
+  font-weight: normal!important;
+}
+.viewrequest .h3-like{
+  font-weight: 500 !important;
+  font-size: 36px;
+  line-height: 51px;
+  padding-bottom: 8px;
+  padding-top: 15px;
+  color: #000000;
+}
+.viewrequest .panel{
+  background: #FAFAFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-sizing: border-box !important;;
+  box-shadow: 0px 4px 15px rgba(22, 24, 48, 0.08) !important;
+  border-radius: 20px !important;
+  margin-bottom: 3em !important;
+  padding:20px !important;
+}
+.viewrequest .panel-body{
+  font-weight: 400 ;
+  font-size: 22px;
+  line-height: 28px;
+  padding-bottom:2.5em;
+  color: #000000;
+}
+.viewrequest .panel-footer{
+  border-radius: 20px !important;
+  border:none !important;
+  background-color: #FAFAFF !important;
+}
+.viewrequest .panel-button{
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #5F65FF !important;
+  background-color: #FAFAFF !important;
+  border:none !important;
+}
+.viewrequest .panel-footer img{
+  padding-right: 12px;
+  float: right;
+}
+.viewrequest .h6-like{
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+  letter-spacing: 0.1em;
+  padding-bottom: 0.1em;
+}
+.viewrequest .h6-like span{
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  padding-left: 1em;
+  color: #424242;
+}
+.viewrequest .red-icon{
+  color:red !important;
+  padding-left: 1em !important;
+}
+.viewrequest .p-like{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #424242;
+}
+.viewrequest #divMsg{
+  display: none;
+}
+.viewrequest .itoonstaskrequest a:hover {
+  text-decoration: none;
+}
+.viewrequest .red-iconurgent{
+  color: red !important;
+  padding-left: 1em !important;
+}
+.viewrequest .red-iconhigh{
+  color: green !important;
+  padding-left: 1em !important;
+}
+.viewrequest .red-iconstandard{
+  color: #967c1d !important;
+  padding-left: 1em !important;
+}
+.viewrequest .red-iconnormal{
+  color: #29aed6 !important;
+  padding-left: 1em !important;
+}
+@media screen and (max-width: 425px) and (min-width: 320px) {
+  .viewrequest .viewrequest .span-like{
+    font-size: 15px !important;
+  }
+  .viewrequest .h3-like{
+    font-size: 28px !important;
+  }
+  .viewrequest .panel{
+    padding:5px !important;
+  }
+  .viewrequest .panel-body{
+    font-size: 19px!important;
+  }
+  .viewrequest .panel-button{
+    font-size: 16px !important;
+  }
+  .viewrequest .panel-footer img {
+    padding-right: 8px !important;
+    margin-top:7px;
+    float: right;
+    width: 30px !important;
+    height: 20px !important;
+  }
+  .viewrequest .h6-like{
+    font-weight: 500;
+    font-size: 16px !important;
+  }
+  .viewrequest .h6-like span{
+    font-weight: 500;
+    font-size: 15px !important;
+  }
+  .viewrequest .p-like{
+    font-size: 12px !important;
+  }
+}
