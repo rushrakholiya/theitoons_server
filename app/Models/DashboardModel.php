@@ -23,32 +23,37 @@ class DashboardModel extends Model
 		$totaltaskno = count($result->getResultArray());
 		return $totaltaskno;		
 	}
-	/*public function addNewTaskRequest($taskdata)
-	{		
-		$builder = $this->db->table('task_requests');
-		$res = $builder->insert($taskdata);
-		$taskid = $this->db->insertID();		
-		if( ($this->db->affectedRows()) == 1 && (!empty($taskid)) )
-		{			
-			return $taskid ;	
-		}
-		else
-		{
-			return false;
-		}	
-	}
-	public function addNewTaskRequestMeta($taskmetadata)
+	public function checkAuthorizedUser($id,$uid)
 	{
-		$buildermetadata = $this->db->table('task_request_meta');
-		$resmeta = $buildermetadata->insertBatch($taskmetadata);
-		if( $this->db->affectedRows() > 0 )
-		{
-			return true;
+		$builder = $this->db->table("task_requests");
+	  	$builder->select('user_id');
+	  	$query = $builder->getWhere(['task_id' => $id], 1);
+		$row = $query->getRow();
+		if(!empty($row)){
+			if($row->user_id == $uid){
+				return true;
+			}
 		}
-		else
-		{
-			return false;
-		}
+	}
+	public function deleteTaskRequest($id)
+	{
+		$builder = $this->db->table('task_requests');
+		$builder->delete(['task_id' => $id]);
+
+		$builder = $this->db->table('task_request_meta');
+		$builder->delete(['task_id' => $id]);        
+		
+		return true;		
+	}
+	public function completeTaskRequest($id)
+	{
+		
+		$taskdata = ['task_status'=> "completed"];
+        $builder = $this->db->table('task_requests');
+		$builder->where('task_id', $id);
+		$builder->update($taskdata);       
+		
+		return true;		
 	}
 	public function viewTaskRequest($id)
 	{
@@ -57,7 +62,7 @@ class DashboardModel extends Model
 		$query = $builder->getWhere(['task_id' => $id], 1);
 		return $query->getRow();	   
 	}
-	public function editTaskRequest($id,$taskdata,$taskmetadata)
+	/*public function editTaskRequest($id,$taskdata,$taskmetadata)
 	{		
 		$builder = $this->db->table('task_requests');
 		$builder->where('task_id', $id);
@@ -69,14 +74,5 @@ class DashboardModel extends Model
 
 		return true;		
 	}
-	public function deleteTaskRequest($id)
-	{
-		$builder = $this->db->table('task_requests');
-		$builder->delete(['task_id' => $id]);
-
-		$builder = $this->db->table('task_request_meta');
-		$builder->delete(['task_id' => $id]);        
-		
-		return true;		
-	}*/
+	*/
 }
