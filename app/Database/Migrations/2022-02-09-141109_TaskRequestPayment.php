@@ -32,7 +32,10 @@ class TaskRequestPayment extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'payment_date datetime default current_timestamp',
+            'payment_date' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+            ],
         ]);
         $this->forge->addPrimaryKey('payment_id', true);
         $this->forge->createTable('task_request_payments');
