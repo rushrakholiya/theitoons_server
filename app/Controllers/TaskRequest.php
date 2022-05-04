@@ -94,13 +94,16 @@ class TaskRequest extends HF_Controller
                         $message .= 'Dear user ('.$username.'),<br><br>Thank you for contacting us!<br><br>';
                         $message .= '<table cellpadding="5"><tbody><tr><th valign="top" align="right">Email:</th><td>'.$useremail.'</td></tr><tr><th valign="top" align="right">Type:</th><td>'.$requesttype->meta_value.'</td></tr><tr><th valign="top" align="right">Task title:</th><td>'.$this->request->getVar('title').'</td></tr><tr><th valign="top" align="right">Priority:</th><td>'.$priority->meta_value.'</td></tr><tr><th valign="top" align="right">Task description:</th><td>'.$task_description->meta_value.'</td></tr><tr><th valign="top" align="right">Reference files:</th><td>'.$refimgname[0].'</td></tr><tr><th valign="top" align="right">Constraint:</th><td>'.$constraint->meta_value.'</td></tr><tr><th valign="top" align="right">Deadline:</th><td>'.$deadline->meta_value.'</td></tr><tr><th valign="top" align="right">Estimated budget:</th><td>$'.$budget->meta_value.'</td></tr></tbody></table>';
                         $message .= '<br><br>We will reply within 48 hours.<br><br>Best Regards, '.$sitename.'<br><br>';
-                        if(!empty($refimg)){ $message .= '<img src='.$refimg.'/>';}
+                        //if(!empty($refimg)){ $message .= '<img src='.$refimg.'/>';}
                         $email = \Config\Services::email();
                         $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                         $email->setTo($to);
                         $email->setFrom($admin_email,$sitename);
                         $email->setSubject($subject);
                         $email->setMessage($message);
+                        $filename = $refimg; //you can use the App patch 
+                        $email->attach($filename);
+                           
                         //$email->send();  
 
                         //sent mail to admin
@@ -123,7 +126,8 @@ class TaskRequest extends HF_Controller
                         return redirect()->to(base_url().'/dashboard');*/
                         if($email->send())
                        {
-                            $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
+                            //$email->printDebugger(['headers']);
+                            $this->session->setTempdata('success',$email->printDebugger(['headers']),2);
                             return redirect()->to(base_url().'/dashboard');
                        }
                        else
