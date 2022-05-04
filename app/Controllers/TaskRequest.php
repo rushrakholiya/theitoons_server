@@ -75,8 +75,7 @@ class TaskRequest extends HF_Controller
                           $refimg = explode('/', $reference_img->meta_value);
                           $refimgname = array_reverse($refimg);
                           }
-                        $img = file_get_contents($reference_img->meta_value);
-                        $imgdata = base64_encode($img);
+                        
                         $constraint=getTaskRequestMeta("constraint", $taskid);
                         $deadline=getTaskRequestMeta("deadline", $taskid);
                         $budget=getTaskRequestMeta("budget", $taskid);
@@ -93,8 +92,8 @@ class TaskRequest extends HF_Controller
                         $message = "";
                         $message .= 'Dear user ('.$username.'),<br><br>Thank you for contacting us!';
                         $message .= '<table cellpadding="5"><tbody><tr><th valign="top" align="right">Email:</th><td>'.$useremail.'</td></tr><tr><th valign="top" align="right">Type:</th><td>'.$requesttype->meta_value.'</td></tr><tr><th valign="top" align="right">Task title:</th><td>'.$this->request->getVar('title').'</td></tr><tr><th valign="top" align="right">Priority:</th><td>'.$priority->meta_value.'</td></tr><tr><th valign="top" align="right">Task description:</th><td>'.$task_description->meta_value.'</td></tr><tr><th valign="top" align="right">Reference files:</th><td>'.$refimgname[0].'</td></tr><tr><th valign="top" align="right">Constraint:</th><td>'.$constraint->meta_value.'</td></tr><tr><th valign="top" align="right">Deadline:</th><td>'.$deadline->meta_value.'</td></tr><tr><th valign="top" align="right">Estimated budget:</th><td>$'.$budget->meta_value.'</td></tr></tbody></table>';
-                        $message .= 'We will reply within 48 hours.<br>Best Regards, '.$sitename;
-                        $message .= "<img src='data:image/x-icon;base64,$imgdata'/>";
+                        $message .= 'We will reply within 48 hours.<br>Best Regards, '.$sitename.'<br><br>';
+                        $message .= '<img src='.$reference_img->meta_value.'/>';
                         $email = \Config\Services::email();
                         $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                         $email->setTo($to);
@@ -109,8 +108,8 @@ class TaskRequest extends HF_Controller
                         $messagea = "";
                         $messagea .= 'The following information has been send by the submitter:';
                         $messagea .= '<table cellpadding="5"><tbody><tr><th valign="top" align="right">Name:</th><td>'.$username.'</td></tr><tr><th valign="top" align="right">Email:</th><td>'.$useremail.'</td></tr><tr><th valign="top" align="right">Type:</th><td>'.$requesttype->meta_value.'</td></tr><tr><th valign="top" align="right">Task title:</th><td>'.$this->request->getVar('title').'</td></tr><tr><th valign="top" align="right">Priority:</th><td>'.$priority->meta_value.'</td></tr><tr><th valign="top" align="right">Task description:</th><td>'.$task_description->meta_value.'</td></tr><tr><th valign="top" align="right">Reference files:</th><td>'.$refimgname[0].'</td></tr><tr><th valign="top" align="right">Constraint:</th><td>'.$constraint->meta_value.'</td></tr><tr><th valign="top" align="right">Deadline:</th><td>'.$deadline->meta_value.'</td></tr><tr><th valign="top" align="right">Estimated budget:</th><td>$'.$budget->meta_value.'</td></tr></tbody></table>';
-                        $messagea .= 'We will reply within 48 hours.<br>Best Regards, '.$sitename;
-                        $messagea .= "<img src='data:image/x-icon;base64,$imgdata'/>";
+                        $messagea .= 'We will reply within 48 hours.<br>Best Regards, '.$sitename.'<br><br>';
+                        $messagea .= '<img src='.$reference_img->meta_value.'/>';
                         $emaila = \Config\Services::email();
                         $emaila->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                         $emaila->setTo($toa);
