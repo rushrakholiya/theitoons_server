@@ -101,7 +101,7 @@ class TaskRequest extends HF_Controller
                         $email->setFrom($admin_email,$sitename);
                         $email->setSubject($subject);
                         $email->setMessage($message);
-                        $email->send();  
+                        //$email->send();  
 
                         //sent mail to admin
                         /*$toa = $useremail;//$admin_email;
@@ -131,7 +131,7 @@ class TaskRequest extends HF_Controller
                             $this->session->setTempdata('error',$email->printDebugger(['headers']),2);
                             return redirect()->to(base_url().'/dashboard');
                        }
-                        
+
                     }
                     else
                     {
