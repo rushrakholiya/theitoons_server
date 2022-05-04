@@ -88,7 +88,7 @@ class TaskRequest extends HF_Controller
                         if(!empty($admin_email->option_value)){$admin_email=$admin_email->option_value;}else{$admin_email="me@preraktrivedi.com";}*/
                         $admin_email = "prerak@theitoons.com";
                         //sent mail to user
-                        $to = $useremail;
+                        $to = "surbhi@theitoons.com";//$useremail;
                         $subject = 'Thank you! | '.$sitename;
                         $message = "";
                         $message .= 'Dear user ('.$username.'),<br><br>Thank you for contacting us!';
