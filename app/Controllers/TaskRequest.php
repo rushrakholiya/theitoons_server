@@ -74,6 +74,7 @@ class TaskRequest extends HF_Controller
                           if($reference_img->meta_value){                 
                           $refimg = explode('/', $reference_img->meta_value);
                           $refimgname = array_reverse($refimg);
+                          $refimg = $reference_img->meta_value;
                           }
                         
                         $constraint=getTaskRequestMeta("constraint", $taskid);
@@ -93,7 +94,8 @@ class TaskRequest extends HF_Controller
                         $message .= 'Dear user ('.$username.'),<br><br>Thank you for contacting us!';
                         $message .= '<table cellpadding="5"><tbody><tr><th valign="top" align="right">Email:</th><td>'.$useremail.'</td></tr><tr><th valign="top" align="right">Type:</th><td>'.$requesttype->meta_value.'</td></tr><tr><th valign="top" align="right">Task title:</th><td>'.$this->request->getVar('title').'</td></tr><tr><th valign="top" align="right">Priority:</th><td>'.$priority->meta_value.'</td></tr><tr><th valign="top" align="right">Task description:</th><td>'.$task_description->meta_value.'</td></tr><tr><th valign="top" align="right">Reference files:</th><td>'.$refimgname[0].'</td></tr><tr><th valign="top" align="right">Constraint:</th><td>'.$constraint->meta_value.'</td></tr><tr><th valign="top" align="right">Deadline:</th><td>'.$deadline->meta_value.'</td></tr><tr><th valign="top" align="right">Estimated budget:</th><td>$'.$budget->meta_value.'</td></tr></tbody></table>';
                         $message .= 'We will reply within 48 hours.<br>Best Regards, '.$sitename.'<br><br>';
-                        $message .= '<img src='.$reference_img->meta_value.'/>';
+                        if(!empty($refimg)){ $message .= '<img src='.$refimg.'/>';}
+                        $message .= '<img src='..'/>';
                         $email = \Config\Services::email();
                         $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                         $email->setTo($to);
@@ -103,7 +105,7 @@ class TaskRequest extends HF_Controller
                         $email->send();  
 
                         //sent mail to admin
-                        $toa = $useremail;//$admin_email;
+                        /*$toa = $useremail;//$admin_email;
                         $subjecta = 'New question | '.$sitename;
                         $messagea = "";
                         $messagea .= 'The following information has been send by the submitter:';
@@ -117,7 +119,7 @@ class TaskRequest extends HF_Controller
                         $emaila->setSubject($subjecta);
                         $emaila->setMessage($messagea);
                         $emaila->send();             
-
+*/
                         $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
                         return redirect()->to(base_url().'/dashboard'); 
                     }
