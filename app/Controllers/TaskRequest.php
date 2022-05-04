@@ -119,10 +119,20 @@ class TaskRequest extends HF_Controller
                         $emaila->setMessage($messagea);
                         $emaila->send();             
 
-                        $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
+                        /*$this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
                         $this->session->setTempdata('error',$email->printDebugger(['headers']),2);
                         $this->session->setTempdata('error',$emaila->printDebugger(['headers']),2);
-                        return redirect()->to(base_url().'/dashboard'); 
+                        return redirect()->to(base_url().'/dashboard'); */
+                        if($email->send())
+                           {
+                                $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
+                                return redirect()->to(base_url().'/dashboard');
+                           }
+                           else
+                           {
+                                $this->session->setTempdata('error',$email->printDebugger(['headers']),2);
+                                return redirect()->to(base_url().'/dashboard');
+                           }
                     }
                     else
                     {
