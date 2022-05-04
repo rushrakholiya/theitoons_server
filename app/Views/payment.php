@@ -28,7 +28,7 @@
       <?php }?>
 
       <?php if(isset($datacomplete)){
-        //print_r($datacomplete);?>
+        print_r($datacomplete);?>
         <span class="text-success input-group mt-1 ml-1 mb-2"> <?php echo "Status: ".$datacomplete['PAYMENTINFO_0_PAYMENTSTATUS']."<br>Transaction Id: ".$datacomplete['PAYMENTINFO_0_TRANSACTIONID'];?></span>
       <?php }?>
 

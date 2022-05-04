@@ -46,14 +46,22 @@
               <!-- <p class="login-box-msg">Submit your request</p> -->
 
               <?php if($session->getTempdata('success')){?>
-                <span class="text-success input-group mt-1 ml-1 mb-2"><?= $session->getTempdata('success'); ?></span>
+                <div class="text-center"><span class="text-success mt-1 mb-2"><?= $session->getTempdata('success'); ?></span></div>
               <?php }?>
 
               <?php if($session->getTempdata('error')){?>
-                <span class="text-danger input-group mt-1 ml-1 mb-2"><?= $session->getTempdata('error'); ?></span>
+                <div class="text-center"><span class="text-danger mt-1 mb-2"><?= $session->getTempdata('error'); ?></span></div>
               <?php }?>
 
-              <?php if(isset($taskrequestinfo)){
+              <?php if(isset($success)){?>
+                <div class="text-center"><span class="text-success mt-1 mb-2"><?= $success; ?></span></div>
+              <?php }?>
+
+              <?php if(isset($error)){?>
+                <div class="text-center"><span class="text-danger mt-1 mb-2"><?= $error; ?></span></div>
+              <?php }?>
+
+              <?php if(isset($taskrequestinfo) && !empty($taskrequestinfo)){
                     //print_r($taskrequestinfo);
               $id = $taskrequestinfo->task_id;?>
               <?= form_open_multipart('dashboard/editTaskRequest/'.$id,'class="taskrequestForm" id="taskrequestForm1"'); ?>

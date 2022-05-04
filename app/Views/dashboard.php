@@ -38,7 +38,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="row justify-content-center">        
-        <div class="col-sm-8">          
+        <div class="col-sm-10">          
           <!-- Default box -->
           <?php if($session->getTempdata('success')){?>
             <div class="text-center mb-3"><span class="text-success"><?= $session->getTempdata('success'); ?></span></div>
@@ -71,6 +71,7 @@
                           <th>Deadline</th>
                           <th>Status</th>                       
                           <th>Submitted Date</th>
+                          <th>Payment Status</th>
                           <th>Actions</th>
                       </tr>
                   </thead>
@@ -97,12 +98,18 @@
                         
                         $task_submitted_date = date("d-m-Y", strtotime($row->task_date));
                         $task_submitted_time = date("h:i a", strtotime($row->task_date));
+
+                        $paymentstatus = getTaskRequestPaymentData($row->task_id);
+                        if(!empty($paymentstatus->payment_status)){$pay_status = $paymentstatus->payment_status;}
+                        else{$pay_status = "-";}
+
                         echo "<tr>";
                         echo "<td>".$row->task_title."</td>";
                         echo "<td><span class='tbp btn btn-sm ".$color."'><span>".$taskpriority."</span></span></td>";
                         echo "<td>".$task_deadline."</td>";                        
                         echo "<td>".$taskstatus."</td>";   
                         echo '<td>'.$task_submitted_date.'<span style="font-weight: 600;font-size: 10px;color: #939393;text-transform: uppercase;">  '.$task_submitted_time.'</span></td>';
+                        echo "<td>".$pay_status."</td>";
                         echo '<td class="project-actions">';
                         echo '<a class="contactentryview" href="'.base_url().'/dashboard/viewTaskRequest/'.$row->task_id.'" title="View Request"> 👁 </a>';
                         if($row->task_status=="pending"){
@@ -111,6 +118,11 @@
                         }
                         if($row->task_status=="in_review"){
                         echo '<a href="'.base_url().'/dashboard/completeTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Complete Request"> ✔ </a>';
+                        }
+                        
+                        if($row->task_status=="accepted" && $pay_status != "Completed"){
+                        $task_budget = getTaskRequestMeta("budget",$row->task_id);
+                        echo '<a href="'.base_url().'/dashboard/paymentTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Pay $'.$task_budget->meta_value.'"> 💳</a>';
                         }
                         echo '</td>';
                         echo "</tr>";
