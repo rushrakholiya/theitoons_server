@@ -46,8 +46,7 @@ class DashboardModel extends Model
 		return true;		
 	}
 	public function completeTaskRequest($id)
-	{
-		
+	{		
 		$taskdata = ['task_status'=> "completed"];
         $builder = $this->db->table('task_requests');
 		$builder->where('task_id', $id);
@@ -73,5 +72,53 @@ class DashboardModel extends Model
 		$builder->updateBatch($taskmetadata,'meta_key');		
 
 		return true;		
+	}
+	public function verifyPaymentMethod()
+	{
+		$builder = $this->db->table('site_details');
+        $builder->select('*');        
+		$query = $builder->where('option_name', 'paypal_enable_disable');
+        $result = $query->get();
+        $paypalactive = $result->getRow();
+        if( $paypalactive->option_value ==1)
+        {
+        	$names = ['paypal_sandbox','live_API_username','live_API_password','live_API_signature'];
+			$builder = $this->db->table('site_details');
+        	$builder->select('*');        
+			$query = $builder->whereIn('option_name', $names);
+        	$result = $query->get();
+        	return $result->getResultArray();
+        }
+        else
+        {
+        	return false;
+        }
+	}
+	public function addPaymentDataTaskRequest($taskpaymentdata)
+	{
+		$builder = $this->db->table('task_request_payments');
+		$res = $builder->insert($taskpaymentdata);
+		$paymentid = $this->db->insertID();		
+		if( ($this->db->affectedRows()) == 1 && (!empty($paymentid)) )
+		{			
+			return $paymentid ;	
+		}
+		else
+		{
+			return false;
+		}	
+	}
+	public function addPaymentDataTaskRequestMeta($taskpaymentmetadata)
+	{
+		$buildermetadata = $this->db->table('task_request_payment_meta');
+		$resmeta = $buildermetadata->insert($taskpaymentmetadata);
+		if( $this->db->affectedRows() > 0 )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
