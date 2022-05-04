@@ -97,6 +97,7 @@ class TaskRequest extends HF_Controller
                         //if(!empty($refimg)){ $message .= '<img src='.$refimg.'/>';}
                         $email = \Config\Services::email();
                         //$email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
+                        $email->set_mailtype("html");
                         $email->setTo($to);
                         $email->setFrom($admin_email,$sitename);
                         $email->setSubject($subject);
