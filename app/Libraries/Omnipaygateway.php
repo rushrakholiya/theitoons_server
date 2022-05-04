@@ -35,7 +35,8 @@ class Omnipaygateway extends Omnipay {
         {
             if ($response->getRedirectMethod() == "GET"){
                 /*$paypalResponse = "<h4>Amount : ".$valTransaction['amount']." ".$valTransaction['currency']."</h4><p><a href=".$response->getRedirectUrl()." class='btn btn-success'>Pay Now </a></p>";*/
-                $paypalResponse = "<p><a href=".$response->getRedirectUrl()." class='btn btn-primary btn-block'>Pay with paypal</a></p>";
+               /* $paypalResponse = "<p><a href=".$response->getRedirectUrl()." class='btn btn-primary btn-block'>Pay with paypal</a></p>";*/
+               $response->redirect();
             } 
         }
         else
