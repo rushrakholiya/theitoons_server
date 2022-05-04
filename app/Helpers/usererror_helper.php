@@ -77,4 +77,15 @@ if(!function_exists('getTaskRequestMeta')) {
 		return $query->getRow();
 	}
 }
+
+if(!function_exists('getTaskRequestPaymentData')) {
+	function getTaskRequestPaymentData($id)
+	{
+		$db      = \Config\Database::connect();
+		$builder = $db->table('task_request_payments');
+		$builder->select('*');
+		$query = $builder->getWhere(['task_id' => $id], 1);
+		return $query->getRow();
+	}
+}
 ?>
