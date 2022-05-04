@@ -96,7 +96,7 @@ class TaskRequest extends HF_Controller
                         $message .= '<br><br>We will reply within 48 hours.<br><br>Best Regards, '.$sitename.'<br><br>';
                         //if(!empty($refimg)){ $message .= '<img src='.$refimg.'/>';}
                         $email = \Config\Services::email();
-                        $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
+                        //$email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                         $email->setTo($to);
                         $email->setFrom($admin_email,$sitename);
                         $email->setSubject($subject);
