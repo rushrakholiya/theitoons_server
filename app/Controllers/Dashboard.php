@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\DashboardModel;
+use App\Libraries\Omnipaygateway; 
 
 class Dashboard extends HF_Controller
 {    
@@ -159,7 +160,6 @@ class Dashboard extends HF_Controller
             $checkauthorizeduser = $this->dashboardModel->checkAuthorizedUser($id,$uid);
             if( $checkauthorizeduser == true )
             {
-
                 if( $this->request->getMethod() == "post" ){                    
                     $path = "";
                     $file =  $this->request->getFile('reference');
@@ -202,16 +202,17 @@ class Dashboard extends HF_Controller
                 else
                 {
                     $data['taskrequestinfo'] = $this->dashboardModel->viewTaskRequest($id);
-                    if(!empty($data['taskrequestinfo']))
+                    $taskstatus = $data['taskrequestinfo']->task_status;
+                    if( !empty($data['taskrequestinfo']) && $taskstatus=="pending" )
                     {
                         return $this->loginheaderfooter('editTaskRequest',$data);
                     }
                     else
                     { 
+                        $data['taskrequestinfo'] = '';
                         $data['error'] = "Sorry! No Records found, Try again.";
                         return $this->loginheaderfooter('editTaskRequest',$data);
                     }
-                    //return $this->loginheaderfooter('dashboard/editTaskRequest/'.$id,$data);
                 }
             }
             else
@@ -220,5 +221,140 @@ class Dashboard extends HF_Controller
                 return redirect()->to(base_url().'/dashboard');
             }
         }
+    }
+    public function paymentTaskRequest($id=null)
+    {
+        if(!session()->has('logged_user_client'))
+        {
+            return redirect()->to(base_url()."/login");
+        }
+        else
+        {
+            $data = [];
+            if(session()->has('logged_user_client')){$uid=session()->get('logged_user_client'); }
+            $task_budget = getTaskRequestMeta("budget",$id);
+            $amount = $task_budget->meta_value;
+            $checkauthorizeduser = $this->dashboardModel->checkAuthorizedUser($id,$uid);
+            if( $checkauthorizeduser == true )
+            {
+                $paymentdata = $this->dashboardModel->verifyPaymentMethod();            
+                if(!empty($paymentdata))
+                {
+                   foreach($paymentdata as $row){
+                        if($row['option_name'] == 'paypal_sandbox' )
+                            {$paypal_sandbox = $row['option_value'];}
+                        if($row['option_name'] == 'live_API_username' )
+                            {$live_API_username = $row['option_value'];;}
+                        if($row['option_name'] == 'live_API_password' )
+                            {$live_API_password = $row['option_value'];}
+                        if($row['option_name'] == 'live_API_signature' )
+                            {$live_API_signature = $row['option_value'];}                   
+                    }
+                    if($paypal_sandbox==1){$test_mode = true;}else{$test_mode = false;}
+                    
+                    $this->purchaseProc = new Omnipaygateway('PayPal_Express', $test_mode,$live_API_username,$live_API_password,$live_API_signature);
+                    
+                    $valTransc = array(
+                        'amount' => number_format($amount , 2, '.', ''),
+                        'currency'=>'USD',
+                        'returnUrl'=> base_url()."/dashboard/thankYouPaypal/".$id,
+                        'cancelUrl'=> base_url()."/dashboard/canceledPaypal");
+                    $datapurchase = $this->purchaseProc->sendPurchase($valTransc);         
+                }
+                else
+                {
+                    $data['paypalerror'] = "Paypal Disabled, Try again.";
+                    return $this->loginheaderfooter('dashboard',$data);
+                }
+            }
+            else
+            {
+                $this->session->setTempdata('error','Sorry, You are not authorised user.',2);
+                return redirect()->to(base_url().'/dashboard');
+            }
+        }
+    }
+    public function canceledPaypal()
+    {
+        $data = [];
+        return $this->loginheaderfooter('canceledPaypal',$data);
+    }
+    public function thankYouPaypal($id=null)
+    {
+        $data = [];
+        if(session()->has('logged_user_client')){$uid=session()->get('logged_user_client'); }
+        $task_budget = getTaskRequestMeta("budget",$id);
+        $amount = $task_budget->meta_value;                    
+        $paymentdata = $this->dashboardModel->verifyPaymentMethod();            
+        $checkauthorizeduser = $this->dashboardModel->checkAuthorizedUser($id,$uid);
+        if( $checkauthorizeduser == true )
+        {
+            if(!empty($paymentdata))
+            {
+                foreach($paymentdata as $row){
+                    if($row['option_name'] == 'paypal_sandbox' )
+                        {$paypal_sandbox = $row['option_value'];}
+                    if($row['option_name'] == 'live_API_username' )
+                        {$live_API_username = $row['option_value'];;}
+                    if($row['option_name'] == 'live_API_password' )
+                        {$live_API_password = $row['option_value'];}
+                    if($row['option_name'] == 'live_API_signature' )
+                        {$live_API_signature = $row['option_value'];}                   
+                }
+                if($paypal_sandbox==1){$test_mode = true;}else{$test_mode = false;}
+                
+                $this->purchaseProc = new Omnipaygateway('PayPal_Express', $test_mode,$live_API_username,$live_API_password,$live_API_signature);
+
+                if(isset($_GET['token']) && isset($_GET['PayerID'])){
+                    $parameters = array(
+                        'amount' => number_format($amount, 2, '.', ''),
+                        'currency'=>'USD',
+                        'token' => $_GET['token'],
+                        'payerid' => $_GET['PayerID'],
+                        'returnUrl'=> base_url()."/dashboard/thankYouPaypal",
+                        'cancelUrl'=> base_url()."/dashboard/canceledPaypal");
+                    $datacomplete = $this->purchaseProc->complete($parameters);
+                    //$data['datacomplete'] = $datacomplete;
+                    
+                    if($datacomplete['ACK']=="Success"){
+                        $pydate = $datacomplete['PAYMENTINFO_0_ORDERTIME'];
+                        $pdate = date_create($pydate);
+                        $payment_date = date_format($pdate,"d-m-Y h:i a");
+                        $taskpaymentdata = [
+                            'task_id' =>$id,
+                            'user_id'=> $uid,                        
+                            'payment_title' => $datacomplete['PAYMENTINFO_0_TRANSACTIONID'],
+                            'payment_status'=> $datacomplete['PAYMENTINFO_0_PAYMENTSTATUS'],
+                            'payment_date'=> $payment_date                    
+                        ];
+                        //$data['datacomplete'] = $taskpaymentdata;
+                        
+                        $paymentid = $this->dashboardModel->addPaymentDataTaskRequest($taskpaymentdata);
+                        if(!empty($paymentid))
+                        {
+                            $taskpaymentmetadata = [
+                                'payment_id' => $paymentid,
+                                'meta_key' => 'payment_txn_data',
+                                'meta_value' => json_encode($datacomplete)
+                            ];
+                            $this->dashboardModel->addPaymentDataTaskRequestMeta($taskpaymentmetadata);
+                        }
+
+                    }
+                    
+                }
+            }
+            else
+            {
+                $data['paypalerror'] = "Paypal Disabled, Try again.";
+                return $this->loginheaderfooter('dashboard',$data);
+            }
+        }
+        else
+        {
+            $this->session->setTempdata('error','Sorry, You are not authorised user.',2);
+            return redirect()->to(base_url().'/dashboard');
+        }
+        return $this->loginheaderfooter('thankYouPaypal',$data);
     }
 }

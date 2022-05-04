@@ -62,8 +62,66 @@ class TaskRequest extends HF_Controller
                     ];
                     if($this->taskrequestModel->addNewTaskRequestMeta($taskmetadata))
                     {
-                        //sent mail to admin and client remaining
+                        //sent mail to admin and user
+                        $userdata = getLoggedInUserData($cid);
+                        $useremail = $userdata->user_email;
+                        $username = $userdata->user_name;
+
+                        $requesttype = getTaskRequestMeta("requesttype", $taskid);
+                        $priority=getTaskRequestMeta("priority", $taskid);
+                        $task_description = getTaskRequestMeta("task_description", $taskid);
+                        $reference_img = getTaskRequestMeta("reference_img", $taskid);
+                          if($reference_img->meta_value){                 
+                          $refimg = explode('/', $reference_img->meta_value);
+                          $refimgname = array_reverse($refimg);
+                          }
+                        $img = file_get_contents($reference_img->meta_value);
+                        $imgdata = base64_encode($img);
+                        $constraint=getTaskRequestMeta("constraint", $taskid);
+                        $deadline=getTaskRequestMeta("deadline", $taskid);
+                        $budget=getTaskRequestMeta("budget", $taskid);
+                        
+                        $site_name = getGeneralData("site_name");
+                        if(!empty($site_name->option_value)){$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
+
+                        $admin_email = getGeneralData("admin_email");
+                        if(!empty($admin_email->option_value)){$admin_email=$admin_email->option_value;}else{$admin_email="me@preraktrivedi.com";}
+                        
+                        //sent mail to user
+                        $to = $useremail;
+                        $subject = 'Thank you! | '.$sitename;
+                        $message = "";
+                        $message .= 'Dear user ('.$username.'),<br><br>Thank you for contacting us!';
+                        $message .= '<table cellpadding="5"><tbody><tr><th valign="top" align="right">Email:</th><td>'.$useremail.'</td></tr><tr><th valign="top" align="right">Type:</th><td>'.$requesttype->meta_value.'</td></tr><tr><th valign="top" align="right">Task title:</th><td>'.$this->request->getVar('title').'</td></tr><tr><th valign="top" align="right">Priority:</th><td>'.$priority->meta_value.'</td></tr><tr><th valign="top" align="right">Task description:</th><td>'.$task_description->meta_value.'</td></tr><tr><th valign="top" align="right">Reference files:</th><td>'.$refimgname[0].'</td></tr><tr><th valign="top" align="right">Constraint:</th><td>'.$constraint->meta_value.'</td></tr><tr><th valign="top" align="right">Deadline:</th><td>'.$deadline->meta_value.'</td></tr><tr><th valign="top" align="right">Estimated budget:</th><td>$'.$budget->meta_value.'</td></tr></tbody></table>';
+                        $message .= 'We will reply within 48 hours.<br>Best Regards, '.$sitename;
+                        $message .= "<img src='data:image/x-icon;base64,$imgdata'/>";
+                        $email = \Config\Services::email();
+                        $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
+                        $email->setTo($to);
+                        $email->setFrom($admin_email,$sitename);
+                        $email->setSubject($subject);
+                        $email->setMessage($message);
+                        $email->send();  
+
+                        //sent mail to admin
+                        $toa = $useremail;//$admin_email;
+                        $subjecta = 'New question | '.$sitename;
+                        $messagea = "";
+                        $messagea .= 'The following information has been send by the submitter:';
+                        $messagea .= '<table cellpadding="5"><tbody><tr><th valign="top" align="right">Name:</th><td>'.$username.'</td></tr><tr><th valign="top" align="right">Email:</th><td>'.$useremail.'</td></tr><tr><th valign="top" align="right">Type:</th><td>'.$requesttype->meta_value.'</td></tr><tr><th valign="top" align="right">Task title:</th><td>'.$this->request->getVar('title').'</td></tr><tr><th valign="top" align="right">Priority:</th><td>'.$priority->meta_value.'</td></tr><tr><th valign="top" align="right">Task description:</th><td>'.$task_description->meta_value.'</td></tr><tr><th valign="top" align="right">Reference files:</th><td>'.$refimgname[0].'</td></tr><tr><th valign="top" align="right">Constraint:</th><td>'.$constraint->meta_value.'</td></tr><tr><th valign="top" align="right">Deadline:</th><td>'.$deadline->meta_value.'</td></tr><tr><th valign="top" align="right">Estimated budget:</th><td>$'.$budget->meta_value.'</td></tr></tbody></table>';
+                        $messagea .= 'We will reply within 48 hours.<br>Best Regards, '.$sitename;
+                        $messagea .= "<img src='data:image/x-icon;base64,$imgdata'/>";
+                        $emaila = \Config\Services::email();
+                        $emaila->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
+                        $emaila->setTo($toa);
+                        $emaila->setFrom($admin_email,$sitename);
+                        $emaila->setSubject($subjecta);
+                        $emaila->setMessage($messagea);
+                        $emaila->send();             
+
                         $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
+                        $this->session->setTempdata('error',$email->printDebugger(['headers']),2);
+                        $this->session->setTempdata('error',$emaila->printDebugger(['headers']),2);
                         return redirect()->to(base_url().'/dashboard'); 
                     }
                     else
