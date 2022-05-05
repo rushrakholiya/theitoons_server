@@ -121,25 +121,14 @@ class Login extends HF_Controller
                        
                        /*$admin_email = getGeneralData("admin_email");
                         if(!empty($admin_email->option_value))
-                        {$admin_email=$admin_email->option_value;}else{$admin_email="prerak@theitoons.com";}*/
-
-                       $admin_email = getGeneralData("smtpadmin_email");
-                        if(!empty($admin_email->option_value)){$adminemail=$admin_email->option_value;}
-
-                       $smtpadmin_pass = getGeneralData("smtpadmin_pass");
-                        if(!empty($smtpadmin_pass->option_value)){$smtpadminpass=$smtpadmin_pass->option_value;}
-
-                       $SMTPUser = $adminemail;
-                       $SMTPPass = $smtpadminpass; 
+                        {$admin_email=$admin_email->option_value;}*/
 
                        $to = $useremail;
                        $subject = 'Reset Password Link | '.$sitename;
                        $token = $userdata['user_id'];
                        $message = 'Hi '.$userdata['user_name'].',<br><br> Your reset password request has been received. Please click the below link to reset your password.<br><br><a href="'.base_url().'/login/resetPassword/'.$token.'" target="_blank">Click here to reset password</a><br><br> Thanks,<br>'.$sitename;
                        $email = \Config\Services::email();
-                       $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                        $email->setTo($to);
-                       $email->setFrom($adminemail,$sitename);
                        $email->setSubject($subject);
                        $email->setMessage($message);
 
