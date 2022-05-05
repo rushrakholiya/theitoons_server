@@ -88,4 +88,16 @@ if(!function_exists('getTaskRequestPaymentData')) {
 		return $query->getRow();
 	}
 }
+
+if(!function_exists('getManagerUsers')) {
+	function getManagerUsers()
+	{
+		$db      = \Config\Database::connect();
+		$builder = $db->table('users');
+		$builder->join('user_meta','user_meta.user_id = users.user_id AND user_meta.meta_value = "client_manager"');
+		$builder->select('users.*');
+	    $query = $builder->get();
+	    return $query->getResult();
+	}
+}
 ?>
