@@ -86,7 +86,7 @@ class TaskRequest extends HF_Controller
                         if(!empty($site_name->option_value)){$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
 
                         $admin_email = getGeneralData("admin_email");
-                        if(!empty($admin_email->option_value)){$admin_email=$admin_email->option_value;}else{$admin_email="me@preraktrivedi.com";}
+                        if(!empty($admin_email->option_value)){$admin_email=$admin_email->option_value;}else{$admin_email="prerak@theitoons.com";}
 
                         //$admin_email = "prerak@theitoons.com";
                         $useremail = "surbhi@theitoons.com";
@@ -101,7 +101,7 @@ class TaskRequest extends HF_Controller
                         $email = \Config\Services::email();
                         //$email->setMailType("html");
                         $email->setTo($to);
-                        $email->setFrom($admin_email,$sitename);
+                        //$email->setFrom($admin_email,$sitename);
                         $email->setSubject($subject);
                         $email->setMessage($message);
                         /*$filename = $refimg;

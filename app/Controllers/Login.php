@@ -120,7 +120,7 @@ class Login extends HF_Controller
                         {$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
                        $admin_email = getGeneralData("admin_email");
                         if(!empty($admin_email->option_value))
-                        {$admin_email=$admin_email->option_value;}else{$admin_email="me@preraktrivedi.com";}
+                        {$admin_email=$admin_email->option_value;}else{$admin_email="prerak@theitoons.com";}
                        $to = $useremail;
                        $subject = 'Reset Password Link | '.$sitename;
                        $token = $userdata['user_id'];
