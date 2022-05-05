@@ -76,7 +76,7 @@ class TaskRequest extends HF_Controller
                           $refimgname = array_reverse($refimg);
                           $imagename = $refimgname[0];
                           $refimg = $reference_img->meta_value;
-                          }else{$refimg="";}
+                          }else{$refimg="";$imagename="";}
                         
                         $constraint=getTaskRequestMeta("constraint", $taskid);
                         $deadline=getTaskRequestMeta("deadline", $taskid);
