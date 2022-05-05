@@ -61,12 +61,30 @@
                       </div>
                      </div>
                      <div class="form-group row">
-                      <label for="sitename" class="col-sm-3 col-form-label">Admin Email</label>
+                      <label for="admin_email" class="col-sm-3 col-form-label">Admin Email</label>
                       <?php $admin_email = getGeneralData("admin_email");
                       if(!empty($admin_email->option_value))
                         {$admin_email=$admin_email->option_value;}else{$admin_email="";}?>
                       <div class="col-sm-9">
                         <input type="email" id="admin_email" name="admin_email" class="form-control" value="<?= $admin_email;?>">
+                      </div>
+                     </div>
+                     <div class="form-group row">
+                      <label for="sitename" class="col-sm-3 col-form-label">SMTP Email</label>
+                      <?php $smtpadmin_email = getGeneralData("smtpadmin_email");
+                      if(!empty($smtpadmin_email->option_value))
+                        {$smtpadmin_email=$smtpadmin_email->option_value;}else{$smtpadmin_email="";}?>
+                      <div class="col-sm-9">
+                        <input type="email" id="smtpadmin_email" name="smtpadmin_email" class="form-control" value="<?= $smtpadmin_email;?>">
+                      </div>
+                     </div>
+                     <div class="form-group row">
+                      <label for="sitename" class="col-sm-3 col-form-label">SMTP Password</label>
+                      <?php $smtpadmin_pass = getGeneralData("smtpadmin_pass");
+                      if(!empty($smtpadmin_pass->option_value))
+                        {$smtpadmin_pass=$smtpadmin_pass->option_value;}else{$smtpadmin_pass="";}?>
+                      <div class="col-sm-9">
+                        <input type="password" id="smtpadmin_pass" name="smtpadmin_pass" class="form-control" value="<?= $smtpadmin_pass;?>">
                       </div>
                      </div>
                      <div class="form-group row">
