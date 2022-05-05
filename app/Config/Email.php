@@ -9,14 +9,15 @@ class Email extends BaseConfig
     public $smtpadmin_email;public $smtpadmin_pass;
     public function __construct()
     {
-        helper("usererror");
-        
+        helper(['usererror']);
+
         $smtpadmin_email = getGeneralData("smtpadmin_email");
         if(!empty($smtpadmin_email->option_value)){$smtpadmin_email=$admin_email->option_value;}
 
         $smtpadmin_pass = getGeneralData("smtpadmin_pass");
         if(!empty($smtpadmin_pass->option_value)){$smtpadmin_pass=$admin_email->option_value;}
-    }
+
+    }    
 
     /**
      * @var string
@@ -66,14 +67,14 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPUser;
+    public $SMTPUser = $smtpadmin_email;
 
     /**
      * SMTP Password
      *
      * @var string
      */
-    public $SMTPPass;
+    public $SMTPPass = $smtpadmin_pass;
 
     /**
      * SMTP Port
