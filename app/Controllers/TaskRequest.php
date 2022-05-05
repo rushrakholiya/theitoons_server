@@ -105,7 +105,7 @@ class TaskRequest extends HF_Controller
                         $email->setMessage($message);
                         $filename = $refimg;
                         $email->attach($filename);                           
-                        $email->send();  
+                        /*$email->send();  
 
                         //sent mail to admin
                         $toa = $useremail;//"prerak@theitoons.com";
@@ -125,8 +125,8 @@ class TaskRequest extends HF_Controller
                         $emaila->send();             
 
                         $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
-                        return redirect()->to(base_url().'/dashboard');
-                        /*if($email->send())
+                        return redirect()->to(base_url().'/dashboard');*/
+                        if($email->send())
                        {
                             //$email->printDebugger(['headers']);
                             $this->session->setTempdata('success',$email->printDebugger(['headers']),2);
@@ -136,7 +136,7 @@ class TaskRequest extends HF_Controller
                        {
                             $this->session->setTempdata('error',$email->printDebugger(['headers']),2);
                             return redirect()->to(base_url().'/dashboard');
-                       }*/
+                       }
 
                     }
                     else
