@@ -106,7 +106,7 @@ class TaskRequest extends HF_Controller
                         $email->send();  
 
                         //sent mail to admin
-                        $toa = $useremail;//"prerak@theitoons.com";
+                        $toa = $admin_email;
                         $subjecta = 'New question | '.$sitename;
                         $messagea = "";
                         $messagea .= 'The following information has been send by the submitter:<br><br>';
