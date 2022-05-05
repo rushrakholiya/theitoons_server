@@ -118,9 +118,20 @@ class Login extends HF_Controller
                        $site_name = getGeneralData("site_name");
                         if(!empty($site_name->option_value))
                         {$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
-                       $admin_email = getGeneralData("admin_email");
+                       
+                       /*$admin_email = getGeneralData("admin_email");
                         if(!empty($admin_email->option_value))
-                        {$admin_email=$admin_email->option_value;}else{$admin_email="prerak@theitoons.com";}
+                        {$admin_email=$admin_email->option_value;}else{$admin_email="prerak@theitoons.com";}*/
+
+                       $admin_email = getGeneralData("smtpadmin_email");
+                        if(!empty($admin_email->option_value)){$adminemail=$admin_email->option_value;}
+
+                       $smtpadmin_pass = getGeneralData("smtpadmin_pass");
+                        if(!empty($smtpadmin_pass->option_value)){$smtpadminpass=$smtpadmin_pass->option_value;}
+
+                       $SMTPUser = $adminemail;
+                       $SMTPPass = $smtpadminpass; 
+
                        $to = $useremail;
                        $subject = 'Reset Password Link | '.$sitename;
                        $token = $userdata['user_id'];
@@ -128,7 +139,7 @@ class Login extends HF_Controller
                        $email = \Config\Services::email();
                        $email->setHeader('Content-Type', 'text/html; charset=UTF-8\r\n');
                        $email->setTo($to);
-                       $email->setFrom($admin_email,$sitename);
+                       $email->setFrom($adminemail,$sitename);
                        $email->setSubject($subject);
                        $email->setMessage($message);
 
