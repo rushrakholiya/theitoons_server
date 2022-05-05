@@ -65,7 +65,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPUser = $admin_email;
+    public $SMTPUser = $smtpadmin_email;
 
     /**
      * SMTP Password
