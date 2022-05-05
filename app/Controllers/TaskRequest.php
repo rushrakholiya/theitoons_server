@@ -76,7 +76,7 @@ class TaskRequest extends HF_Controller
                           $refimgname = array_reverse($refimg);
                           $imagename = $refimgname[0];
                           $refimg = $reference_img->meta_value;
-                          }else{$imagename = '-';}
+                          }else{$refimg="";}
                         
                         $constraint=getTaskRequestMeta("constraint", $taskid);
                         $deadline=getTaskRequestMeta("deadline", $taskid);
@@ -84,18 +84,6 @@ class TaskRequest extends HF_Controller
                         
                         $site_name = getGeneralData("site_name");
                         if(!empty($site_name->option_value)){$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
-
-                        $admin_email = getGeneralData("smtpadmin_email");
-                        if(!empty($admin_email->option_value)){$adminemail=$admin_email->option_value;}
-
-                        $smtpadmin_pass = getGeneralData("smtpadmin_pass");
-                        if(!empty($smtpadmin_pass->option_value)){$smtpadminpass=$smtpadmin_pass->option_value;}
-
-                        $SMTPUser = $adminemail;
-                        $SMTPPass = $smtpadminpass;   
-
-                        //$admin_email = "prerak@theitoons.com";
-                        //$useremail = "surbhi@theitoons.com";
                         
                         //sent mail to user
                         $to = $useremail;
@@ -105,13 +93,13 @@ class TaskRequest extends HF_Controller
                         $message .= '<table cellpadding="5"><tbody><tr><th valign="top" align="right">Email:</th><td>'.$useremail.'</td></tr><tr><th valign="top" align="right">Type:</th><td>'.$requesttype->meta_value.'</td></tr><tr><th valign="top" align="right">Task title:</th><td>'.$this->request->getVar('title').'</td></tr><tr><th valign="top" align="right">Priority:</th><td>'.$priority->meta_value.'</td></tr><tr><th valign="top" align="right">Task description:</th><td>'.$task_description->meta_value.'</td></tr><tr><th valign="top" align="right">Reference files:</th><td>'.$imagename.'</td></tr><tr><th valign="top" align="right">Constraint:</th><td>'.$constraint->meta_value.'</td></tr><tr><th valign="top" align="right">Deadline:</th><td>'.$deadline->meta_value.'</td></tr><tr><th valign="top" align="right">Estimated budget:</th><td>$'.$budget->meta_value.'</td></tr></tbody></table>';
                         $message .= '<br><br>We will reply within 48 hours.<br>Best Regards, '.$sitename;
                         $email = \Config\Services::email();
-                        //$email->setMailType("html");
                         $email->setTo($to);
-                        $email->setFrom($adminemail,$sitename);
+                        //$email->setFrom($adminemail,$sitename);
                         $email->setSubject($subject);
                         $email->setMessage($message);
-                        /*$filename = $refimg;
-                        $email->attach($filename);                           
+                        /*if(refimg){
+                        $filename = $refimg;
+                        $email->attach($filename);}                         
                         $email->send();  
 
                         //sent mail to admin
@@ -122,13 +110,12 @@ class TaskRequest extends HF_Controller
                         $messagea .= '<table cellpadding="5"><tbody><tr><th valign="top" align="right">Name:</th><td>'.$username.'</td></tr><tr><th valign="top" align="right">Email:</th><td>'.$useremail.'</td></tr><tr><th valign="top" align="right">Type:</th><td>'.$requesttype->meta_value.'</td></tr><tr><th valign="top" align="right">Task title:</th><td>'.$this->request->getVar('title').'</td></tr><tr><th valign="top" align="right">Priority:</th><td>'.$priority->meta_value.'</td></tr><tr><th valign="top" align="right">Task description:</th><td>'.$task_description->meta_value.'</td></tr><tr><th valign="top" align="right">Reference files:</th><td>'.$imagename.'</td></tr><tr><th valign="top" align="right">Constraint:</th><td>'.$constraint->meta_value.'</td></tr><tr><th valign="top" align="right">Deadline:</th><td>'.$deadline->meta_value.'</td></tr><tr><th valign="top" align="right">Estimated budget:</th><td>$'.$budget->meta_value.'</td></tr></tbody></table>';
                         $messagea .= '<br><br>Best Regards, '.$sitename;
                         $emaila = \Config\Services::email();
-                        $emaila->setMailType("html");
                         $emaila->setTo($toa);
                         $emaila->setFrom($adminemail,$sitename);
                         $emaila->setSubject($subjecta);
                         $emaila->setMessage($messagea);
-                        $filenamea = $refimg;
-                        $emaila->attach($filenamea);
+                        if(refimg){$filenamea = $refimg;
+                        $emaila->attach($filenamea);}
                         $emaila->send();             
 
                         $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);

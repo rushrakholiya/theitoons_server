@@ -76,8 +76,6 @@ class Settings extends \App\Controllers\Admin\HFA_Controller
                 $generaldata = [
                     ['option_name' => 'site_name','option_value' => $this->request->getVar('sitename'),],
                     ['option_name' => 'admin_email','option_value' => $this->request->getVar('admin_email'),],
-                    ['option_name' => 'smtpadmin_email','option_value' => $this->request->getVar('smtpadmin_email'),],
-                    ['option_name' => 'smtpadmin_pass','option_value' => $this->request->getVar('smtpadmin_pass'),],
                     ['option_name' => 'site_favicon','option_value' => $sitefaviconpath,],
                     ['option_name' => 'site_logo','option_value' => $sitelogopath,],
                         
