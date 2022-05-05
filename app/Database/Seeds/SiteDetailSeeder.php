@@ -13,8 +13,6 @@ class SiteDetailSeeder extends Seeder
             ['option_name' => 'site_favicon','option_value' => "",],
             ['option_name' => 'site_logo','option_value' => "",],  
             ['option_name' => 'admin_email','option_value' => "",],
-            ['option_name' => 'smtpadmin_email','option_value' => "",],
-            ['option_name' => 'smtpadmin_pass','option_value' => "",],
             ['option_name' => 'paypal_enable_disable','option_value' =>"" ,],
             ['option_name' => 'paypal_sandbox','option_value' =>"" ,],
             ['option_name' => 'paypal_email','option_value' => "",],   
