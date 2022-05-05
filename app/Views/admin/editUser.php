@@ -83,8 +83,29 @@
                   <option disabled>Select one</option>
                   <option value="admin" <?php if($user_role->meta_value=="admin"){echo "selected";}?>>Admin</option>
                   <option value="client" <?php if($user_role->meta_value=="client"){echo "selected";}?>>Client</option>
+                  <option value="client_manager" <?php if($user_role->meta_value=="client_manager"){echo "selected";}?>>Client Manager</option>
                 </select>
               </div>
+              <?php if($user_role->meta_value=="client"){
+                $user_managers = getManagerUsers();
+                $user_managern = getUserMeta("user_manager", $id);
+                /*echo "<pre>";
+                print_r($user_managers);
+                echo "</pre>";*/
+              ?>
+              <div class="form-group">
+                <label for="user_manager">Select Manager</label>
+                <select id="user_manager" name="user_manager" class="form-control custom-select">
+                  <option value="">Select one</option>
+                  <?php if($user_managers){
+                    foreach($user_managers as $umnger){
+                      $mngername = strtolower($umnger->user_name);?>
+                      <option value="<?= $mngername;?>" <?php if($user_managern->meta_value==$mngername){echo "selected";}?>><?= ucwords($umnger->user_name);?></option>
+                   <?php }
+                  }?>
+                </select>
+              </div>
+              <?php }?>
               <div class="form-group">
                 <label for="userstatus">Status</label>
                 <select id="userstatus" name="userstatus" class="form-control custom-select">

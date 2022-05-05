@@ -87,6 +87,19 @@
                   <option disabled>Select one</option>
                   <option value="admin">Admin</option>
                   <option value="client">Client</option>
+                  <option value="client_manager">Client Manager</option>
+                </select>
+              </div>
+              <?php $user_managers = getManagerUsers();?>
+              <div class="form-group">
+                <label for="user_manager">Select Manager</label>
+                <select id="user_manager" name="user_manager" class="form-control custom-select">
+                  <option value="">Select one</option>
+                  <?php if($user_managers){
+                    foreach($user_managers as $umnger){
+                      echo '<option value="'.strtolower($umnger->user_name).'">'.ucwords($umnger->user_name).'</option>';
+                    }
+                  }?>
                 </select>
               </div>
               <div class="form-group">

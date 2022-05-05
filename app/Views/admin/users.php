@@ -52,6 +52,7 @@
                       <th>User Name</th>
                       <th>Email</th>
                       <th>Role</th>
+                      <th>Manager</th>
                       <th>Status</th>
                       <th></th>
                   </tr>
@@ -60,18 +61,20 @@
                 <?php
                  foreach($userdata as $row)
                   {
+                    $user_manager = getUserMeta("user_manager", $row->user_id);
                     echo "<tr>";
                     echo "<td>".$row->user_id."</td>";
                     echo "<td>".$row->user_name."</td>";
                     echo "<td>".$row->user_email."</td>";
                     echo "<td>".$row->meta_value."</td>";
+                    echo "<td>".$user_manager->meta_value."</td>";
                     echo "<td>";
                        if($row->user_status == 0){
                           echo "inactive";
                        }else{
                           echo "active";
                        }
-                    echo "</td>";
+                    echo "</td>";                    
                     echo '<td class="project-actions text-right">
                           <a class="btn btn-info btn-sm" href="'.base_url().'/admin/users/viewUser/'.$row->user_id.'">
                               <i class="fas fa-pencil-alt">
