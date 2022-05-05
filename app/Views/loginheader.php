@@ -41,4 +41,13 @@ if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" /> -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <?php }?>
+
+<script>
+  // @see https://docs.headwayapp.co/widget for more configuration options.
+  var HW_config = {
+    selector: ".CHANGE_THIS", // CSS selector where to inject the badge
+    account:  "xGEpOJ"
+  }
+</script>
+<script async src="https://cdn.headwayapp.co/widget.js"></script>
 </head>
