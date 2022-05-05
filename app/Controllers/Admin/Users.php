@@ -78,6 +78,7 @@ class Users extends \App\Controllers\Admin\HFA_Controller
                         ['user_id' => $userid,'meta_key' => 'last_name','meta_value' => $this->request->getVar('lastname'),],
                         ['user_id' => $userid,'meta_key' => 'user_description','meta_value' => $this->request->getVar('userdescription'),],
                         ['user_id' => $userid,'meta_key' => 'user_role','meta_value' => $this->request->getVar('user_role'),],
+                        ['user_id' => $userid,'meta_key' => 'user_manager','meta_value' => $this->request->getVar('user_manager'),],
                         ['user_id' => $userid,'meta_key' => 'company_name','meta_value' => $this->request->getVar('companyname'),],
                         ['user_id' => $userid,'meta_key' => 'address_one','meta_value' => $this->request->getVar('useraddressone'),],
                         ['user_id' => $userid,'meta_key' => 'address_two','meta_value' => $this->request->getVar('useraddresstwo'),],
@@ -162,6 +163,15 @@ class Users extends \App\Controllers\Admin\HFA_Controller
                         $path = base_url().'/public/profiles/'.$file->getName();
                     } 
                 }
+
+                $user_manager=getUserMeta("user_manager", $id);
+                if(empty($user_manager) && empty($user_manager->meta_value)){
+                    $user_managerdata = [
+                        ['user_id' => $id,'meta_key' => 'user_manager','meta_value' => $this->request->getVar('user_manager'),],                        
+                    ];
+                    $this->usersModel->addNewUserMeta($user_managerdata);
+                }
+
                 $userdata = [
                     'user_status' => $this->request->getVar('userstatus'),
                 ];
@@ -171,6 +181,7 @@ class Users extends \App\Controllers\Admin\HFA_Controller
                     ['meta_key' => 'last_name','meta_value' => $this->request->getVar('lastname'),],
                     ['meta_key' => 'user_description','meta_value' => $this->request->getVar('userdescription'),],
                     ['meta_key' => 'user_role','meta_value' => $this->request->getVar('user_role'),],
+                    ['meta_key' => 'user_manager','meta_value' => $this->request->getVar('user_manager'),],
                     ['meta_key' => 'company_name','meta_value' => $this->request->getVar('companyname'),],
                     ['meta_key' => 'address_one','meta_value' => $this->request->getVar('useraddressone'),],
                     ['meta_key' => 'address_two','meta_value' => $this->request->getVar('useraddresstwo'),],
