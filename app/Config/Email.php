@@ -54,7 +54,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPUser = 'prerak@theitoons.com';
+    public $SMTPUser;
 
     /**
      * SMTP Password
