@@ -89,7 +89,7 @@ class TaskRequest extends HF_Controller
                         if(!empty($admin_email->option_value)){$admin_email=$admin_email->option_value;}
 
                         $smtpadmin_pass = getGeneralData("smtpadmin_pass");
-                        if(!empty($smtpadmin_pass->option_value)){$smtpadmin_pass=$admin_email->option_value;}
+                        if(!empty($smtpadmin_pass->option_value)){$smtpadmin_pass=$smtpadmin_pass->option_value;}
 
                         $SMTPUser = $admin_email;
                         $SMTPPass = $smtpadmin_pass;        
