@@ -61,6 +61,14 @@ class Omnipaygateway extends Omnipay {
             $paypalResponsecomplete = $response->getMessage();
         }
         return $paypalResponsecomplete;
-    }   
+    }  
+
+    public function testFetchCheckout($options)
+    {
+        $response = $this->gateway->fetchCheckout($options);
+
+        $data = $response->getData();
+        return $data;
+    }  
             
 }
