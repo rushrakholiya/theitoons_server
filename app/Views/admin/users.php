@@ -62,12 +62,15 @@
                  foreach($userdata as $row)
                   {
                     $user_manager = getUserMeta("user_manager", $row->user_id);
+                    if(!empty($user_manager) && !empty($user_manager->meta_value)){
+                      $umanager = $user_manager->meta_value;
+                    }else{$umanager= "-";}
                     echo "<tr>";
                     echo "<td>".$row->user_id."</td>";
                     echo "<td>".$row->user_name."</td>";
                     echo "<td>".$row->user_email."</td>";
                     echo "<td>".$row->meta_value."</td>";
-                    echo "<td>".$user_manager->meta_value."</td>";
+                    echo "<td>".$umanager."</td>";
                     echo "<td>";
                        if($row->user_status == 0){
                           echo "inactive";
