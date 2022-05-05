@@ -315,8 +315,12 @@ class Dashboard extends HF_Controller
                         'cancelUrl'=> base_url()."/dashboard/canceledPaypal");
                     $datacomplete = $this->purchaseProc->complete($parameters);
                     //$data['datacomplete'] = $datacomplete;
-                    
-                    if($datacomplete['ACK']=="Success"){
+
+                    /*$options = array('token' => $_GET['token']);
+                    $fetchCheckout = $this->purchaseProc->testFetchCheckout($options);
+                    $data['datacomplete'] = $fetchCheckout;*/
+
+                    if($datacomplete['ACK']=="Success1"){
                         $pydate = $datacomplete['PAYMENTINFO_0_ORDERTIME'];
                         $pdate = date_create($pydate);
                         $payment_date = date_format($pdate,"d-m-Y h:i a");
