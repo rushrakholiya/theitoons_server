@@ -86,7 +86,7 @@
                   <option value="client_manager" <?php if($user_role->meta_value=="client_manager"){echo "selected";}?>>Client Manager</option>
                 </select>
               </div>
-              <?php if($user_role->meta_value=="client"){
+              <?php //if($user_role->meta_value=="client"){
                 $user_managers = getManagerUsers();
                 $user_managern = getUserMeta("user_manager", $id);
                 if(!empty($user_managern) && !empty($user_managern->meta_value)){
@@ -96,7 +96,7 @@
                 print_r($user_managers);
                 echo "</pre>";*/
               ?>
-              <div class="form-group">
+              <div class="form-group selectmanager">
                 <label for="user_manager">Select Manager</label>
                 <select id="user_manager" name="user_manager" class="form-control custom-select">
                   <option value="">Select one</option>
@@ -108,7 +108,7 @@
                   }?>
                 </select>
               </div>
-              <?php }?>
+              <?php //}?>
               <div class="form-group">
                 <label for="userstatus">Status</label>
                 <select id="userstatus" name="userstatus" class="form-control custom-select">
@@ -241,3 +241,19 @@
     });
   </script>
  <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css"> 
+ <script>
+  if ($("#user_role").val() == 'client') {
+    $("div.selectmanager").show();
+  }else{
+    $("div.selectmanager").hide();
+  }  
+  $('#user_role').on('change', function(){
+    var demovalue = $(this).val();
+    if(demovalue == "client"){
+      $("div.selectmanager").show();
+    } 
+    else{
+      $("div.selectmanager").hide();
+    }      
+  });  
+</script>

@@ -91,7 +91,7 @@
                 </select>
               </div>
               <?php $user_managers = getManagerUsers();?>
-              <div class="form-group">
+              <div class="form-group selectmanager">
                 <label for="user_manager">Select Manager</label>
                 <select id="user_manager" name="user_manager" class="form-control custom-select">
                   <option value="">Select one</option>
@@ -196,3 +196,15 @@
     });
   </script>
  <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css"> 
+ <script>
+  $("div.selectmanager").hide();
+  $('#user_role').on('change', function(){
+    var demovalue = $(this).val();
+    if(demovalue == "client"){
+      $("div.selectmanager").show();
+    } 
+    else{
+      $("div.selectmanager").hide();
+    }      
+  });  
+</script>
