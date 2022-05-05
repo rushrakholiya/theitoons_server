@@ -320,7 +320,7 @@ class Dashboard extends HF_Controller
                     $fetchCheckout = $this->purchaseProc->testFetchCheckout($options);
                     $data['datacomplete'] = $fetchCheckout;*/
 
-                    if($datacomplete['ACK']=="Success1"){
+                    if($datacomplete['ACK']=="Success"){
                         $pydate = $datacomplete['PAYMENTINFO_0_ORDERTIME'];
                         $pdate = date_create($pydate);
                         $payment_date = date_format($pdate,"d-m-Y h:i a");
