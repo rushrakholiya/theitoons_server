@@ -61,7 +61,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPPass = 'Prerak-Private-TI';
+    public $SMTPPass = 'L@E6R0xJl9xc';
 
     /**
      * SMTP Port
