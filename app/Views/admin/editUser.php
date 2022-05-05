@@ -89,6 +89,9 @@
               <?php if($user_role->meta_value=="client"){
                 $user_managers = getManagerUsers();
                 $user_managern = getUserMeta("user_manager", $id);
+                if(!empty($user_managern) && !empty($user_managern->meta_value)){
+                      $umanager = $user_managern->meta_value;
+                }else{$umanager = "";}
                 /*echo "<pre>";
                 print_r($user_managers);
                 echo "</pre>";*/
@@ -100,7 +103,7 @@
                   <?php if($user_managers){
                     foreach($user_managers as $umnger){
                       $mngername = strtolower($umnger->user_name);?>
-                      <option value="<?= $mngername;?>" <?php if($user_managern->meta_value==$mngername){echo "selected";}?>><?= ucwords($umnger->user_name);?></option>
+                      <option value="<?= $mngername;?>" <?php if($umanager==$mngername){echo "selected";}?>><?= ucwords($umnger->user_name);?></option>
                    <?php }
                   }?>
                 </select>
