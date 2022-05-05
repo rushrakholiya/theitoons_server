@@ -107,7 +107,7 @@ class TaskRequest extends HF_Controller
                         $email = \Config\Services::email();
                         //$email->setMailType("html");
                         $email->setTo($to);
-                        $email->setFrom($admin_email,$sitename);
+                        $email->setFrom($adminemail,$sitename);
                         $email->setSubject($subject);
                         $email->setMessage($message);
                         /*$filename = $refimg;
@@ -124,7 +124,7 @@ class TaskRequest extends HF_Controller
                         $emaila = \Config\Services::email();
                         $emaila->setMailType("html");
                         $emaila->setTo($toa);
-                        $emaila->setFrom($admin_email,$sitename);
+                        $emaila->setFrom($adminemail,$sitename);
                         $emaila->setSubject($subjecta);
                         $emaila->setMessage($messagea);
                         $filenamea = $refimg;
