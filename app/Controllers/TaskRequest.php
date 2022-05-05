@@ -86,13 +86,13 @@ class TaskRequest extends HF_Controller
                         if(!empty($site_name->option_value)){$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
 
                         $admin_email = getGeneralData("smtpadmin_email");
-                        if(!empty($admin_email->option_value)){$admin_email=$admin_email->option_value;}
+                        if(!empty($admin_email->option_value)){$adminemail=$admin_email->option_value;}
 
-                        /*$smtpadmin_pass = getGeneralData("smtpadmin_pass");
-                        if(!empty($smtpadmin_pass->option_value)){$smtpadmin_pass=$smtpadmin_pass->option_value;}
+                        $smtpadmin_pass = getGeneralData("smtpadmin_pass");
+                        if(!empty($smtpadmin_pass->option_value)){$smtpadminpass=$smtpadmin_pass->option_value;}
 
-                        $SMTPUser = $admin_email;
-                        $SMTPPass = $smtpadmin_pass;    */    
+                        $SMTPUser = $adminemail;
+                        $SMTPPass = $smtpadminpass;   
 
                         //$admin_email = "prerak@theitoons.com";
                         //$useremail = "surbhi@theitoons.com";
