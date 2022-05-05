@@ -100,7 +100,7 @@ class TaskRequest extends HF_Controller
                         $email->setTo($to);
                         $email->setSubject($subject);
                         $email->setMessage($message);
-                        if(refimg){
+                        if($refimg){
                         $filename = $refimg;
                         $email->attach($filename);}                         
                         $email->send();  
@@ -116,7 +116,7 @@ class TaskRequest extends HF_Controller
                         $emaila->setTo($toa);
                         $emaila->setSubject($subjecta);
                         $emaila->setMessage($messagea);
-                        if(refimg){$filenamea = $refimg;
+                        if($refimg){$filenamea = $refimg;
                         $emaila->attach($filenamea);}
                         $emaila->send();             
 
