@@ -33,7 +33,10 @@
       <div class="col-sm-6 container-fluid mt-4 pl-4">        
         <h1>You are awesome!</h1>
         <?php if(isset($datacomplete)){
-        print_r($datacomplete);}?>
+        echo "<pre>";
+        print_r($datacomplete);
+        echo "</pre>";
+        }?>
       </div><!-- /.container-fluid -->
     </section>
 
