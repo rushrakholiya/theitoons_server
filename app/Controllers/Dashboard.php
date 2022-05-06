@@ -319,15 +319,24 @@ class Dashboard extends HF_Controller
                     $parameters = array(
                         'amount' => number_format($amount, 2, '.', ''),
                         'currency'=>'USD',
-                        'transactionReference' => $_GET['token'],
-                        'payerid' => $_GET['PayerID'],
+                        'transactionReference' => $_GET['paymentId'],
+                        'payer_id' => $_GET['PayerID'],
                         'description' => $tasktitle.'-'.$id,
                         'returnUrl'=> base_url()."/dashboard/thankYouPaypal/".$id,
                         'cancelUrl'=> base_url()."/dashboard/canceledPaypal/".$id);
                     $datacomplete = $this->cpurchaseProc->complete($parameters);
                     $data['datacomplete'] = $datacomplete;
 
-                    /*$options = array('token' => $_GET['token']);
+                    /*$parameters = array(
+                        'amount' => number_format($amount, 2, '.', ''),
+                        'currency'=>'USD',
+                        'transactionReference' => $_GET['token'],
+                        'payerid' => $_GET['PayerID'],
+                        'description' => $tasktitle.'-'.$id,
+                        'returnUrl'=> base_url()."/dashboard/thankYouPaypal/".$id,
+                        'cancelUrl'=> base_url()."/dashboard/canceledPaypal/".$id);                 
+
+                    $options = array('token' => $_GET['token']);
                     $fetchCheckout = $this->purchaseProc->testFetchCheckout($options);
                     $data['datacomplete'] = $fetchCheckout;*/
 
