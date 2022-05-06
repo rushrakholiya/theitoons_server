@@ -234,6 +234,10 @@ class Dashboard extends HF_Controller
             if(session()->has('logged_user_client')){$uid=session()->get('logged_user_client'); }
             $task_budget = getTaskRequestMeta("budget",$id);
             $amount = $task_budget->meta_value;
+
+            $data['taskrequestinfo'] = $this->dashboardModel->viewTaskRequest($id);
+            $tasktitle = $data['taskrequestinfo']->task_title;
+
             $checkauthorizeduser = $this->dashboardModel->checkAuthorizedUser($id,$uid);
             if( $checkauthorizeduser == true )
             {
@@ -252,18 +256,19 @@ class Dashboard extends HF_Controller
                     }
                     if($paypal_sandbox==1){$test_mode = true;}else{$test_mode = false;}
                     
-                    $this->purchaseProc = new Omnipaygateway('PayPal_Express', $test_mode,$live_API_username,$live_API_password,$live_API_signature);
-                    
+                    $this->purchaseProc = new Omnipaygateway('PayPal_Rest', $test_mode,$live_API_username,$live_API_password,$live_API_signature);
+
                     $valTransc = array(
                         'amount' => number_format($amount , 2, '.', ''),
                         'currency'=>'USD',
+                        'description' => $tasktitle.'-'.$id,
                         'returnUrl'=> base_url()."/dashboard/thankYouPaypal/".$id,
-                        'cancelUrl'=> base_url()."/dashboard/canceledPaypal");
+                        'cancelUrl'=> base_url()."/dashboard/canceledPaypal/".$id);
                     $datapurchase = $this->purchaseProc->sendPurchase($valTransc);         
                 }
                 else
                 {
-                    $data['paypalerror'] = "Paypal Disabled, Try again.";
+                    $data['error'] = "Paypal Disabled, Try again.";
                     return $this->loginheaderfooter('dashboard',$data);
                 }
             }
@@ -284,7 +289,11 @@ class Dashboard extends HF_Controller
         $data = [];
         if(session()->has('logged_user_client')){$uid=session()->get('logged_user_client'); }
         $task_budget = getTaskRequestMeta("budget",$id);
-        $amount = $task_budget->meta_value;                    
+        $amount = $task_budget->meta_value;
+
+        $data['taskrequestinfo'] = $this->dashboardModel->viewTaskRequest($id);
+        $tasktitle = $data['taskrequestinfo']->task_title;                 
+        
         $paymentdata = $this->dashboardModel->verifyPaymentMethod();            
         $checkauthorizeduser = $this->dashboardModel->checkAuthorizedUser($id,$uid);
         if( $checkauthorizeduser == true )
@@ -303,24 +312,26 @@ class Dashboard extends HF_Controller
                 }
                 if($paypal_sandbox==1){$test_mode = true;}else{$test_mode = false;}
                 
-                $this->purchaseProc = new Omnipaygateway('PayPal_Express', $test_mode,$live_API_username,$live_API_password,$live_API_signature);
+                $this->cpurchaseProc = new Omnipaygateway('PayPal_Rest', $test_mode,$live_API_username,$live_API_password,$live_API_signature);
 
                 if(isset($_GET['token']) && isset($_GET['PayerID'])){
+                    
                     $parameters = array(
                         'amount' => number_format($amount, 2, '.', ''),
                         'currency'=>'USD',
-                        'token' => $_GET['token'],
+                        'transactionReference' => $_GET['token'],
                         'payerid' => $_GET['PayerID'],
-                        'returnUrl'=> base_url()."/dashboard/thankYouPaypal",
-                        'cancelUrl'=> base_url()."/dashboard/canceledPaypal");
-                    $datacomplete = $this->purchaseProc->complete($parameters);
-                    //$data['datacomplete'] = $datacomplete;
+                        'description' => $tasktitle.'-'.$id,
+                        'returnUrl'=> base_url()."/dashboard/thankYouPaypal/".$id,
+                        'cancelUrl'=> base_url()."/dashboard/canceledPaypal/".$id);
+                    $datacomplete = $this->cpurchaseProc->complete($parameters);
+                    $data['datacomplete'] = $datacomplete;
 
                     /*$options = array('token' => $_GET['token']);
                     $fetchCheckout = $this->purchaseProc->testFetchCheckout($options);
                     $data['datacomplete'] = $fetchCheckout;*/
 
-                    if($datacomplete['ACK']=="Success"){
+                    /*if($datacomplete['ACK']=="Success1"){
                         $pydate = $datacomplete['PAYMENTINFO_0_ORDERTIME'];
                         $pdate = date_create($pydate);
                         $payment_date = date_format($pdate,"d-m-Y h:i a");
@@ -343,14 +354,12 @@ class Dashboard extends HF_Controller
                             ];
                             $this->dashboardModel->addPaymentDataTaskRequestMeta($taskpaymentmetadata);
                         }
-
-                    }
-                    
+                    }*/                    
                 }
             }
             else
             {
-                $data['paypalerror'] = "Paypal Disabled, Try again.";
+                $data['error'] = "Paypal Disabled, Try again.";
                 return $this->loginheaderfooter('dashboard',$data);
             }
         }
