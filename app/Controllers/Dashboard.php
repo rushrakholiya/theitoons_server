@@ -314,7 +314,7 @@ class Dashboard extends HF_Controller
                 
                 $this->cpurchaseProc = new Omnipaygateway('PayPal_Rest', $test_mode,$live_API_username,$live_API_password,$live_API_signature);
 
-                if(isset($_GET['token']) && isset($_GET['PayerID'])){
+                if(isset($_GET['token']) && isset($_GET['PayerID']) && isset($_GET['paymentId'])){
                     
                     $parameters = array(
                         'amount' => number_format($amount, 2, '.', ''),
@@ -326,19 +326,6 @@ class Dashboard extends HF_Controller
                         'cancelUrl'=> base_url()."/dashboard/canceledPaypal/".$id);
                     $datacomplete = $this->cpurchaseProc->complete($parameters);
                     $data['datacomplete'] = $datacomplete;
-
-                    /*$parameters = array(
-                        'amount' => number_format($amount, 2, '.', ''),
-                        'currency'=>'USD',
-                        'transactionReference' => $_GET['token'],
-                        'payerid' => $_GET['PayerID'],
-                        'description' => $tasktitle.'-'.$id,
-                        'returnUrl'=> base_url()."/dashboard/thankYouPaypal/".$id,
-                        'cancelUrl'=> base_url()."/dashboard/canceledPaypal/".$id);                 
-
-                    $options = array('token' => $_GET['token']);
-                    $fetchCheckout = $this->purchaseProc->testFetchCheckout($options);
-                    $data['datacomplete'] = $fetchCheckout;*/
 
                     /*if($datacomplete['ACK']=="Success1"){
                         $pydate = $datacomplete['PAYMENTINFO_0_ORDERTIME'];
