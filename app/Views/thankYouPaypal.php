@@ -32,8 +32,8 @@
     <section class="row justify-content-center mr-0 pt-5">
       <div class="col-sm-6 container-fluid mt-4 pl-4">        
         <h1>You are awesome!</h1>
-        <?php /*if(isset($datacomplete)){
-        print_r($datacomplete);}*/?>
+        <?php if(isset($datacomplete)){
+        print_r($datacomplete);}?>
       </div><!-- /.container-fluid -->
     </section>
 

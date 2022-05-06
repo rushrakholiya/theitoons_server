@@ -120,7 +120,8 @@
                         echo '<a href="'.base_url().'/dashboard/completeTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Complete Request"> ✔ </a>';
                         }
                         
-                        if($row->task_status=="accepted" && $pay_status != "Completed"){
+                        //if($row->task_status=="accepted" && $pay_status != "Completed"){
+                          if($row->task_status=="accepted"){
                         $task_budget = getTaskRequestMeta("budget",$row->task_id);
                         echo '<a href="'.base_url().'/dashboard/paymentTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Pay $'.$task_budget->meta_value.'"> 💳</a>';
                         }
