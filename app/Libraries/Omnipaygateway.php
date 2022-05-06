@@ -15,7 +15,7 @@ class Omnipaygateway extends Omnipay {
         $this->gateway->initialize(array(
             'clientId' => $live_API_password,
             'secret'   => $live_API_signature,
-            'testMode' => $test_mode, // Or false when you are ready for live transactions
+            'testMode' => $test_mode, 
         ));
     }
 
