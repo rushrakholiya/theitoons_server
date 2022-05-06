@@ -134,7 +134,7 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="live_API_username" class="col-sm-3 col-form-label">Live API username</label>
+                            <label for="live_API_username" class="col-sm-3 col-form-label">Live REST API Name</label>
                             <?php $live_API_username = getGeneralData("live_API_username");
                             if(!empty($live_API_username->option_value))
                               {$live_API_username=$live_API_username->option_value;}else{$live_API_username="";}?>
@@ -143,7 +143,7 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="live_API_password" class="col-sm-3 col-form-label">Live API Password</label>
+                            <label for="live_API_password" class="col-sm-3 col-form-label">Live REST API Client Id</label>
                             <?php $live_API_password = getGeneralData("live_API_password");
                             if(!empty($live_API_password->option_value))
                               {$live_API_password=$live_API_password->option_value;}else{$live_API_password="";}?>
@@ -152,7 +152,7 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="live_API_signature" class="col-sm-3 col-form-label">Live API Signature</label>
+                            <label for="live_API_signature" class="col-sm-3 col-form-label">Live REST API Secret Key</label>
                             <?php $live_API_signature = getGeneralData("live_API_signature");
                             if(!empty($live_API_signature->option_value))
                               {$live_API_signature=$live_API_signature->option_value;}else{$live_API_signature="";}?>
