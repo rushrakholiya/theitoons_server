@@ -65,7 +65,7 @@ class Omnipaygateway extends Omnipay {
     {
 
         $paypalResponsecomplete = "";
-        $response = $gateway->completePurchase($parameters)->send();
+        $response = $this->gateway->completePurchase($parameters)->send();
         
         if ($response->isSuccessful())
         {
