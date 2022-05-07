@@ -328,7 +328,7 @@ class Dashboard extends HF_Controller
                     //$data['datacomplete'] = $datacomplete;
 
                     $recordfound = $this->dashboardModel->foundPaypalRecord($datacomplete['id']);
-                    $data['datacomplete'] = $recordfound;
+                    //$data['datacomplete'] = $recordfound;
                     if(empty($recordfound) || $recordfound->payment_title != $datacomplete['id'])
                     {
                         $pydate = $datacomplete['create_time'];
