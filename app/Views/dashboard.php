@@ -109,7 +109,7 @@
                         echo "<td>".$task_deadline."</td>";                        
                         echo "<td>".$taskstatus."</td>";   
                         echo '<td>'.$task_submitted_date.'<span style="font-weight: 600;font-size: 10px;color: #939393;text-transform: uppercase;">  '.$task_submitted_time.'</span></td>';
-                        echo "<td>".$pay_status."</td>";
+                        echo "<td>".ucwords($pay_status)."</td>";
                         echo '<td class="project-actions">';
                         echo '<a class="contactentryview" href="'.base_url().'/dashboard/viewTaskRequest/'.$row->task_id.'" title="View Request"> 👁 </a>';
                         if($row->task_status=="pending"){
