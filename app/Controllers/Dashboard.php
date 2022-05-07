@@ -329,7 +329,7 @@ class Dashboard extends HF_Controller
 
                     $recordfound = $this->dashboardModel->foundPaypalRecord($datacomplete['id']);
                     $data['datacomplete'] = $recordfound;
-                    /*if(empty($recordfound) && $recordfound < 1)
+                    if(empty($recordfound) || $recordfound->payment_title != $datacomplete['id'])
                     {
                         $pydate = $datacomplete['create_time'];
                         $pdate = date_create($pydate);
@@ -353,7 +353,7 @@ class Dashboard extends HF_Controller
                             ];
                             $this->dashboardModel->addPaymentDataTaskRequestMeta($taskpaymentmetadata);
                         }
-                    }*/                    
+                    }                    
                 }
             }
             else
