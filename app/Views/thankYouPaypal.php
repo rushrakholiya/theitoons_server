@@ -32,11 +32,11 @@
     <section class="row justify-content-center mr-0 pt-5">
       <div class="col-sm-6 container-fluid mt-4 pl-4">        
         <h1>You are awesome!</h1>
-        <?php /*if(isset($datacomplete)){
+        <?php if(isset($datacomplete)){
         echo "<pre>";
         print_r($datacomplete);
         echo "</pre>";
-        }*/?>
+        }?>
       </div><!-- /.container-fluid -->
     </section>
 
