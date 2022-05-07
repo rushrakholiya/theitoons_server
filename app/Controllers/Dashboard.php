@@ -325,17 +325,20 @@ class Dashboard extends HF_Controller
                         'returnUrl'=> base_url()."/dashboard/thankYouPaypal/".$id,
                         'cancelUrl'=> base_url()."/dashboard/canceledPaypal/".$id);
                     $datacomplete = $this->cpurchaseProc->complete($parameters);
-                    $data['datacomplete'] = $datacomplete;
+                    //$data['datacomplete'] = $datacomplete;
 
-                    /*if($datacomplete['ACK']=="Success1"){
-                        $pydate = $datacomplete['PAYMENTINFO_0_ORDERTIME'];
+                    $recordfound = $this->dashboardModel->foundPaypalRecord($datacomplete['id']);
+                    $data['datacomplete'] = $recordfound;
+                    /*if(empty($recordfound) && $recordfound < 1)
+                    {
+                        $pydate = $datacomplete['create_time'];
                         $pdate = date_create($pydate);
                         $payment_date = date_format($pdate,"d-m-Y h:i a");
                         $taskpaymentdata = [
                             'task_id' =>$id,
                             'user_id'=> $uid,                        
-                            'payment_title' => $datacomplete['PAYMENTINFO_0_TRANSACTIONID'],
-                            'payment_status'=> $datacomplete['PAYMENTINFO_0_PAYMENTSTATUS'],
+                            'payment_title' => $datacomplete['id'],
+                            'payment_status'=> $datacomplete['state'],
                             'payment_date'=> $payment_date                    
                         ];
                         //$data['datacomplete'] = $taskpaymentdata;
