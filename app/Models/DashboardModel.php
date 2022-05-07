@@ -121,4 +121,11 @@ class DashboardModel extends Model
 			return false;
 		}
 	}
+	public function foundPaypalRecord($id)
+	{
+		$builder = $this->db->table('task_request_payments');
+		$builder->select('*');
+		$query = $builder->getWhere(['payment_title' => $id], 1);
+		return $query->getRow();
+	}
 }
