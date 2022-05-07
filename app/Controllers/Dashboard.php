@@ -338,7 +338,8 @@ class Dashboard extends HF_Controller
                             'task_id' =>$id,
                             'user_id'=> $uid,                        
                             'payment_title' => $datacomplete['id'],
-                            'payment_status'=> $datacomplete['state'],
+                            //'payment_status'=> $datacomplete['state'],
+                            'payment_status'=> $datacomplete['transactions'][0]['related_resources'][0]['sale']['state'],
                             'payment_date'=> $payment_date                    
                         ];
                         //$data['datacomplete'] = $taskpaymentdata;
