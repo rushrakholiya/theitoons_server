@@ -7,6 +7,7 @@
       if (in_array("users", $uriarray)) { $menu_name = 'users';}
       if (in_array("addNewUser", $uriarray)) { $menu_name = 'addNewUser';}
       if (in_array("allTaskRequests", $uriarray)) { $menu_name = 'allTaskRequests';}
+      if (in_array("allTaskTransactions", $uriarray)) { $menu_name = 'allTaskTransactions';}
       if (in_array("settings", $uriarray)) { $menu_name = 'settings';}
       
       //echo $menu_name;?>
@@ -121,8 +122,8 @@
             </ul>       
           </li> 
 
-          <li class="nav-item <?php if($menu_name=="allTaskRequests"){?>menu-open<?php }?>">
-            <a href="" class="nav-link <?php if($menu_name=="allTaskRequests"){?>active<?php }?>">
+          <li class="nav-item <?php if($menu_name=="allTaskRequests" || $menu_name=="allTaskTransactions"){?>menu-open<?php }?>">
+            <a href="" class="nav-link <?php if($menu_name=="allTaskRequests" || $menu_name=="allTaskTransactions"){?>active<?php }?>">
               <i class="nav-icon fa fa-tasks"></i>
               <p> Task Requests <i class="right fas fa-angle-left"></i></p>
             </a>
@@ -131,6 +132,12 @@
                 <a href="<?= base_url();?>/admin/allTaskRequests" class="nav-link <?php if($menu_name=="allTaskRequests"){?>active<?php }?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Task Requests</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/admin/allTaskTransactions" class="nav-link <?php if($menu_name=="allTaskTransactions"){?>active<?php }?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Transactions</p>
                 </a>
               </li>
             </ul>       
