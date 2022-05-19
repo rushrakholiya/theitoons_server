@@ -73,13 +73,16 @@
                     elseif($row->task_status=="refunded"){$color = "bg-black";}
                     $taskstatus = ucwords(str_replace("_"," ",$row->task_status));
                     
+                    $task_submitted_date = date("d-m-Y", strtotime($row->task_date));
+                    $task_submitted_time = date("h:i a", strtotime($row->task_date));
+
                     echo "<tr>";
                     echo "<td>".$row->task_id."</td>";
                     echo "<td>".$row->task_title."</td>";
                     echo "<td><span class='btn-sm ".$color."'><span class='text-white'>".$taskstatus."</span></span></td>";
                     echo "<td>".$task_useremail."</td>";
                     echo "<td>".$row->meta_value."</td>";
-                    echo "<td>".$row->task_date."</td>";
+                    echo "<td>".$task_submitted_date."<span style='font-weight: 600;font-size: 10px;color: #939393;text-transform: uppercase;'>  ".$task_submitted_time."</span></td>";
                     echo '<td class="project-actions text-right">
                           <a class="btn btn-info btn-sm" href="'.base_url().'/admin/allTaskRequests/viewTaskRequest/'.$row->task_id.'"><i class="fas fa-pencil-alt"></i> Edit</a>
                           <a class="btn btn-danger btn-sm" href="'.base_url().'/admin/allTaskRequests/deleteTaskRequest/'.$row->task_id.'"><i class="fas fa-trash"></i> Delete</a>
