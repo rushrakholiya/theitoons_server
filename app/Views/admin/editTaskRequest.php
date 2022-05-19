@@ -40,7 +40,11 @@
 
       <?php if(isset($taskrequestinfo)){
         //print_r($taskrequestinfo);
-      $id = $taskrequestinfo->task_id;?>
+      $id = $taskrequestinfo->task_id;
+
+      $task_submitted_date = date("d-m-Y", strtotime($taskrequestinfo->task_date));
+      $task_submitted_time = date("h:i a", strtotime($taskrequestinfo->task_date));
+                    ?>
       <?= form_open('admin/allTaskRequests/editTaskRequest/'.$id); ?>
       <div class="row ml-1">
         <div class="col-md-7">
@@ -114,7 +118,7 @@
             <div class="card-body">
               <div class="row">
                 <label class="col-sm-4 col-form-label">Submitted:</label>
-                <span class="col-sm-8 col-form-label"><?= $taskrequestinfo->task_date;?></span>          
+                <span class="col-sm-8 col-form-label"><?= $task_submitted_date; ?><span style='font-weight: 600;font-size: 10px;color: #939393;text-transform: uppercase;'> <?= $task_submitted_time;?></span></span>          
               </div>
               <?php $userdata = getLoggedInUserData($taskrequestinfo->user_id);
               if(!empty($userdata)){ $task_username = $userdata->user_name;?>
