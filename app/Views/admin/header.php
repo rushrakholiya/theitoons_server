@@ -48,4 +48,12 @@
 <!-- Bootstrap 4 -->
 <script src="<?= base_url();?>/public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+<script>
+  // @see https://docs.headwayapp.co/widget for more configuration options.
+  var HW_config = {
+    selector: ".CHANGE_THIS", // CSS selector where to inject the badge
+    account:  "xGEpOJ"
+  }
+</script>
+<script async src="https://cdn.headwayapp.co/widget.js"></script>
 </head>
