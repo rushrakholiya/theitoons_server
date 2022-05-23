@@ -37,7 +37,7 @@ if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="regist
 <script src="<?= base_url();?>/public/assets/dist/js/adminlte.min.js"></script>
 
 <style>
-.HW_badge.HW_softHidden {
+.HW_badge, .HW_badge.HW_softHidden {
     background: none !important;
     opacity: 1 !important;
     transform: unset !important;
@@ -54,6 +54,19 @@ if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="regist
 .HW_badge_cont {
     height: auto !important;
     width: auto !important;
+}
+.appcount {
+    border-radius: 20px;
+    background: #CD4B5B;
+    height: 16px;
+    width: 16px;
+    color: #fff;
+    text-align: center;
+    line-height: 16px;
+    font-size: 11px;
+    cursor: pointer;
+    position: absolute;
+    opacity: 1;
 }
 </style>
 <?php 
