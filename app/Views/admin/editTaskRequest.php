@@ -135,6 +135,7 @@
                   <option value="pending" <?php if($task_status=="pending"){echo "selected";}?>>Pending</option>
                   <option value="processing" <?php if($task_status=="processing"){echo "selected";}?>>Processing</option>
                   <option value="in_review" <?php if($task_status=="in_review"){echo "selected";}?>>In Review</option>
+                  <option value="in_revision" <?php if($task_status=="in_revision"){echo "selected";}?>>In Revision</option>
                   <option value="accepted" <?php if($task_status=="accepted"){echo "selected";}?>>Accepted</option>
                   <option value="completed" <?php if($task_status=="completed"){echo "selected";}?>>Completed</option>
                   <option value="cancelled" <?php if($task_status=="cancelled"){echo "selected";}?>>Cancelled</option>
