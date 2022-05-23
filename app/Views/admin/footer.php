@@ -2,7 +2,7 @@
     <?php $site_name = getGeneralData("site_name");
         if(!empty($site_name->option_value))
         {$sitename=$site_name->option_value;}else{$sitename="TheIToons";}?>
-    <strong>© <?= $sitename;?> - 2022</strong>
+    <strong>© <?= $sitename;?> - <?= date("Y");?></strong>
   </footer>
 
   <!-- Control Sidebar -->

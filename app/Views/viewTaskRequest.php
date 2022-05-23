@@ -1,44 +1,17 @@
 <?php $session = \Config\Services::session();?>
-<?php $site_name = getGeneralData("site_name");
-  if(!empty($site_name->option_value))
-  {$sitename=$site_name->option_value;}else{$sitename="TheIToons";}?>
-<?php $site_logo=getGeneralData("site_logo");
-  if(!empty($site_logo->option_value))
-  {$site_logo=$site_logo->option_value;}else{$site_logo = base_url()."/public/assets/dist/img/logo.png";}?>
-<body class="hold-transition layout-fixed taskdashboard viewrequest">
-<div class="wrapper">
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <img src="<?= $site_logo;?>" alt="Logo" style="width: 5%;">
-    <p class="site-description"><?= $sitename;?></p>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a href="<?= base_url();?>/dashboard" class="nav-link">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-      <li class="nav-item">
-        <a href="<?= base_url();?>/login/logout" class="nav-link">Logout</a>
-      </li>
-    </ul>
-  </nav>  
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header row justify-content-center mr-0">
+    <section class="content-header row justify-content-center text-center mr-0">
       <div class="col-sm-6 container-fluid mt-4 pl-4">        
         <h3><?php if(isset($taskrequestinfo)){ echo $taskrequestinfo->task_title; }?></h3>
 
         <?php if($session->getTempdata('success')){?>
-          <span class="text-success input-group mt-1"><?= $session->getTempdata('success');?></span>
+          <div class="text-center"><span class="text-success mt-1"><?= $session->getTempdata('success');?></span></div>
         <?php }?>
 
         <?php if($session->getTempdata('error')){?>
-          <span class="text-danger input-group mt-1"><?= $session->getTempdata('error');?></span>
+          <div class="text-center"><span class="text-danger input-group mt-1"><?= $session->getTempdata('error');?></span></div>
         <?php }?>
 
       </div><!-- /.container-fluid -->
@@ -48,7 +21,8 @@
     <?php if(isset($taskrequestinfo)){?>
     <section class="content">
       <div class="row justify-content-center">
-        <div class="col-sm-6">
+        
+        <div class="col-sm-5 mr-3">
           <?php
           /*echo "<pre>";
           print_r($taskrequestinfo);
@@ -58,10 +32,10 @@
           $task_status = $taskrequestinfo->task_status;
           $task_budget = getTaskRequestMeta("budget",$taskrequestinfo->task_id);
           $task_priority = getTaskRequestMeta("priority",$taskrequestinfo->task_id);
-          $task_submitted_date = date("d/m/Y", strtotime($taskrequestinfo->task_date));
+          $task_submitted_date = date("d-m-Y", strtotime($taskrequestinfo->task_date));
           $deadline = getTaskRequestMeta("deadline",$taskrequestinfo->task_id);
           if(!empty($deadline->meta_value)){
-            $task_deadline =  date("d/m/Y", strtotime($deadline->meta_value));
+            $task_deadline =  date("d-m-Y", strtotime($deadline->meta_value));
           }?> 
           
           <?php if($task_description->meta_value || $reference_img->meta_value){?>
@@ -97,37 +71,35 @@
           <h6 class="h6-like">Deadline:<span><?php echo $task_deadline;?></span></h6>
           <?php }?>
 
-          <div class="text-center"><div class="newtaskbtn"><a class="btn btn-block btn-primary" href="<?= base_url();?>/taskRequest">Submit a new request</a></div></div>
+          <div class=""><div class="newtaskbtn"><a class="btn btn-block btn-primary" href="<?= base_url();?>/taskRequest">Submit a new request</a></div></div>
 
         </div>
+        
+        <!-- <div class="col-sm-5 ml-3">
+          <div class="comment-box-main">
+            <div class="comments">
+               <h2>Comments</h2>                
+            </div>
+            <div id="comment-box"><ul class="ul" id="commentul"></ul></div>
+            <form>  
+              <div class="form-div">
+                <?php $profile_picture=getUserMeta("profile_picture", $taskrequestinfo->user_id);
+                if(!empty($profile_picture->meta_value)){$userimage = $profile_picture->meta_value;}else{$userimage = base_url()."/public/assets/dist/img/default_avatar.jpg";}?>
+                <img src="<?= $userimage;?>" class="img">
+                <input type="hidden" value="<?= $userimage;?>" id="img1">
+                <input id="text1" type="text" placeholder="Add Your Comment"  class="textbox"/> 
+                <div class="btn" style="display:none;">
+                  <input id="submit" type="submit" value="Comment" >                         
+                </div> 
+              </div>  
+            </form>
+
+          </div>
+        </div> -->
+        
       </div>
     </section>
     <?php }?>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
-  <footer class="main-footer">
-    <strong>© <?= $sitename;?> - 2022</strong>
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-</div>
-<!-- ./wrapper -->
-<script type="text/javascript">
-function ShowHideDiv(btnPassport) {
-  var dvPassport = document.getElementById("dvPassport");
-  if (btnPassport.value == "View more...") {
-    dvPassport.style.display = "block";
-    btnPassport.value = "View less...";
-  } else {
-    dvPassport.style.display = "none";
-    btnPassport.value = "View more...";
-  }
-}  
-</script>

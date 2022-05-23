@@ -20,12 +20,21 @@
 <?php $menu_name ="";
 $uri = current_url();
 $uriarray = explode('/', $uri);
+//print_r($uriarray);
+if (in_array("login", $uriarray)) { $menu_name = 'login';}
+if (in_array("forgotPassword", $uriarray)) { $menu_name = 'forgotPassword';}
+if (in_array("register", $uriarray)) { $menu_name = 'register';}
+if (in_array("resetPassword", $uriarray)) { $menu_name = 'resetPassword';}
+
 if (in_array("taskRequest", $uriarray)) { $menu_name = 'taskRequest';}
 if (in_array("dashboard", $uriarray)) { $menu_name = 'dashboard';}
 if (in_array("viewTaskRequest", $uriarray)) { $menu_name = 'viewTaskRequest';}
 if (in_array("editTaskRequest", $uriarray)) { $menu_name = 'editTaskRequest';}
+if (in_array("canceledPaypal", $uriarray)) { $menu_name = 'canceledPaypal';}
+if (in_array("thankYouPaypal", $uriarray)) { $menu_name = 'thankYouPaypal';}
 
-if($menu_name=="taskRequest" || $menu_name=="dashboard" || $menu_name=="viewTaskRequest" || $menu_name=="editTaskRequest"){?>
+//if($menu_name=="taskRequest" || $menu_name=="dashboard" || $menu_name=="viewTaskRequest" || $menu_name=="editTaskRequest" || $menu_name = 'canceledPaypal' || $menu_name = 'thankYouPaypal'){
+if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="register" && $menu_name !="resetPassword"){?>
   <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/taskdashboard.css">
 <?php }
 
@@ -45,9 +54,41 @@ if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
 <script>
   // @see https://docs.headwayapp.co/widget for more configuration options.
   var HW_config = {
-    selector: ".CHANGE_THIS", // CSS selector where to inject the badge
+    selector: ".CHANGE THIS", // CSS selector where to inject the badge
     account:  "xGEpOJ"
   }
 </script>
 <script async src="https://cdn.headwayapp.co/widget.js"></script>
 </head>
+<?php 
+if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="register" && $menu_name !="resetPassword"){?>
+  <?php $site_name = getGeneralData("site_name");
+  if(!empty($site_name->option_value))
+  {$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
+  $site_logo=getGeneralData("site_logo");
+  if(!empty($site_logo->option_value))
+  {$site_logo=$site_logo->option_value;}else{$site_logo = base_url()."/public/assets/dist/img/logo.png";}
+  $bodyclass ="";$bodyinnerclass="";
+  if($menu_name=="canceledPaypal" || $menu_name == 'thankYouPaypal' || $menu_name=="viewTaskRequest"){$bodyclass="viewrequest";}
+  if($menu_name=="editTaskRequest" || $menu_name=="taskRequest"){$bodyinnerclass="taskrequest";}?>
+<body class="hold-transition layout-fixed taskdashboard <?= $bodyclass;?>">
+<div class="wrapper <?= $bodyinnerclass;?>">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <img src="<?= $site_logo;?>" alt="Logo" style="width: 5%;">
+    <p class="site-description"><?= $sitename;?></p>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="<?= base_url();?>/dashboard" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= base_url();?>/login/logout" class="nav-link">Logout</a>
+      </li>
+    </ul>
+  </nav>  
+<?php }?>
