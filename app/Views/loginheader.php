@@ -61,7 +61,12 @@ if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
         console.log("Widget is here!");
         console.log("unseen entries count: " + widget.getUnseenCount());
         setTimeout(function () {
-           $('#HW_badge').text("What's New");
+           if( widget.getUnseenCount() > 0){
+            $('#HW_badge').html("What's New <span class='appcount'> "+ widget.getUnseenCount() +"</span>");
+           }
+           else{
+            $('#HW_badge').html("What's New");
+           }           
         }, 3000);
       },
       onShowWidget: function(){
