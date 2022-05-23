@@ -54,9 +54,36 @@ if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
 <script>
   // @see https://docs.headwayapp.co/widget for more configuration options.
   var HW_config = {
-    selector: ".CHANGE THIS", // CSS selector where to inject the badge
-    account:  "xGEpOJ"
-  }
+    selector: ".whatsnew", // CSS selector where to inject the badge
+    account:  "xGEpOJ",
+    callbacks: {
+      onWidgetReady: function(widget) {
+        console.log("Widget is here!");
+        console.log("unseen entries count: " + widget.getUnseenCount());
+        setTimeout(function () {
+           $('#HW_badge').text("What's New");
+        }, 3000);
+      },
+      onShowWidget: function(){
+        console.log("Someone opened the widget!");
+        setTimeout(function () {
+           $('#HW_badge').text("What's New");
+        }, 10);
+      },
+      onShowDetails: function(changelog){
+        console.log(changelog.position); // position in the widget
+        console.log(changelog.id); // unique id
+        console.log(changelog.title); // title
+        console.log(changelog.category); // category, lowercased
+      },
+      onReadMore: function(changelog){
+        console.log(changelog); // same changelog object as in onShowDetails callback
+      },
+      onHideWidget: function(){
+        console.log("Who turned off the light?");
+      }
+    }
+};
 </script>
 <script async src="https://cdn.headwayapp.co/widget.js"></script>
 </head>
@@ -89,6 +116,9 @@ if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="regist
       <li class="nav-item">
         <a href="<?= base_url();?>/login/logout" class="nav-link">Logout</a>
       </li>
+      <li class="nav-item">
+        <span class="nav-link whatsnew"></span>
+      </li>      
     </ul>
   </nav>  
 <?php }?>
