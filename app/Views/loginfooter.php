@@ -16,7 +16,7 @@ if (in_array("editTaskRequest", $uriarray)) { $menu_name = 'editTaskRequest';}
 if (in_array("viewTaskRequest", $uriarray)) { $menu_name = 'viewTaskRequest';}
 
 if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="register" && $menu_name !="resetPassword"){?>
-<footer class="main-footer">
+  <footer class="main-footer">
     <strong>© <?= $sitename;?> - <?= date("Y");?></strong>
   </footer>
 
@@ -36,6 +36,26 @@ if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="regist
 <!-- AdminLTE App -->
 <script src="<?= base_url();?>/public/assets/dist/js/adminlte.min.js"></script>
 
+<style>
+.HW_badge.HW_softHidden {
+    background: none !important;
+    opacity: 1 !important;
+    transform: unset !important;
+    color: rgba(0,0,0,.9) !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    top: 0px !important;
+    left: 0px !important;
+    height: auto !important;
+    width: auto !important;
+    position: unset !important;
+}
+.HW_badge_cont {
+    height: auto !important;
+    width: auto !important;
+}
+</style>
 <?php 
 if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
