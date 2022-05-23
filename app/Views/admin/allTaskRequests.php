@@ -66,6 +66,7 @@
                     if($row->task_status=="pending"){$color = "bg-secondary";}
                     elseif($row->task_status=="processing"){$color = "bg-secondary";}
                     elseif($row->task_status=="in_review"){$color = "bg-orange";}
+                    elseif($row->task_status=="in_revision"){$color = "bg-orange";}
                     elseif($row->task_status=="accepted"){$color = "bg-success";}
                     elseif($row->task_status=="completed"){$color = "bg-success";}
                     elseif($row->task_status=="cancelled"){$color = "bg-danger";}
