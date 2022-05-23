@@ -37,7 +37,7 @@ if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="regist
 <script src="<?= base_url();?>/public/assets/dist/js/adminlte.min.js"></script>
 
 <style>
-.HW_badge.HW_softHidden {
+.HW_badge, .HW_badge.HW_softHidden {
     background: none !important;
     opacity: 1 !important;
     transform: unset !important;
