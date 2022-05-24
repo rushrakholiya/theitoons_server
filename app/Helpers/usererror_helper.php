@@ -100,4 +100,69 @@ if(!function_exists('getManagerUsers')) {
 	    return $query->getResult();
 	}
 }
+
+if(!function_exists('time_Ago')) {
+	function time_Ago($time) {
+  
+	    $diff    = time() - $time;
+	    $sec     = $diff;
+	    $min     = round($diff / 60 );
+	    $hrs     = round($diff / 3600);
+	    $days    = round($diff / 86400 );
+	    $weeks   = round($diff / 604800);
+	    $mnths   = round($diff / 2600640 );
+	    $yrs     = round($diff / 31207680 );
+	    if($sec <= 60) {
+	        echo "$sec seconds ago";
+	    }
+	    else if($min <= 60) {
+	        if($min==1) {
+	            echo "one minute ago";
+	        }
+	        else {
+	            echo "$min minutes ago";
+	        }
+	    }
+	    else if($hrs <= 24) {
+	        if($hrs == 1) { 
+	            echo "an hour ago";
+	        }
+	        else {
+	            echo "$hrs hours ago";
+	        }
+	    }
+	    else if($days <= 7) {
+	        if($days == 1) {
+	            echo "Yesterday";
+	        }
+	        else {
+	            echo "$days days ago";
+	        }
+	    }
+	    else if($weeks <= 4.3) {
+	        if($weeks == 1) {
+	            echo "a week ago";
+	        }
+	        else {
+	            echo "$weeks weeks ago";
+	        }
+	    }
+	    else if($mnths <= 12) {
+	        if($mnths == 1) {
+	            echo "a month ago";
+	        }
+	        else {
+	            echo "$mnths months ago";
+	        }
+	    }
+	    else {
+	        if($yrs == 1) {
+	            echo "one year ago";
+	        }
+	        else {
+	            echo "$yrs years ago";
+	        }
+	    }
+	}
+}
 ?>
