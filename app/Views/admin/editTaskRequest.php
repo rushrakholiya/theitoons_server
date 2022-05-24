@@ -54,7 +54,7 @@
         <div class="col-md-7">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Lead Information</h3>
+              <h3 class="card-title">Request Information</h3>
               <div class="card-tools"></div>
             </div>
             <div class="card-body">
@@ -133,7 +133,7 @@
         <div class="col-md-5">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Lead Details</h3>
+              <h3 class="card-title">Request Details</h3>
             </div>          
             <div class="card-body">
               <div class="row">
