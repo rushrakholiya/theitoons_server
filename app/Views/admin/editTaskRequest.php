@@ -44,7 +44,11 @@
 
       $task_submitted_date = date("d-m-Y", strtotime($taskrequestinfo->task_date));
       $task_submitted_time = date("h:i a", strtotime($taskrequestinfo->task_date));
-                    ?>
+
+      //$curr_time = "2013-07-10 09:09:09";
+      $curr_time = $taskrequestinfo->task_date;
+      $time_ago = strtotime($curr_time);?>
+
       <?= form_open('admin/allTaskRequests/editTaskRequest/'.$id); ?>
       <div class="row ml-1">
         <div class="col-md-7">
@@ -98,7 +102,22 @@
               <div class="form-group row">
                 <label for="deadline" class="col-sm-4 col-form-label">Deadline:</label>
                 <?php $deadline=getTaskRequestMeta("deadline", $id);?>
-                <input type="text" id="deadline" name="deadline" class="form-control col-sm-8" value="<?= $deadline->meta_value;?>" placeholder="dd/mm/yyyy">
+                <input type="text" id="deadline" name="deadline" class="form-control col-sm-4" value="<?= $deadline->meta_value;?>" placeholder="dd-mm-yyyy">
+                <?php
+                $current_date = date("d-m-Y");
+                if($deadline->meta_value && $current_date > $deadline->meta_value){
+                $task_deadlineago = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
+                $date=strtotime($task_deadlineago);//Converted to a PHP date (a second count)
+                $diff=$date-time();//time returns current time in seconds
+                $days=floor($diff/(60*60*24));//seconds/minute*minutes/hour*hours/day)
+                //$hours=round(($diff-$days*60*60*24)/(60*60));
+                //echo "$days days $hours hours remain<br />";?>
+                <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo "$days days to complete";?> )</span>
+                <?php }else if($deadline->meta_value){
+                $curr_time = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
+                $time_ago = strtotime($curr_time);?>
+                <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo time_Ago($time_ago);?> )</span>
+                <?php }?>
               </div>
               <div class="form-group row">
                 <label for="budget" class="col-sm-4 col-form-label">Estimated budget:</label>
@@ -118,7 +137,8 @@
             <div class="card-body">
               <div class="row">
                 <label class="col-sm-4 col-form-label">Submitted:</label>
-                <span class="col-sm-8 col-form-label"><?= $task_submitted_date; ?><span style='font-weight: 600;font-size: 10px;color: #939393;text-transform: uppercase;'> <?= $task_submitted_time;?></span></span>          
+                <span class="col-sm-8 col-form-label"><?= $task_submitted_date; ?><span style='font-weight: 600;font-size: 10px;color: #939393;text-transform: uppercase;'> <?= $task_submitted_time;?></span><span> ( <?php echo time_Ago($time_ago);?> )</span></span>
+
               </div>
               <?php $userdata = getLoggedInUserData($taskrequestinfo->user_id);
               if(!empty($userdata)){ $task_username = $userdata->user_name;?>
