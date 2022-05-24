@@ -106,12 +106,6 @@
                 <?php
                 $current_date = new DateTime();
                 $deadlinedate    = new DateTime($deadline->meta_value);
-
-                if ($current_date > $deadlinedate) {
-                    echo 'greater than';
-                }else{
-                    echo 'Less than';
-                }
                 if($deadline->meta_value && $current_date < $deadlinedate){
                   $task_deadlineago = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
                   $date=strtotime($task_deadlineago);//Converted to a PHP date (a second count)
