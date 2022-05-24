@@ -104,22 +104,26 @@
                 <?php $deadline=getTaskRequestMeta("deadline", $id);?>
                 <input type="text" id="deadline" name="deadline" class="form-control col-sm-4" value="<?= $deadline->meta_value;?>" placeholder="dd-mm-yyyy">
                 <?php
-                $current_date = date("d-m-Y");
-                echo $current_date;
-                if($deadline->meta_value && $current_date > $deadline->meta_value){
-                  echo "hererrerer";
-                $task_deadlineago = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
-                $date=strtotime($task_deadlineago);//Converted to a PHP date (a second count)
-                $diff=$date-time();//time returns current time in seconds
-                $days=floor($diff/(60*60*24));//seconds/minute*minutes/hour*hours/day)
-                //$hours=round(($diff-$days*60*60*24)/(60*60));
-                //echo "$days days $hours hours remain<br />";?>
-                <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo "$days days to complete";?> )</span>
+                $current_date = new DateTime();
+                $deadlinedate    = new DateTime($deadline->meta_value);
+
+                if ($current_date > $deadlinedate) {
+                    echo 'greater than';
+                }else{
+                    echo 'Less than';
+                }
+                if($deadline->meta_value && $current_date < $deadlinedate){
+                  $task_deadlineago = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
+                  $date=strtotime($task_deadlineago);//Converted to a PHP date (a second count)
+                  $diff=$date-time();//time returns current time in seconds
+                  $days=floor($diff/(60*60*24));//seconds/minute*minutes/hour*hours/day)
+                  //$hours=round(($diff-$days*60*60*24)/(60*60));
+                  //echo "$days days $hours hours remain<br />";?>
+                  <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo "$days days to complete";?> )</span>
                 <?php }else if($deadline->meta_value){
-                echo "kgnsdkg";
-                $curr_time1 = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
-                $time_ago1 = strtotime($curr_time1);?>
-                <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo time_Ago($time_ago1);?> )</span>
+                  $curr_time1 = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
+                  $time_ago1 = strtotime($curr_time1);?>
+                  <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo time_Ago($time_ago1);?> )</span>
                 <?php }?>
               </div>
               <div class="form-group row">
