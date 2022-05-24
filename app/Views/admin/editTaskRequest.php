@@ -105,7 +105,9 @@
                 <input type="text" id="deadline" name="deadline" class="form-control col-sm-4" value="<?= $deadline->meta_value;?>" placeholder="dd-mm-yyyy">
                 <?php
                 $current_date = date("d-m-Y");
+                echo $current_date;
                 if($deadline->meta_value && $current_date > $deadline->meta_value){
+                  echo "hererrerer";
                 $task_deadlineago = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
                 $date=strtotime($task_deadlineago);//Converted to a PHP date (a second count)
                 $diff=$date-time();//time returns current time in seconds
