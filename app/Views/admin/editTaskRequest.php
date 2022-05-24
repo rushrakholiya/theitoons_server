@@ -114,6 +114,7 @@
                 //echo "$days days $hours hours remain<br />";?>
                 <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo "$days days to complete";?> )</span>
                 <?php }else if($deadline->meta_value){
+                echo "kgnsdkg";
                 $curr_time1 = date("Y-m-d h:m:s", strtotime($deadline->meta_value));
                 $time_ago1 = strtotime($curr_time1);?>
                 <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo time_Ago($time_ago1);?> )</span>
