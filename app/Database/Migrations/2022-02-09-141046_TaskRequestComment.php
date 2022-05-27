@@ -33,9 +33,10 @@ class TaskRequestComment extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ], 
-            'comment_title'  => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
+            'comment_parent'  => [
+                'type'       => 'BIGINT',
+                'constraint' => '20',
+                'unsigned'   => true,
             ],           
             'comment_content'=> [
                 'type'       => 'LONGTEXT',
