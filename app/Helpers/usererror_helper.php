@@ -67,6 +67,17 @@ if(!function_exists('getLoggedInUserData')) {
 	}
 }
 
+if(!function_exists('getTaskRequest')) {
+	function getTaskRequest($id)
+	{
+		$db      = \Config\Database::connect();
+		$builder = $db->table('task_requests');
+		$builder->select('*');
+		$query = $builder->getWhere(['task_id' => $id], 1);
+		return $query->getRow();
+	}
+}
+
 if(!function_exists('getTaskRequestMeta')) {
 	function getTaskRequestMeta($metakey,$id)
 	{
@@ -163,6 +174,30 @@ if(!function_exists('time_Ago')) {
 	            echo "$yrs years ago";
 	        }
 	    }
+	}
+}
+
+if(!function_exists('getTaskRequestCommentData')) {
+	function getTaskRequestCommentData($id)
+	{
+		$db      = \Config\Database::connect();
+		$builder = $db->table('task_request_comments');
+		$builder->select('*');
+		$query = $builder->where('task_id',$id);
+		$result = $query->get();
+		return $result->getResultArray();
+	}
+}
+
+if(!function_exists('getParentCommentData')) {
+	function getParentCommentData($id)
+	{
+		$db      = \Config\Database::connect();
+		$builder = $db->table('task_request_comments');
+		$builder->select('*');
+		$query = $builder->where('comment_id',$id);
+		$result = $query->get();
+		return $result->getResultArray();
 	}
 }
 ?>
