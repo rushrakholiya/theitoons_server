@@ -393,8 +393,8 @@ class Dashboard extends HF_Controller
             ];
             $this->dashboardModel->addTaskComment($commentdata);
             $getTaskRequestCommentData = getTaskRequestCommentData($_POST['ctask_id']);
-            //print_r($getTaskRequestCommentData);
-            $taskuserid = $taskrequestinfo->uid;
+            print_r($getTaskRequestCommentData);
+            /*$taskuserid = $taskrequestinfo->uid;
             if(!empty($getTaskRequestCommentData)){
                 foreach($getTaskRequestCommentData as $cmd){
                   $profile_picture = getUserMeta("profile_picture", $cmd['user_id']);
@@ -410,7 +410,7 @@ class Dashboard extends HF_Controller
                     </div>
                     </li>';
                 }
-              }
+            }*/
         }
         
     }
