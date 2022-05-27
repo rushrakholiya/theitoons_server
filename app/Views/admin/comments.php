@@ -84,7 +84,7 @@
                     echo "<td>".$row['comment_author']."</td>";
                     echo "<td style='width: 30%;'>";
                       if($ptasktitle){
-                        echo "<a href=".$row['comment_parent']." class='linkrow'>In reply to a $ptasktitle<br></a>";
+                        echo "<a href=".$row['comment_parent']." class='linkrow'>In reply to a $ptasktitle (id:".$row['comment_parent'].")<br></a>";
                       }
                     echo $row['comment_content']."</td>";
                     echo "<td style='width: 20%;'>".$taskdata->task_title."</td>";
