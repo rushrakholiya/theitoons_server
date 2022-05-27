@@ -114,8 +114,8 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                            <div class="form-div">                       
-                              <input id="comment_text" name="comment_text" type="text" placeholder="Add Your Comment"  class="textbox"/>
+                            <div class="form-div form-group">                       
+                              <input id="comment_text" name="comment_text" type="text" placeholder="Add Your Comment"  class="form-control"/>
                               <input type="hidden" value="<?= $cuser_id;?>" id="cuser_id" name="cuser_id">  
                               <input type="hidden" value="<?= $row['task_id'];?>" id="ctask_id" name="ctask_id">
                               <input type="hidden" value="<?= $comment_author;?>" id="comment_author" name="comment_author">
