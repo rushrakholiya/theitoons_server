@@ -13,7 +13,6 @@ if (in_array("resetPassword", $uriarray)) { $menu_name = 'resetPassword';}
 
 if (in_array("taskRequest", $uriarray)) { $menu_name = 'taskRequest';}
 if (in_array("editTaskRequest", $uriarray)) { $menu_name = 'editTaskRequest';}
-if (in_array("viewTaskRequest", $uriarray)) { $menu_name = 'viewTaskRequest';}
 
 if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="register" && $menu_name !="resetPassword"){?>
   <footer class="main-footer">
@@ -157,64 +156,6 @@ $("#budget").on("slide", function(slideEvt) {
       $(this).addClass('active');
     });
   })
-</script>
-<?php }?>
-
-  <?php if($menu_name =="viewTaskRequest"){?>
-    <script type="text/javascript">
-function ShowHideDiv(btnPassport) {
-  var dvPassport = document.getElementById("dvPassport");
-  if (btnPassport.value == "View more...") {
-    dvPassport.style.display = "block";
-    btnPassport.value = "View less...";
-  } else {
-    dvPassport.style.display = "none";
-    btnPassport.value = "View more...";
-  }
-}  
-
-
-const field = document.getElementById('text1');
-text1.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-  }
-});
-const backUp = field.getAttribute('placeholder')
-const btn = document.querySelector('.btn');
-const submit = document.querySelector('#submit');
-const userimage = document.getElementById('img1').value;
-// const comments = document.querySelector('#comment-box')
-const comments = document.getElementById('commentul');
-// array to store the comments
-const comments_arr = [];
-// to generate html list based on comments array
-const display_comments = () => {
-  let list = '';
-   comments_arr.forEach(comment => {
-    list += `<li class="li">
-    <div class="inline">
-      <img src="${userimage}" class="img">
-    </div>
-    <div class="inline pt-2">
-      <span style="color: #5F65FF !important;">You</span><br><span>${comment}</span>
-    </div>
-    </li>`;
-  })
-  comments.innerHTML = list;
-}
-submit.onclick = function(event){
-  event.preventDefault();
-  const content = field.value;
-  if(content.length > 0){ // if there is content
-    // add the comment to the array
-    comments_arr.push(content);
-    // re-genrate the comment html list
-    display_comments();
-    // reset the textArea content 
-    field.value = '';
-  }
-}
 </script>
 <?php }?>
 

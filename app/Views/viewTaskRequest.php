@@ -75,27 +75,55 @@
 
         </div>
         
-        <!-- <div class="col-sm-5 ml-3">
+        <div class="col-sm-5 ml-3">
           <div class="comment-box-main">
             <div class="comments">
                <h2>Comments</h2>                
             </div>
-            <div id="comment-box"><ul class="ul" id="commentul"></ul></div>
-            <form>  
+            <?php $getTaskRequestCommentData = getTaskRequestCommentData($taskrequestinfo->task_id);
+                  //print_r($getTaskRequestCommentData);
+                  $taskuserid = $taskrequestinfo->user_id;
+            ?>
+            <div id="comment-box"><ul class="ul" id="commentul">
+              <?php if(!empty($getTaskRequestCommentData)){
+                foreach($getTaskRequestCommentData as $cmd){
+                  $profile_picture = getUserMeta("profile_picture", $cmd['user_id']);
+                  if(!empty($profile_picture->meta_value)){$userimage = $profile_picture->meta_value;}else{$userimage = base_url()."/public/assets/dist/img/default_avatar.jpg";}
+                  $comment_content = $cmd['comment_content'];
+                  if($taskuserid == $cmd['user_id']){
+                    $commentauthor="You";
+                    $color="#5F65FF";
+                  }else{
+                    $commentauthor = $cmd['comment_author'];
+                    $color="#FF8412";
+                  }
+                  echo '<li class="li">
+                    <div class="inline">
+                      <img src="'.$userimage.'" class="img">
+                    </div>
+                    <div class="inline pt-2">
+                      <span style="color: '.$color.' !important;">'.$commentauthor.'</span><br><span>'.$comment_content.'</span>
+                    </div>
+                    </li>';
+                }
+              }?>
+            </ul></div>
+            <form id="comment_form" name ="comment_form" action="" method="post">  
               <div class="form-div">
-                <?php $profile_picture=getUserMeta("profile_picture", $taskrequestinfo->user_id);
+                <?php 
+                $profile_picture=getUserMeta("profile_picture", $taskrequestinfo->user_id);
                 if(!empty($profile_picture->meta_value)){$userimage = $profile_picture->meta_value;}else{$userimage = base_url()."/public/assets/dist/img/default_avatar.jpg";}?>
                 <img src="<?= $userimage;?>" class="img">
                 <input type="hidden" value="<?= $userimage;?>" id="img1">
-                <input id="text1" type="text" placeholder="Add Your Comment"  class="textbox"/> 
+                <input id="comment_text" name="comment_text" type="text" placeholder="Add Your Comment"  class="textbox"/> 
+                <input type="hidden" value="<?= $taskrequestinfo->task_id;?>" id="ctask_id" name="ctask_id">
                 <div class="btn" style="display:none;">
                   <input id="submit" type="submit" value="Comment" >                         
                 </div> 
               </div>  
             </form>
-
           </div>
-        </div> -->
+        </div>
         
       </div>
     </section>
@@ -103,3 +131,48 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <script type="text/javascript">
+    function ShowHideDiv(btnPassport) {
+      var dvPassport = document.getElementById("dvPassport");
+      if (btnPassport.value == "View more...") {
+        dvPassport.style.display = "block";
+        btnPassport.value = "View less...";
+      } else {
+        dvPassport.style.display = "none";
+        btnPassport.value = "View more...";
+      }
+    }  
+
+
+    const field = document.getElementById('comment_text');
+    comment_text.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      }
+    });
+    const submit = document.querySelector('#submit');
+    const comments = document.getElementById('commentul');
+    submit.onclick = function(event){
+      event.preventDefault();
+      const content = field.value;
+      var ctask_id= $("#ctask_id").val();
+      var comment_text= $("#comment_text").val();
+      if(content.length > 0){ // if there is content   
+        $.ajax({
+            type: "post",
+            url: "<?php echo base_url(); ?>/dashboard/addTaskComment",
+            data:{
+                'ctask_id':ctask_id,
+                'comment_text':comment_text,
+            },
+            success:function(data)
+            {
+                console.log(data);
+                comments.innerHTML = data;
+                field.value = '';
+            }
+        });
+      }
+    }
+  </script>

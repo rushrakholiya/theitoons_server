@@ -93,7 +93,7 @@
                       $umanager = $user_managern->meta_value;
                 }else{$umanager = "";}
                 /*echo "<pre>";
-                print_r($user_managers);
+                print_r($user_managern);
                 echo "</pre>";*/
               ?>
               <div class="form-group selectmanager">
@@ -102,8 +102,8 @@
                   <option value="">Select one</option>
                   <?php if($user_managers){
                     foreach($user_managers as $umnger){
-                      $mngername = strtolower($umnger->user_name);?>
-                      <option value="<?= $mngername;?>" <?php if($umanager==$mngername){echo "selected";}?>><?= ucwords($umnger->user_name);?></option>
+                      $mngerid = $umnger->user_id;?>
+                      <option value="<?= $mngerid;?>" <?php if($umanager==$mngerid){echo "selected";}?>><?= ucwords($umnger->user_name);?></option>
                    <?php }
                   }?>
                 </select>

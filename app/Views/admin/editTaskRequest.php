@@ -148,7 +148,7 @@
                 <span class="col-sm-8 col-form-label"><?= $task_username;?></span>          
               </div>
               <?php }?>
-              <div class="form-group row mt-2">
+              <div class="row mt-2 mb-3">
                 <label for="task_status" class="col-sm-4 col-form-label">Status:</label>
                 <?php $task_status = $taskrequestinfo->task_status;?>
                 <select id="task_status" name="task_status" class="form-control custom-select col-sm-8 col-form-label">
@@ -163,6 +163,15 @@
                   <option value="declined" <?php if($task_status=="declined"){echo "selected";}?>>Declined</option>
                   <option value="refunded" <?php if($task_status=="refunded"){echo "selected";}?>>Refunded</option>
                 </select>
+              </div>
+              <div class="form-group">
+                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                  <?php $delivertask = getTaskRequestMeta("delivertask", $id);
+                    if(!empty($delivertask->meta_value))
+                    {$delivertaskv=$delivertask->meta_value;}else{$delivertaskv="";}?>
+                  <input type="checkbox" class="custom-control-input" value="1" id="delivertask" name="delivertask" <?php if($delivertaskv==1){echo "checked"; }?>>
+                  <label class="custom-control-label" for="delivertask">Deliver</label>
+                </div>
               </div>
             </div>
             <div class="card-footer">

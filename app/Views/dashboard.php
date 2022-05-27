@@ -26,7 +26,7 @@
             <center>
               <img src="<?= $frame1;?>" width="250">
               <br><span><?= $error;?></span><br>
-              <div class="newtaskbtn"><a class="btn btn-block btn-primary" href="<?= base_url();?>/taskRequest">Submit a new request</a></div>
+              <!-- <div class="newtaskbtn"><a class="btn btn-block btn-primary" href="<?php //echo base_url();?>/taskRequest">Submit a new request</a></div> -->
             </center>
           <?php }?>
 

@@ -8,6 +8,7 @@
       if (in_array("addNewUser", $uriarray)) { $menu_name = 'addNewUser';}
       if (in_array("allTaskRequests", $uriarray)) { $menu_name = 'allTaskRequests';}
       if (in_array("allTaskTransactions", $uriarray)) { $menu_name = 'allTaskTransactions';}
+      if (in_array("comments", $uriarray)) { $menu_name = 'comments';}
       if (in_array("settings", $uriarray)) { $menu_name = 'settings';}
       
       //echo $menu_name;?>
@@ -141,6 +142,13 @@
                 </a>
               </li>
             </ul>       
+          </li> 
+
+          <li class="nav-item">
+            <a href="<?= base_url();?>/admin/comments" class="nav-link <?php if($menu_name=="comments"){?>active<?php }?>">
+              <i class="nav-icon fa fa-comments"></i>
+              <p> Comments </p>
+            </a>            
           </li> 
 
           <li class="nav-item">
