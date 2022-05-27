@@ -67,6 +67,13 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
         {
             $data = [];
             if( $this->request->getMethod() == "post" ){
+                $delivertask = getTaskRequestMeta("delivertask", $id);
+                if(empty($delivertask)){
+                    $delivertaskmetadata = [
+                        ['task_id' => $id,'meta_key' => 'delivertask','meta_value' => $this->request->getVar('delivertask'),],
+                    ];
+                    $this->taskrequestModel->addNewTaskRequestMeta($delivertaskmetadata);         
+                }
                 $taskdata = [
                     'task_status'=> $this->request->getVar('task_status'),
                 ];
@@ -77,6 +84,7 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                 ['meta_key' => 'constraint','meta_value' => $this->request->getVar('constraint'),],
                 ['meta_key' => 'deadline','meta_value' => $this->request->getVar('deadline'),],
                 ['meta_key' => 'budget','meta_value' => $this->request->getVar('budget'),],
+                ['meta_key' => 'delivertask','meta_value' => $this->request->getVar('delivertask'),],
                 ];
                 if($this->taskrequestModel->editTaskRequest($id,$taskdata,$taskmetadata))
                 {

@@ -370,4 +370,48 @@ class Dashboard extends HF_Controller
         }
         return $this->loginheaderfooter('thankYouPaypal',$data);
     }
+    public function addTaskComment()
+    {
+        $data = [];$uid = "";
+        if(session()->has('logged_user_client')){
+            $uid=session()->get('logged_user_client'); 
+        }
+        //print_r($_POST['comment_text']);        
+        if( $this->request->getMethod() == "post" ){  
+            $userdata = getLoggedInUserData($uid);
+            if(!empty($userdata)){ $task_useremail = $userdata->user_email;
+            $task_username = $userdata->user_name;}
+            $commentdata = [
+                'user_id'=> $uid,
+                'task_id'=> $_POST['ctask_id'],
+                'comment_author'=> $task_username,
+                'comment_author_email'=> $task_useremail,
+                'comment_parent'=> 0,
+                'comment_content' => $_POST['comment_text'],
+                'comment_type'=>'comment',
+                'comment_status'=> 1,
+            ];
+            $this->dashboardModel->addTaskComment($commentdata);
+            $getTaskRequestCommentData = getTaskRequestCommentData($_POST['ctask_id']);
+            //print_r($getTaskRequestCommentData);
+            $taskuserid = $taskrequestinfo->uid;
+            if(!empty($getTaskRequestCommentData)){
+                foreach($getTaskRequestCommentData as $cmd){
+                  $profile_picture = getUserMeta("profile_picture", $cmd['user_id']);
+                  if(!empty($profile_picture->meta_value)){$userimage = $profile_picture->meta_value;}else{$userimage = base_url()."/public/assets/dist/img/default_avatar.jpg";}
+                  $comment_content = $cmd['comment_content'];
+                  if($taskuserid == $cmd['user_id']){$commentauthor="You";}else{$commentauthor=$cmd['comment_author'];}
+                  echo '<li class="li">
+                    <div class="inline">
+                      <img src="'.$userimage.'" class="img">
+                    </div>
+                    <div class="inline pt-2">
+                      <span style="color: #5F65FF !important;">'.$commentauthor.'</span><br><span>'.$comment_content.'</span>
+                    </div>
+                    </li>';
+                }
+              }
+        }
+        
+    }
 }

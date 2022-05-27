@@ -58,7 +58,7 @@ class Login extends HF_Controller
                         if($userdata['user_status']==1 )
                         {
                             $user_role = getUserMeta("user_role", $userdata['user_id']);
-                            if($user_role->meta_value=="admin"){ 
+                            if($user_role->meta_value=="admin" || $user_role->meta_value=="client_manager"){ 
                                 $this->session->set('logged_user',$userdata['user_id']);
                                 return redirect()->to(base_url()."/admin/dashboard");
                             }
