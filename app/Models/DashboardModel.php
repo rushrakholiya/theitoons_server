@@ -128,4 +128,17 @@ class DashboardModel extends Model
 		$query = $builder->getWhere(['payment_title' => $id], 1);
 		return $query->getRow();
 	}
+	public function addTaskComment($commentdata)
+	{
+		$builder = $this->db->table('task_request_comments');
+		$resmeta = $builder->insert($commentdata);
+		if( $this->db->affectedRows() > 0 )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
