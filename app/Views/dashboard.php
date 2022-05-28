@@ -92,15 +92,58 @@
                         }
                         if($row->task_status=="in_review"){
                         echo '<a href="'.base_url().'/dashboard/completeTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Complete Request"> ✔ </a>';
-                        }
-                        
+                        }                        
                         if($row->task_status=="accepted" && $pay_status != "Completed"){
                         $task_budget = getTaskRequestMeta("budget",$row->task_id);
                         echo '<a href="'.base_url().'/dashboard/paymentTaskRequest/'.$row->task_id.'" style="padding-left: 10px;" title="Pay $'.$task_budget->meta_value.'"> 💳</a>';
                         }
+
+                        $deliver_file = getTaskRequestMeta("deliver_file",$row->task_id);
+                        $task_deliver_description = getTaskRequestMeta("task_deliver_description",$row->task_id);
+                        if($deliver_file || $task_deliver_description){
+                          if(!empty($deliver_file->meta_value) || !empty($task_deliver_description->meta_value)){
+                            echo '<a href="#" data-toggle="modal" data-target="#modal-default'.$row->task_id.'" style="padding-left: 10px;" title="Download Deliver"> 📥 </a>';
+                          }
+                        }
                         echo '</td>';
-                        echo "</tr>";
-                      }?>
+                        echo "</tr>";?>
+
+                        <div class="modal fade" id="modal-default<?= $row->task_id;?>">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Add Data</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="form-div">                       
+                                  <div class="form-group">
+                                    <label for="uploadfile" class="control-label">Uploaded File :</label>
+                                    <?php $ddeliver_file = getTaskRequestMeta("deliver_file", $row->task_id);
+                                      if($ddeliver_file && !empty($ddeliver_file->meta_value)){
+                                      $ddrefimg = explode('/', $ddeliver_file->meta_value);
+                                      $ddrefimgname = array_reverse($ddrefimg);
+                                      //print_r($refimgname);?>
+                                      <a href="<?= $ddeliver_file->meta_value;?>" download>
+                                        <span class=""><?= $ddrefimgname[0];?></span>
+                                      </a>
+                                    <?php }else{echo "-";}?>
+                                  </div>
+                                  <div class="form-group">
+                                    <?php $dtask_deliver_description = getTaskRequestMeta("task_deliver_description", $row->task_id);?>
+                                    <label for="task_deliver_description" class="control-label">Description : </label>
+                                    <?php if($dtask_deliver_description && !empty($dtask_deliver_description->meta_value)){echo $dtask_deliver_description->meta_value;}?>
+                                  </div>
+                                </div>                                                      
+                              </div>
+                            </div>
+                            <!-- /.modal-content -->
+                          </div>
+                          <!-- /.modal-dialog -->
+                        </div>
+                    <?php }?>
                   </tbody>
               </table>        
             </div>        

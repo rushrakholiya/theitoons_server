@@ -131,6 +131,35 @@
           <!-- /.card -->
         </div>
         <div class="col-md-5">
+          
+          <?php $deliver_file = getTaskRequestMeta("deliver_file", $id);
+          $task_deliver_description = getTaskRequestMeta("task_deliver_description", $id);
+          //print_r($deliver_file);
+          //print_r($task_deliver_description);
+          if($deliver_file || $task_deliver_description){
+            if(!empty($deliver_file->meta_value) || !empty($task_deliver_description->meta_value)){?>
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Deliver Details</h3>
+            </div>          
+            <div class="card-body">
+              <div class="form-group row">
+                <label class="col-sm-4">Uploaded file:</label>
+                <?php $drefimg = explode('/', $deliver_file->meta_value);
+                $drefimgname = array_reverse($drefimg);
+                //print_r($refimgname);?>
+                <a href="<?= $deliver_file->meta_value;?>" data-toggle="lightbox" data-title="<?= $drefimgname[0];?>" data-gallery="gallery">
+                  <span class="col-sm-8"><?= $drefimgname[0];?></span>
+                </a>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4">Description:</label>
+                <span class="col-sm-8"><?= $task_deliver_description->meta_value; ?></span>
+              </div>        
+            </div>
+          </div>
+          <?php }}?>
+
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">Request Details</h3>
@@ -164,21 +193,14 @@
                   <option value="refunded" <?php if($task_status=="refunded"){echo "selected";}?>>Refunded</option>
                 </select>
               </div>
-              <div class="form-group">
-                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                  <?php $delivertask = getTaskRequestMeta("delivertask", $id);
-                    if(!empty($delivertask->meta_value))
-                    {$delivertaskv=$delivertask->meta_value;}else{$delivertaskv="";}?>
-                  <input type="checkbox" class="custom-control-input" value="1" id="delivertask" name="delivertask" <?php if($delivertaskv==1){echo "checked"; }?>>
-                  <label class="custom-control-label" for="delivertask">Deliver</label>
-                </div>
-              </div>
             </div>
             <div class="card-footer">
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default<?= $id;?>"><i class="fas fa-pencil-alt"></i> Deliver</button>
               <a class="btn btn-danger" href="<?= base_url();?>/admin/allTaskRequests/deleteTaskRequest/<?= $id;?>"><i class="fas fa-trash"></i> Delete</a>
               <button type="submit" class="btn btn-success float-right">Save Changes</button>
             </div>
-          </div>
+          </div>         
+
         </div>
       </div>
       <?= form_close();?>
@@ -188,3 +210,94 @@
 
   </div>
   <!-- /.content-wrapper --> 
+
+  <div class="modal fade" id="modal-default<?= $id;?>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <?= form_open_multipart('admin/allTaskRequests/addDeliverDataTask/'.$id,'id="deliver_form"'); ?>          
+        <div class="modal-header">
+          <h4 class="modal-title">Add Data</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-div">                       
+            <div class="form-group">
+              <label for="uploadfile" class="control-label">Upload File</label>
+              <input type="file" class="form-control userProfilePicture" name="deliver_file" />
+              <?php $ddeliver_file = getTaskRequestMeta("deliver_file", $id);
+                if($ddeliver_file && !empty($ddeliver_file->meta_value)){
+                $ddrefimg = explode('/', $ddeliver_file->meta_value);
+                $ddrefimgname = array_reverse($ddrefimg);
+                //print_r($refimgname);?>
+                <a href="<?= $ddeliver_file->meta_value;?>" data-toggle="lightbox" data-title="<?= $ddrefimgname[0];?>" data-gallery="gallery">
+                  <span class="col-sm-8"><?= $ddrefimgname[0];?></span>
+                </a>
+              <?php }?>
+            </div>
+            <div class="form-group">
+              <?php $dtask_deliver_description = getTaskRequestMeta("task_deliver_description", $id);?>
+              <label for="task_deliver_description" class="control-label">Description</label>
+              <textarea id="task_deliver_description" name="task_deliver_description" class="form-control" rows="4"><?php if($dtask_deliver_description && !empty($dtask_deliver_description->meta_value)){echo $dtask_deliver_description->meta_value;}?></textarea>
+            </div>
+          </div>                                                      
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <?= form_close();?>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+  <script>
+    $('#modal-default<?= $id;?>').on('hidden.bs.modal', function (e) {
+      $('#deliver_form').bootstrapValidator('resetForm', true);
+    });
+    $('#modal-default<?= $id;?>').on('show.bs.modal', function (e) {
+      <?php $dtask_deliver_description = getTaskRequestMeta("task_deliver_description", $id);?>
+      <?php if($dtask_deliver_description && !empty($dtask_deliver_description->meta_value)){
+        $deliverd = $dtask_deliver_description->meta_value;}?>
+      $("textarea#task_deliver_description").val(<?= $deliverd;?>);
+    });
+    $(document).ready(function() {
+        $('#deliver_form').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            excluded: ':disabled',
+            fields: {
+                deliver_file: {
+                    validators: {
+                        file: {
+                            extension: 'jpg,jpeg,png,pdf',
+                            type: 'image/jpg,image/jpeg,image/png,application/pdf',
+                            //maxSize: 2048 * 1024,
+                            message: 'The selected file is not valid'
+                        }
+                    }
+                },
+                task_deliver_description: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The Description is required and cannot be empty'
+                        },
+                        stringLength: {
+                            max: 500,
+                            message: 'The Description must be less than 500 characters long'
+                        }
+                    }
+                }
+            }
+        });
+    });
+  </script>
+  <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css">
