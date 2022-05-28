@@ -78,5 +78,13 @@ class TaskrequestModel extends Model
 		$builder->delete(['task_id' => $id]);        
 		
 		return true;		
+	}	
+	public function updateTaskRequestMeta($id,$taskmetadata)
+	{		
+		$builder = $this->db->table('task_request_meta');
+		$builder->where('task_id', $id);
+		$builder->updateBatch($taskmetadata,'meta_key');		
+
+		return true;		
 	}
 }
