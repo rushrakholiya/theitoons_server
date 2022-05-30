@@ -9,7 +9,18 @@ class DashboardModel extends Model
 	{
 	    $builder = $this->db->table("task_requests");
 	  	$builder->select('*');
-	  	$builder->where('user_id', $uid);
+	  	//$builder->where('user_id', $uid);
+	  	$where = "user_id='".$uid."' AND task_status!='completed'";
+		$query = $builder->where($where);
+	  	$query = $builder->get();
+     	return $query->getResult();
+	}
+	public function displayAllCompleteTaskRequests($uid)
+	{
+	    $builder = $this->db->table("task_requests");
+	  	$builder->select('*');
+	  	$where = "user_id='".$uid."' AND task_status='completed'";
+		$query = $builder->where($where);
 	  	$query = $builder->get();
      	return $query->getResult();
 	}
