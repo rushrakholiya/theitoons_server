@@ -48,6 +48,31 @@ class Dashboard extends HF_Controller
                                
         }    
     }
+    public function completeRequestsList()
+    {    
+        $data = [];
+        if(!session()->has('logged_user_client'))
+        {
+            return redirect()->to(base_url()."/login");
+        }
+        else
+        {
+            $data = [];
+            if(session()->has('logged_user_client')){$uid=session()->get('logged_user_client'); }
+            $data['taskrequestdata'] = $this->dashboardModel->displayAllCompleteTaskRequests($uid);
+            if(!empty($data['taskrequestdata']))
+            {
+                return $this->loginheaderfooter('completeRequests',$data);
+            }
+            else
+            { 
+                $data = [];
+                $data['error'] = "Requests not found!!!";
+                return $this->loginheaderfooter('completeRequests',$data);
+            }            
+            return $this->loginheaderfooter('completeRequests',$data);                              
+        }    
+    }
     public function deleteTaskRequest($id=null)
     {
         if(!session()->has('logged_user_client'))
