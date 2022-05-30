@@ -36,6 +36,15 @@ if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="regist
 <script src="<?= base_url();?>/public/assets/dist/js/adminlte.min.js"></script>
 
 <style>
+.dropdown a{
+    display: inline-block;
+    padding-right: 5px !important;
+}
+.dropdown span{
+    vertical-align: middle;
+    cursor: pointer;
+    padding-right: 1rem;
+}
 .HW_badge, .HW_badge.HW_softHidden {
     background: none !important;
     opacity: 1 !important;
@@ -47,7 +56,7 @@ if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="regist
     top: 0px !important;
     left: 0px !important;
     height: auto !important;
-    width: auto !important;
+    width: 80px !important;
     position: unset !important;
 }
 .HW_badge_cont {

@@ -105,25 +105,39 @@ if($menu_name !="login" && $menu_name !="forgotPassword" && $menu_name !="regist
   if($menu_name=="editTaskRequest" || $menu_name=="taskRequest"){$bodyinnerclass="taskrequest";}?>
 <body class="hold-transition layout-fixed taskdashboard <?= $bodyclass;?>">
 <div class="wrapper <?= $bodyinnerclass;?>">
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <!-- <nav class="main-header navbar navbar-expand navbar-white navbar-light">-->
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <!-- Left navbar links -->
     <img src="<?= $site_logo;?>" alt="Logo" style="width: 5%;">
     <p class="site-description"><?= $sitename;?></p>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a href="<?= base_url();?>/dashboard" class="nav-link">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-      <li class="nav-item">
-        <a href="<?= base_url();?>/login/logout" class="nav-link">Logout</a>
-      </li>
-      <li class="nav-item">
-        <span class="nav-link whatsnew"></span>
-      </li>      
-    </ul>
+    <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a href="<?= base_url();?>/dashboard" class="nav-link">Dashboard </a>
+          <span id="dropdownSubMenu1"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"></span>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="<?= base_url();?>/dashboard" class="dropdown-item">Active requests</a></li>
+              <li><a href="<?= base_url();?>/dashboard/completeRequestsList" class="dropdown-item">Complete requests</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a href="<?= base_url();?>/login/logout" class="nav-link">Logout</a>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link whatsnew"></span>
+        </li>      
+      </ul>
+
+    </div>
   </nav>  
 <?php }?>
