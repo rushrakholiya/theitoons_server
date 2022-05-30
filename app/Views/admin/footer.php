@@ -37,6 +37,13 @@ if (in_array("allTaskRequests", $uriarray)) { $menu_name = 'allTaskRequests';}?>
     });
   })
 </script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script> 
+    $("#deadline").datepicker({
+            dateFormat: "dd-mm-yy",
+            minDate: 0,
+        });
+</script>
 <?php }
 
 if($menu_name=="dashboard"){?>

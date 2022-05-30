@@ -24,6 +24,7 @@
   
   <?php if($menu_name =="allTaskRequests"){?>
   <link rel="stylesheet" href="?= base_url();?>/public/assets/plugins/ekko-lightbox/ekko-lightbox.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
   <?php }
 
   if($menu_name =="dashboard"){?>

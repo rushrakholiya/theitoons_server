@@ -113,7 +113,7 @@
                   <label for="deadline" class="mb-0 ml-1">Deadline</label>
                   <small class="form-text text-muted mt-0 pb-2 ml-1">Set a deadline</small>
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="dd/mm/yyyy" name="deadline" id="datepicker"/>
+                    <input type="text" class="form-control" placeholder="dd-mm-yyyy" name="deadline" id="datepicker"/>
                     <div class="input-group-append">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>

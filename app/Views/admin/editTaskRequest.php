@@ -265,7 +265,7 @@
       $dtask_deliver_description = getTaskRequestMeta("task_deliver_description", $id);?>
       <?php if($dtask_deliver_description && !empty($dtask_deliver_description->meta_value)){
         $deliverd = $dtask_deliver_description->meta_value;}else{ $deliverd = "";}?>
-      $("textarea#task_deliver_description").val(<?= $deliverd;?>);
+      $("textarea#task_deliver_description").val("<?= $deliverd;?>");
     });
     $(document).ready(function() {
         $('#deliver_form').bootstrapValidator({

@@ -133,7 +133,7 @@
                   <label for="deadline" class="mb-0 ml-1">Deadline</label>
                   <small class="form-text text-muted mt-0 pb-2 ml-1">Set a deadline</small>
                   <div class="input-group">
-                    <input type="text" class="form-control" name="deadline" id="datepicker" value="<?= $deadline->meta_value;?>" placeholder="dd/mm/yyyy"/>
+                    <input type="text" class="form-control" name="deadline" id="datepicker" value="<?= $deadline->meta_value;?>" placeholder="dd-mm-yyyy"/>
                     <div class="input-group-append">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
