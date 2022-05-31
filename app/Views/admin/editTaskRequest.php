@@ -196,7 +196,7 @@
             </div>
             <div class="card-footer">
               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default<?= $id;?>"><i class="fas fa-pencil-alt"></i> Deliver</button>
-              <a class="btn btn-danger" href="<?= base_url();?>/admin/allTaskRequests/deleteTaskRequest/<?= $id;?>"><i class="fas fa-trash"></i> Delete</a>
+              <a class="btn btn-danger" href="<?= base_url();?>/admin/allTaskRequests/deleteTaskRequest/<?= $id;?>"><i class="fas fa-trash"></i> Delete task</a>
               <button type="submit" class="btn btn-success float-right">Save Changes</button>
             </div>
           </div>         
