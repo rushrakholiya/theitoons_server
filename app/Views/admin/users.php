@@ -65,7 +65,7 @@
                     if(!empty($user_manager) && !empty($user_manager->meta_value)){
                       $umanager1 = $user_manager->meta_value;
                       $loggedinuserdata = getLoggedInUserData($umanager1);
-                      $umanager= $loggedinuserdata->user_name;
+                      $umanager = $loggedinuserdata->user_name;
                     }else{$umanager= "-";}
                     
                     echo "<tr>";
