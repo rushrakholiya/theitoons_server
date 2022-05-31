@@ -27,7 +27,8 @@ if (in_array("allTaskRequests", $uriarray)) { $menu_name = 'allTaskRequests';}?>
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {
       event.preventDefault();
       $(this).ekkoLightbox({
-        alwaysShowClose: true
+        alwaysShowClose: true,
+        showArrows:false
       });
     });
 
