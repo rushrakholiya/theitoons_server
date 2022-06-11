@@ -60,7 +60,7 @@
           $payerpayerid = $transactionmeta->payer->payer_info->payer_id;
           $payeraddress = $transactionmeta->payer->payer_info->shipping_address;
         ?>
-      <div class="row ml-1">
+      <div class="row">
         <div class="col-md-8">
           <div class="card">
             <div class="card-header">

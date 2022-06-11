@@ -92,7 +92,7 @@
                               </i>
                               Delete
                           </a>
-                      </td>';
+                        </td>';
                     echo "</tr>";
                   }?>
               </tbody>

@@ -41,7 +41,7 @@
       <?php if(isset($userinfo)){
         $id = $userinfo->user_id;?>
       <?= form_open_multipart('admin/users/editUser/'.$id , 'id="fileForm"'); ?>
-      <div class="row ml-1">
+      <div class="row">
         <div class="col-md-8">
           <div class="card card-primary">
             <div class="card-header">
@@ -190,7 +190,7 @@
         <?php }?>
       </div>
 
-      <div class="row ml-1">
+      <div class="row">
         <div class="col-md-8 mb-5">
           <input type="submit" value="Save Changes" class="btn btn-success float-right">
         </div>

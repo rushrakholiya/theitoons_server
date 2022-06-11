@@ -50,7 +50,7 @@
       $time_ago = strtotime($curr_time);?>
 
       <?= form_open('admin/allTaskRequests/editTaskRequest/'.$id); ?>
-      <div class="row ml-1">
+      <div class="row">
         <div class="col-md-7">
           <div class="card card-primary">
             <div class="card-header">

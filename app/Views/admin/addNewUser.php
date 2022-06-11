@@ -39,7 +39,7 @@
       <?php }?>
 
       <?= form_open_multipart('admin/users/addNewUser' , 'id="fileForm"'); ?>
-      <div class="row ml-1">
+      <div class="row">
         <div class="col-md-8">
           <div class="card card-primary">
             <div class="card-header">
@@ -159,7 +159,7 @@
         </div>
       </div>
 
-      <div class="row ml-1">
+      <div class="row">
         <div class="col-md-8 mb-5">
           <input type="submit" value="Create New User" class="btn btn-success float-right">
         </div>
