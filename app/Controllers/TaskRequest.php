@@ -130,9 +130,9 @@ class TaskRequest extends HF_Controller
                         $emaila->attach($filenamea);}
                         $emaila->send();             
 
-                        $this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
-                        return redirect()->to(base_url().'/dashboard');
-                        /*if($email->send())
+                        //$this->session->setTempdata('success','Thank you! Your request has been successfully received.',2);
+                        //return redirect()->to(base_url().'/dashboard');
+                        if($email->send())
                        {
                             //$email->printDebugger(['headers']);
                             $this->session->setTempdata('success',$email->printDebugger(['headers']),2);
@@ -142,7 +142,7 @@ class TaskRequest extends HF_Controller
                        {
                             $this->session->setTempdata('error',$email->printDebugger(['headers']),2);
                             return redirect()->to(base_url().'/dashboard');
-                       }*/
+                       }
                     }
                     else
                     {
