@@ -115,10 +115,11 @@
                     $rimgaresult = str_replace("'", '', $rimga);
                     $refimg = explode('/', $rimgaresult);
                     $refimgname = array_reverse($refimg);?>
-                  <a href="<?php echo $rimgaresult;?>" data-toggle="lightbox" data-title="<?= $refimgname[0];?>" data-gallery="gallery">
-                    <span class="col-sm-8"><?= $refimgname[0];?></span>
-                  </a>  
-                  <?php } }?>            
+                    <a href="<?php echo $rimgaresult;?>" data-toggle="lightbox" data-title="<?= $refimgname[0];?>" data-gallery="gallery">
+                      <span class="col-sm-8"><?= $refimgname[0];?></span>
+                    </a>  
+                  <?php }
+                  }?>            
                 </div>
 
                 <?php $constraint_meta=getTaskRequestMeta("constraint", $id);
