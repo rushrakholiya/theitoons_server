@@ -87,4 +87,17 @@ class TaskrequestModel extends Model
 
 		return true;		
 	}
+	/*public function sendRevisedDate($rdeadline)
+	{		
+		$builder = $this->db->table('task_request_revised_deadline');
+		$res = $builder->insert($rdeadline);
+		if($this->db->affectedRows() > 0)
+		{			
+			return true;	
+		}
+		else
+		{
+			return false;
+		}	
+	}*/
 }
