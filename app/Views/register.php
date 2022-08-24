@@ -70,7 +70,7 @@
           <div class="icheck-primary">
             <input type="checkbox" id="agreeTerms" name="terms" value="1" <?= set_checkbox('terms', '1'); ?>>
             <label for="agreeTerms">
-             Please confirm that you agree to our <a href="#">privacy policy</a>
+             Please confirm that you agree to our <a href="https://theitoons.com/privacy-policy/" target="_blank">privacy policy</a>
             </label>
           </div>
           <?php if(isset($validation)){?>
