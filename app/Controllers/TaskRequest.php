@@ -33,14 +33,24 @@ class TaskRequest extends HF_Controller
             }
             if( $this->request->getMethod() == "post" )
             {                
-                $path = ""; $cid = "";
-                $file =  $this->request->getFile('reference');
+                $path = ""; $cid = "";                
+                /*$file =  $this->request->getFile('reference');
                 if(!empty($file->getName()))
                 {                      
                     if($file->move(FCPATH.'public/taskrequest', $file->getName()))
                     {
                         $path = base_url().'/public/taskrequest/'.$file->getName();
                     } 
+                }*/
+                if($_FILES['reference']['size'][0] > 0){                    
+                    foreach($this->request->getFileMultiple('reference') as $file)
+                    {   
+                        if($file->move(FCPATH.'public/taskrequest', $file->getName()))
+                        {
+                            $fileBasename = base_url().'/public/taskrequest/'.$file->getName();
+                            $path .= "'".$fileBasename."',";
+                        }                    
+                    }                    
                 }
                 if(session()->has('logged_user_client')){$cid=session()->get('logged_user_client'); }
                 $taskdata = [

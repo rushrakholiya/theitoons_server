@@ -187,20 +187,29 @@ class Dashboard extends HF_Controller
             {
                 if( $this->request->getMethod() == "post" ){                    
                     $path = "";
-                    $file =  $this->request->getFile('reference');
-                    if(empty($file->getName())){
+                    //$file =  $this->request->getFile('reference');
+                    if($_FILES['reference']['size'][0] <= 0)
+                    {
                         $reference_img = getTaskRequestMeta("reference_img", $id);
                         if(!empty($reference_img->meta_value)){
                             $path = $reference_img->meta_value;
                         }
                     }
                     else{
-                        if($file->move(FCPATH.'public/taskrequest', $file->getName()))
+                        /*if($file->move(FCPATH.'public/taskrequest', $file->getName()))
                         {
                             $path = base_url().'/public/taskrequest/'.$file->getName();
-                        } 
+                        } */
+                        foreach($this->request->getFileMultiple('reference') as $file)
+                        {   
+                            if($file->move(FCPATH.'public/taskrequest', $file->getName()))
+                            {
+                                $fileBasename = base_url().'/public/taskrequest/'.$file->getName();
+                                $path .= "'".$fileBasename."',";
+                            }                    
+                        }                        
+                        
                     }
-
                     $taskdata = [
                         'task_title' => $this->request->getVar('title'),
                     ];

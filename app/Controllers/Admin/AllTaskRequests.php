@@ -187,4 +187,39 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
             return $this->headerfooter('editTaskRequest',$data);
         }
     }
+    /*public function sendRevisedDate($id=null)
+    {
+        $data = [];
+        $taskinfo = $this->taskrequestModel->viewTaskRequest($id);
+        print_r($taskinfo->user_id);
+        /*if(session()->has('logged_user')){$uid=session()->get('logged_user'); }
+        if( $this->request->getMethod() == "post" ){                
+            $rdeadline = [
+                'task_id'=>$id,
+                'user_id'=>$uid,
+                'revised_deadline'=> $this->request->getVar('rdeadline'),
+                'revised_deadline_status'=>'reject',
+            ];
+            if($this->taskrequestModel->sendRevisedDate($rdeadline))
+            {
+               
+                $userdata = getLoggedInUserData($cid);
+                $useremail = $userdata->user_email;
+                $username = $userdata->user_name;
+
+                $this->session->setTempdata('success','Task Request updated Successfully.',2);
+                return redirect()->to(base_url().'/admin/allTaskRequests/viewTaskRequest/'.$id);
+            }
+            else
+            {
+                $this->session->setTempdata('error','Sorry! Task Request not updated, Try again.',2);
+                return redirect()->to(base_url().'/admin/allTaskRequests/viewTaskRequest/'.$id);
+            }
+        }
+        else
+        {
+            $data = [];
+            return $this->headerfooter('editTaskRequest',$data);
+        } */
+    /*}*/
 }
