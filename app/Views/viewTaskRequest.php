@@ -44,10 +44,14 @@
             <div class="panel-body">
               <?php echo $task_description->meta_value;?> 
             </div>
-            <?php } if($reference_img->meta_value){?>
+            <?php } if($reference_img->meta_value){
+              $refimgarray = array_filter(explode(',',$reference_img->meta_value));?>
             <div  class="panel-body" id="dvPassport" style="display: none">
               <p class="p-like">Attached image:</p>
-              <img src="<?php echo $reference_img->meta_value;?>" height="200px" width="300px">
+              <?php foreach($refimgarray as $rimga){
+                $rimgaresult = str_replace("'", '', $rimga);?>
+              <img src="<?php echo $rimgaresult;?>" height="200px" width="300px"><br/><br/>
+              <?php }?>
             </div>            
             <div class="panel-footer">
               <input id="btnPassport" type="button" value="View more..." class="panel-button" onclick="ShowHideDiv(this)">

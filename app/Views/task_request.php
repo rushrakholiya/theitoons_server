@@ -96,7 +96,7 @@
                 <div class="form-group mb-4">
                   <label for="reference" class="mb-0 ml-1">Reference files (optional but recommended)</label>
                   <small class="form-text text-muted mt-0 pb-2 ml-1">Add files as reference to your task</small>
-                  <input type="file" class="form-control userProfilePicture" name="reference" />              
+                  <input type="file" class="form-control userProfilePicture" name="reference[]" multiple="multiple" />              
                 </div>
 
                 <div class="form-group mb-4">

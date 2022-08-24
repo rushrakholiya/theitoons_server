@@ -89,7 +89,7 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            reference: {
+            "reference[]": {
                 validators: {
                     file: {
                         extension: 'jpg,jpeg,png,gif,pdf',

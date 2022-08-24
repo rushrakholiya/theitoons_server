@@ -3,8 +3,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   <?= $this->include("admin/sidebar");?>
-
-    <!-- Content Wrapper. Contains page content -->
+  
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -16,7 +16,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
 
@@ -87,12 +86,23 @@
               <div class="form-group row">
                 <label for="reference_img" class="col-sm-4">Reference files:</label>
                 <?php $reference_img = getTaskRequestMeta("reference_img", $id);
-                $refimg = explode('/', $reference_img->meta_value);
+                /*$refimg = explode('/', $reference_img->meta_value);
                 $refimgname = array_reverse($refimg);
                 //print_r($refimgname);?>
                 <a href="<?= $reference_img->meta_value;?>" data-toggle="lightbox" data-title="<?= $refimgname[0];?>" data-gallery="gallery">
                   <span class="col-sm-8"><?= $refimgname[0];?></span>
                 </a>
+                <?php */
+                  if($reference_img->meta_value){
+                    $refimgarray = array_filter(explode(',',$reference_img->meta_value));
+                    foreach($refimgarray as $rimga){
+                    $rimgaresult = str_replace("'", '', $rimga);
+                    $refimg = explode('/', $rimgaresult);
+                    $refimgname = array_reverse($refimg);?>
+                  <a href="<?php echo $rimgaresult;?>" data-toggle="lightbox" data-title="<?= $refimgname[0];?>" data-gallery="gallery">
+                    <span class="col-sm-8"><?= $refimgname[0];?></span>
+                  </a>  
+                  <?php } }?> 
               </div>
               <div class="form-group row">
                 <label for="constraint" class="col-sm-4 col-form-label">Constraint:</label>
@@ -120,6 +130,10 @@
                   <span class="col-sm-4" style="padding: 0.375rem 0.75rem;"> ( <?php echo time_Ago($time_ago1);?> )</span>
                 <?php }?>
               </div>
+              <!--<div class="form-group row">
+                <label class="col-sm-4"></label>
+                <a href="#" data-toggle="modal" data-target="#modaldeadline<?= $id;?>" class="col-sm-4">Set Revised Deadline</a>
+              </div>-->
               <div class="form-group row">
                 <label for="budget" class="col-sm-4 col-form-label">Estimated budget:</label>
                 <?php $budget=getTaskRequestMeta("budget", $id);?>
@@ -207,10 +221,10 @@
       <?php }?>
     </section>
     <!-- /.content -->
-
   </div>
   <!-- /.content-wrapper --> 
 
+  <!--Delivered detail model -->
   <div class="modal fade" id="modal-default<?= $id;?>">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -255,50 +269,111 @@
   </div>
   <!-- /.modal -->
 
+  <!-- Revised deadline model-->
+  <div class="modal fade" id="modaldeadline<?= $id;?>">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <?= form_open('admin/allTaskRequests/sendRevisedDate/'.$id,'id="reviseddate_form"'); ?>       
+        <div class="modal-header">
+          <h4 class="modal-title">Add Revised Deadline</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-div">
+            <div class="form-group row">
+              <label for="rdeadline" class="control-label col-sm-4">Revised Deadline:</label>
+              <?php $deadline=getTaskRequestMeta("deadline", $id);?>
+              <input type="text" id="rdeadline" name="rdeadline" class="deadline form-control col-sm-4" value="<?= $deadline->meta_value;?>" placeholder="dd-mm-yyyy">
+            </div>
+          </div>                                                      
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+        <?= form_close();?>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
   <script>
-    $('#modal-default<?= $id;?>').on('hidden.bs.modal', function (e) {
-      $('#deliver_form').bootstrapValidator('resetForm', true);
-    });
-    $('#modal-default<?= $id;?>').on('show.bs.modal', function (e) {
-      <?php $deliverd ="";
-      $dtask_deliver_description = getTaskRequestMeta("task_deliver_description", $id);?>
-      <?php if($dtask_deliver_description && !empty($dtask_deliver_description->meta_value)){
-        $deliverd = $dtask_deliver_description->meta_value;}else{ $deliverd = "";}?>
-      $("textarea#task_deliver_description").val("<?= $deliverd;?>");
-    });
-    $(document).ready(function() {
-        $('#deliver_form').bootstrapValidator({
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            excluded: ':disabled',
-            fields: {
-                deliver_file: {
-                    validators: {
-                        file: {
-                            extension: 'jpg,jpeg,png,pdf',
-                            type: 'image/jpg,image/jpeg,image/png,application/pdf',
-                            //maxSize: 2048 * 1024,
-                            message: 'The selected file is not valid'
-                        }
-                    }
-                },
-                task_deliver_description: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The Description is required and cannot be empty'
-                        },
-                        stringLength: {
-                            max: 500,
-                            message: 'The Description must be less than 500 characters long'
-                        }
-                    }
-                }
+  $('#modal-default<?= $id;?>').on('hidden.bs.modal', function (e) {
+    $('#deliver_form').bootstrapValidator('resetForm', true);
+  });
+  $('#modal-default<?= $id;?>').on('show.bs.modal', function (e) {
+    <?php $deliverd ="";
+    $dtask_deliver_description = getTaskRequestMeta("task_deliver_description", $id);?>
+    <?php if($dtask_deliver_description && !empty($dtask_deliver_description->meta_value)){
+      $deliverd = $dtask_deliver_description->meta_value;}else{ $deliverd = "";}?>
+    $("textarea#task_deliver_description").val("<?= $deliverd;?>");
+  });
+  $(document).ready(function() {
+    $('#deliver_form').bootstrapValidator({
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      excluded: ':disabled',
+      fields: {
+        deliver_file: {
+          validators: {
+            file: {
+              extension: 'jpg,jpeg,png,pdf',
+              type: 'image/jpg,image/jpeg,image/png,application/pdf',
+              //maxSize: 2048 * 1024,
+              message: 'The selected file is not valid'
             }
-        });
+          }
+        },
+        task_deliver_description: {
+          validators: {
+            notEmpty: {
+              message: 'The Description is required and cannot be empty'
+            },
+            stringLength: {
+              max: 500,
+              message: 'The Description must be less than 500 characters long'
+            }
+          }
+        }
+      }
     });
+  });
+  
+  $('#modaldeadline<?= $id;?>').on('hidden.bs.modal', function (e) {
+    $('#reviseddate_form').bootstrapValidator('resetForm', true);
+  });
+  $('#modaldeadline<?= $id;?>').on('show.bs.modal', function (e) {
+    <?php $rdeadline ="";
+    $deadline=getTaskRequestMeta("deadline", $id);
+    if($deadline && !empty($deadline->meta_value)){
+      $rdeadline = $deadline->meta_value;}else{ $rdeadline = "";}?>
+    $("#rdeadline").val("<?= $rdeadline;?>");
+  });
+  $(document).ready(function() {
+    $('#reviseddate_form').bootstrapValidator({
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      excluded: ':disabled',
+      fields: {
+        rdeadline: {
+          validators: {
+            notEmpty: {
+              message: 'The Deadline is required'
+            }
+          }
+        }
+      }
+    });
+  });
   </script>
   <link rel="stylesheet" href="<?= base_url();?>/public/assets/dist/css/userforms.css">

@@ -100,20 +100,25 @@
                 </div>
 
                 <?php $reference_img = getTaskRequestMeta("reference_img", $id);
-                  if($reference_img->meta_value){                 
+                  /*if($reference_img->meta_value){  
                   $refimg = explode('/', $reference_img->meta_value);
                   $refimgname = array_reverse($refimg);
                   //print_r($refimgname);
-                  }?>
+                  }*/?>
                 <div class="form-group mb-4">
                   <label for="reference" class="mb-0 ml-1">Reference files (optional but recommended)</label>
                   <small class="form-text text-muted mt-0 pb-2 ml-1">Add files as reference to your task</small>
-                  <input type="file" class="form-control userProfilePicture" name="reference" />
-                  <?php if($reference_img->meta_value){?>
-                  <a href="<?= $reference_img->meta_value;?>" data-toggle="lightbox" data-title="<?= $refimgname[0];?>" data-gallery="gallery">
+                  <input type="file" class="form-control userProfilePicture" name="reference[]" multiple="multiple" />
+                  <?php if($reference_img->meta_value){
+                    $refimgarray = array_filter(explode(',',$reference_img->meta_value));
+                    foreach($refimgarray as $rimga){
+                    $rimgaresult = str_replace("'", '', $rimga);
+                    $refimg = explode('/', $rimgaresult);
+                    $refimgname = array_reverse($refimg);?>
+                  <a href="<?php echo $rimgaresult;?>" data-toggle="lightbox" data-title="<?= $refimgname[0];?>" data-gallery="gallery">
                     <span class="col-sm-8"><?= $refimgname[0];?></span>
                   </a>  
-                  <?php }?>            
+                  <?php } }?>            
                 </div>
 
                 <?php $constraint_meta=getTaskRequestMeta("constraint", $id);
