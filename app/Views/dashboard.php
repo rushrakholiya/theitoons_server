@@ -102,7 +102,7 @@
                         $task_deliver_description = getTaskRequestMeta("task_deliver_description",$row->task_id);
                         if($deliver_file || $task_deliver_description){
                           if(!empty($deliver_file->meta_value) || !empty($task_deliver_description->meta_value)){
-                            echo '<a href="#" data-toggle="modal" data-target="#modal-default'.$row->task_id.'" style="padding-left: 10px;" title="Download Deliver"> 📥 </a>';
+                            echo '<a href="#" data-toggle="modal" data-target="#modal-default'.$row->task_id.'" style="margin-left: 10px;" title="Download Deliver" class="btn btn-outline-info btn-sm"> <span style="vertical-align: text-bottom;">📥</span> Download</a>';
                           }
                         }
                         echo '</td>';
