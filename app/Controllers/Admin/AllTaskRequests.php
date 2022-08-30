@@ -144,6 +144,34 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                     ];
                     if($this->taskrequestModel->updateTaskRequestMeta($id,$utaskdeliverdata))
                     {
+                        $requesttitle = getTaskRequest("task_title", $id);
+                        $cuserid = getTaskRequest("user_id", $id);
+
+                        $userdata = getLoggedInUserData($cuserid->meta_value);
+                        $useremail = $userdata->user_email;
+                        $username = $userdata->user_name;
+
+                        $site_name = getGeneralData("site_name");
+                        if(!empty($site_name->option_value)){$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
+
+                        $admin_email = getGeneralData("admin_email");
+                        if(!empty($admin_email->option_value))
+                        {$admin_email=$admin_email->option_value;}
+                        
+                        //sent mail to client
+                        $to = $useremail;
+                        $subject = 'Deliver a file | '.$sitename;
+                        $message = "";
+                        $message .= 'Dear user ('.$username.')<br>';
+                        $message .= 'Please find Updated Deliver file in attachment for your "'.$requesttitle->meta_value.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too<br><br>';
+                        $message .= '<br>If any changes required, you can contact us via email.<br>Best Regards,<br>'.$sitename;
+                        $email = \Config\Services::email();
+                        $email->setTo($to);
+                        $email->setSubject($subject);
+                        $email->setMessage($message);
+                        $email->attach($path);
+                        $email->send();
+
                         $this->session->setTempdata('success','Deliver Data updated Successfully.',2);
                         return redirect()->to(base_url().'/admin/allTaskRequests/viewTaskRequest/'.$id);
                     }
@@ -171,6 +199,34 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                 ];
                 if($this->taskrequestModel->addNewTaskRequestMeta($taskdeliverdata))
                 {
+                    $requesttitle = getTaskRequest("task_title", $id);
+                    $cuserid = getTaskRequest("user_id", $id);
+
+                    $userdata = getLoggedInUserData($cuserid->meta_value);
+                    $useremail = $userdata->user_email;
+                    $username = $userdata->user_name;
+
+                    $site_name = getGeneralData("site_name");
+                    if(!empty($site_name->option_value)){$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
+
+                    $admin_email = getGeneralData("admin_email");
+                    if(!empty($admin_email->option_value))
+                    {$admin_email=$admin_email->option_value;}
+                    
+                    //sent mail to client
+                    $to = $useremail;
+                    $subject = 'Deliver a file | '.$sitename;
+                    $message = "";
+                    $message .= 'Dear user ('.$username.')<br>';
+                    $message .= 'Please find Deliver file in attachment for your "'.$requesttitle->meta_value.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too<br><br>';
+                    $message .= '<br>If any changes required, you can contact us via email.<br>Best Regards,<br>'.$sitename;
+                    $email = \Config\Services::email();
+                    $email->setTo($to);
+                    $email->setSubject($subject);
+                    $email->setMessage($message);
+                    $email->attach($path);
+                    $email->send();
+
                     $this->session->setTempdata('success','Deliver Data added Successfully.',2);
                     return redirect()->to(base_url().'/admin/allTaskRequests/viewTaskRequest/'.$id);
                 }
