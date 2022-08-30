@@ -160,9 +160,9 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                         $to = $useremail;
                         $subject = 'Deliver a file | '.$sitename;
                         $message = "";
-                        $message .= 'Dear user ('.$username.')<br>';
-                        $message .= 'Please find Updated Deliver file in attachment for your "'.$requesttitle->task_title.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too<br><br>';
-                        $message .= '<br>If any changes required, you can contact us via email.<br>Best Regards,<br>'.$sitename;
+                        $message .= 'Dear user ('.$username.'),<br><br>';
+                        $message .= 'Please find Updated Deliver file in attachment for your "'.$requesttitle->task_title.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too.<br>';
+                        $message .= '<br>If any changes required, you can contact us via email.<br><br>Best Regards,<br>'.$sitename;
                         $email = \Config\Services::email();
                         $email->setTo($to);
                         $email->setSubject($subject);
@@ -170,10 +170,10 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                         $email->attach($path);
                         $email->send();
 
-                        $email->printDebugger(['headers']);
-                            $this->session->setTempdata('success',$email->printDebugger(['headers']),2);
+                        //$email->printDebugger(['headers']);
+                        //$this->session->setTempdata('success',$email->printDebugger(['headers']),2);
 
-                       // $this->session->setTempdata('success','Deliver Data updated Successfully.',2);
+                        $this->session->setTempdata('success','Deliver Data updated Successfully.',2);
                         return redirect()->to(base_url().'/admin/allTaskRequests/viewTaskRequest/'.$id);
                     }
                     else
@@ -216,9 +216,9 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                     $to = $useremail;
                     $subject = 'Deliver a file | '.$sitename;
                     $message = "";
-                    $message .= 'Dear user ('.$username.')<br>';
-                    $message .= 'Please find Deliver file in attachment for your "'.$requesttitle->task_title.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too<br><br>';
-                    $message .= '<br>If any changes required, you can contact us via email.<br>Best Regards,<br>'.$sitename;
+                    $message .= 'Dear user ('.$username.'),<br><br>';
+                    $message .= 'Please find Deliver file in attachment for your "'.$requesttitle->task_title.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too.<br>';
+                    $message .= '<br>If any changes required, you can contact us via email.<br><br>Best Regards,<br>'.$sitename;
                     $email = \Config\Services::email();
                     $email->setTo($to);
                     $email->setSubject($subject);
