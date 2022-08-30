@@ -144,10 +144,8 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                     ];
                     if($this->taskrequestModel->updateTaskRequestMeta($id,$utaskdeliverdata))
                     {
-                        $requesttitle = getTaskRequest("task_title", $id);
-                        $cuserid = getTaskRequest("user_id", $id);
-
-                        $userdata = getLoggedInUserData($cuserid->meta_value);
+                        $requesttitle = getTaskRequest($id);
+                        $userdata = getLoggedInUserData($requesttitle->user_id);
                         $useremail = $userdata->user_email;
                         $username = $userdata->user_name;
 
@@ -163,7 +161,7 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                         $subject = 'Deliver a file | '.$sitename;
                         $message = "";
                         $message .= 'Dear user ('.$username.')<br>';
-                        $message .= 'Please find Updated Deliver file in attachment for your "'.$requesttitle->meta_value.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too<br><br>';
+                        $message .= 'Please find Updated Deliver file in attachment for your "'.$requesttitle->task_title.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too<br><br>';
                         $message .= '<br>If any changes required, you can contact us via email.<br>Best Regards,<br>'.$sitename;
                         $email = \Config\Services::email();
                         $email->setTo($to);
@@ -202,10 +200,8 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                 ];
                 if($this->taskrequestModel->addNewTaskRequestMeta($taskdeliverdata))
                 {
-                    $requesttitle = getTaskRequest("task_title", $id);
-                    $cuserid = getTaskRequest("user_id", $id);
-
-                    $userdata = getLoggedInUserData($cuserid->meta_value);
+                    $requesttitle = getTaskRequest($id);
+                    $userdata = getLoggedInUserData($requesttitle->user_id);
                     $useremail = $userdata->user_email;
                     $username = $userdata->user_name;
 
@@ -221,7 +217,7 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                     $subject = 'Deliver a file | '.$sitename;
                     $message = "";
                     $message .= 'Dear user ('.$username.')<br>';
-                    $message .= 'Please find Deliver file in attachment for your "'.$requesttitle->meta_value.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too<br><br>';
+                    $message .= 'Please find Deliver file in attachment for your "'.$requesttitle->task_title.'" request.<br>You can check in your <a href="'.base_url().'/dashboard" target="_blank">Dashboard</a> too<br><br>';
                     $message .= '<br>If any changes required, you can contact us via email.<br>Best Regards,<br>'.$sitename;
                     $email = \Config\Services::email();
                     $email->setTo($to);
