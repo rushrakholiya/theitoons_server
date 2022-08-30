@@ -172,7 +172,10 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                         $email->attach($path);
                         $email->send();
 
-                        $this->session->setTempdata('success','Deliver Data updated Successfully.',2);
+                        $email->printDebugger(['headers']);
+                            $this->session->setTempdata('success',$email->printDebugger(['headers']),2);
+
+                       // $this->session->setTempdata('success','Deliver Data updated Successfully.',2);
                         return redirect()->to(base_url().'/admin/allTaskRequests/viewTaskRequest/'.$id);
                     }
                     else
