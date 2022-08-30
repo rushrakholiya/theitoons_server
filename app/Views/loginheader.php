@@ -80,9 +80,15 @@ if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
         console.log(changelog.id); // unique id
         console.log(changelog.title); // title
         console.log(changelog.category); // category, lowercased
+        setTimeout(function () {
+           $('#HW_badge').text("What's New");
+        }, 10);
       },
       onReadMore: function(changelog){
         console.log(changelog); // same changelog object as in onShowDetails callback
+        setTimeout(function () {
+           $('#HW_badge').text("What's New");
+        }, 10);
       },
       onHideWidget: function(){
         console.log("Who turned off the light?");
