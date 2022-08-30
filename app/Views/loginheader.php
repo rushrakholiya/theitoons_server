@@ -86,6 +86,9 @@ if($menu_name=="taskRequest" || $menu_name=="editTaskRequest"){?>
       },
       onHideWidget: function(){
         console.log("Who turned off the light?");
+        setTimeout(function () {
+           $('#HW_badge').text("What's New");
+        }, 10);
       }
     }
 };
