@@ -37,7 +37,7 @@
   color: #fff;
   background-color: #17a2b8;
 }
-.taskdashboard .tbp:focus,.taskdashboard .tbp:hover,.taskdashboard .tbp:active, {
+.taskdashboard .tbp:focus,.taskdashboard .tbp:hover,.taskdashboard .tbp:active {
     text-decoration: none !important;
     box-shadow: unset !important;
     border: none !important;
