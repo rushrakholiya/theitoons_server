@@ -171,7 +171,7 @@
                 $drefimg = explode('/', $drimgaresult);
                 $drefimgname = array_reverse($drefimg);?>
                 <a href="<?= $drimgaresult;?>" data-toggle="lightbox" data-title="<?= $drefimgname[0];?>" data-gallery="gallery">
-                  <span class="col-sm-8"><?= $drefimgname[0];?></span>
+                  <span class="col-sm-8"><?= $drefimgname[0];?></span>&nbsp;&nbsp;&nbsp;
                 </a> 
                 <?php }?>                
               </div>

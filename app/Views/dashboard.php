@@ -135,7 +135,7 @@
                                       $ddrefimg = explode('/', $drimgaresult);
                                       $ddrefimgname = array_reverse($ddrefimg);?>
                                       <a href="<?= $drimgaresult;?>" download>
-                                        <span class=""><?= $ddrefimgname[0];?></span>
+                                        <span class=""><?= $ddrefimgname[0];?></span>&nbsp;&nbsp;&nbsp;
                                       </a>
                                       <?php }
                                       }else{echo "-";}?>
