@@ -129,7 +129,7 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                 if(!empty($deliver_file->meta_value) || !empty($task_deliver_description->meta_value))
                 {
                     $path = "";
-                    $file =  $this->request->getFile('deliver_file');
+                    /*$file =  $this->request->getFile('deliver_file');
                     if(!empty($file->getName()))
                     {                      
                         $filename = "deliver_".$file->getName();
@@ -137,7 +137,23 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                         {
                             $path = base_url().'/public/taskrequest/'.$filename ;
                         } 
-                    } else {$path = $deliver_file->meta_value;}
+                    } else {$path = $deliver_file->meta_value;}*/
+                    
+                    if($_FILES['deliver_file']['size'][0] <= 0)
+                    {
+                       $path = $deliver_file->meta_value;
+                    }
+                    else{
+                        foreach($this->request->getFileMultiple('deliver_file') as $file)
+                        {   
+                            $filename = "deliver_".$file->getName();
+                            if($file->move(FCPATH.'public/taskrequest', $filename ))
+                            {
+                                $fileBasename = base_url().'/public/taskrequest/'.$filename;
+                                $path .= "'".$fileBasename."',";
+                            }                    
+                        }                 
+                    }
                     $utaskdeliverdata = [                
                         ['meta_key' => 'deliver_file','meta_value' => $path,],
                         ['meta_key' => 'task_deliver_description','meta_value' => $this->request->getVar('task_deliver_description'),],                
@@ -148,6 +164,7 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                         $userdata = getLoggedInUserData($requesttitle->user_id);
                         $useremail = $userdata->user_email;
                         $username = $userdata->user_name;
+                        $adeliver_file = getTaskRequestMeta("deliver_file", $id);
 
                         $site_name = getGeneralData("site_name");
                         if(!empty($site_name->option_value)){$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
@@ -167,7 +184,16 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                         $email->setTo($to);
                         $email->setSubject($subject);
                         $email->setMessage($message);
-                        $email->attach($path);
+                        //$email->attach($path);
+                        if($adeliver_file->meta_value){
+                            $adeliverarray = array_filter(explode(',',$adeliver_file->meta_value));
+                            if(!empty($adeliverarray)){
+                                foreach($adeliverarray as $adimga){
+                                    $adimgaaresult = str_replace("'", '', $adimga);
+                                    $email->attach($adimgaaresult);
+                                }
+                            }
+                        }
                         $email->send();
 
                         //$email->printDebugger(['headers']);
@@ -185,7 +211,7 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                 }
             }else{
                 $path = "";
-                $file =  $this->request->getFile('deliver_file');
+                /*$file =  $this->request->getFile('deliver_file');
                 if(!empty($file->getName()))
                 {                      
                     $filename = "deliver_".$file->getName();
@@ -193,6 +219,17 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                     {
                         $path = base_url().'/public/taskrequest/'.$filename ;
                     } 
+                }*/
+                if($_FILES['deliver_file']['size'][0] > 0){                    
+                    foreach($this->request->getFileMultiple('deliver_file') as $file)
+                    {   
+                        $filename = "deliver_".$file->getName();
+                        if($file->move(FCPATH.'public/taskrequest', $filename ))
+                        {
+                            $fileBasename = base_url().'/public/taskrequest/'.$filename;
+                            $path .= "'".$fileBasename."',";
+                        }                    
+                    }                    
                 }
                 $taskdeliverdata = [                
                     ['task_id' => $id,'meta_key' => 'deliver_file','meta_value' => $path,],
@@ -204,6 +241,7 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                     $userdata = getLoggedInUserData($requesttitle->user_id);
                     $useremail = $userdata->user_email;
                     $username = $userdata->user_name;
+                    $adeliver_file = getTaskRequestMeta("deliver_file", $id);
 
                     $site_name = getGeneralData("site_name");
                     if(!empty($site_name->option_value)){$sitename=$site_name->option_value;}else{$sitename="TheIToons";}
@@ -223,7 +261,16 @@ class AllTaskRequests extends \App\Controllers\Admin\HFA_Controller
                     $email->setTo($to);
                     $email->setSubject($subject);
                     $email->setMessage($message);
-                    $email->attach($path);
+                    //$email->attach($path);
+                    if($adeliver_file->meta_value){
+                        $adeliverarray = array_filter(explode(',',$adeliver_file->meta_value));
+                        if(!empty($adeliverarray)){
+                            foreach($adeliverarray as $adimga){
+                                $adimgaaresult = str_replace("'", '', $adimga);
+                                $email->attach($adimgaaresult);
+                            }
+                        }
+                    }
                     $email->send();
 
                     $this->session->setTempdata('success','Deliver Data added Successfully.',2);

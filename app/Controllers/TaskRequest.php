@@ -81,7 +81,7 @@ class TaskRequest extends HF_Controller
                         $priority=getTaskRequestMeta("priority", $taskid);
                         $task_description = getTaskRequestMeta("task_description", $taskid);
                         $reference_img = getTaskRequestMeta("reference_img", $taskid);
-                        $refimgnames="";
+                        $refimgnames = "";
                           if($reference_img->meta_value){                 
                           /*$refimg = explode('/', $reference_img->meta_value);
                           $refimgname = array_reverse($refimg);
