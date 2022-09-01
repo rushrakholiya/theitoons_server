@@ -123,13 +123,22 @@
                                     <label for="uploadfile" class="control-label">Uploaded File :</label>
                                     <?php $ddeliver_file = getTaskRequestMeta("deliver_file", $row->task_id);
                                       if($ddeliver_file && !empty($ddeliver_file->meta_value)){
-                                      $ddrefimg = explode('/', $ddeliver_file->meta_value);
+                                      /*$ddrefimg = explode('/', $ddeliver_file->meta_value);
                                       $ddrefimgname = array_reverse($ddrefimg);
-                                      //print_r($refimgname);?>
+                                      //print_r($refimgname);
                                       <a href="<?= $ddeliver_file->meta_value;?>" download>
                                         <span class=""><?= $ddrefimgname[0];?></span>
+                                      </a>*/
+                                      $drefimgarray = array_filter(explode(',',$ddeliver_file->meta_value));
+                                      foreach($drefimgarray as $drimga){
+                                      $drimgaresult = str_replace("'", '', $drimga);
+                                      $ddrefimg = explode('/', $drimgaresult);
+                                      $ddrefimgname = array_reverse($ddrefimg);?>
+                                      <a href="<?= $drimgaresult;?>" download>
+                                        <span class=""><?= $ddrefimgname[0];?></span>
                                       </a>
-                                    <?php }else{echo "-";}?>
+                                      <?php }
+                                      }else{echo "-";}?>
                                   </div>
                                   <div class="form-group">
                                     <?php $dtask_deliver_description = getTaskRequestMeta("task_deliver_description", $row->task_id);?>

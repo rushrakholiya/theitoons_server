@@ -159,12 +159,21 @@
             <div class="card-body">
               <div class="form-group row">
                 <label class="col-sm-4">Uploaded file:</label>
-                <?php $drefimg = explode('/', $deliver_file->meta_value);
+                <?php /*$drefimg = explode('/', $deliver_file->meta_value);
                 $drefimgname = array_reverse($drefimg);
-                //print_r($refimgname);?>
+                //print_r($refimgname);
                 <a href="<?= $deliver_file->meta_value;?>" data-toggle="lightbox" data-title="<?= $drefimgname[0];?>" data-gallery="gallery">
                   <span class="col-sm-8"><?= $drefimgname[0];?></span>
-                </a>
+                </a>*/
+                $drefimgarray = array_filter(explode(',',$deliver_file->meta_value));
+                foreach($drefimgarray as $drimga){
+                $drimgaresult = str_replace("'", '', $drimga);
+                $drefimg = explode('/', $drimgaresult);
+                $drefimgname = array_reverse($drefimg);?>
+                <a href="<?= $drimgaresult;?>" data-toggle="lightbox" data-title="<?= $drefimgname[0];?>" data-gallery="gallery">
+                  <span class="col-sm-8"><?= $drefimgname[0];?></span>
+                </a> 
+                <?php }?>                
               </div>
               <div class="form-group row">
                 <label class="col-sm-4">Description:</label>
@@ -238,17 +247,26 @@
         <div class="modal-body">
           <div class="form-div">                       
             <div class="form-group">
-              <label for="uploadfile" class="control-label">Upload File</label>
-              <input type="file" class="form-control userProfilePicture" name="deliver_file" />
+              <label for="uploadfile" class="control-label">Upload Files</label>
+              <input type="file" class="form-control userProfilePicture" name="deliver_file[]" multiple="multiple"/>
               <?php $ddeliver_file = getTaskRequestMeta("deliver_file", $id);
                 if($ddeliver_file && !empty($ddeliver_file->meta_value)){
-                $ddrefimg = explode('/', $ddeliver_file->meta_value);
-                $ddrefimgname = array_reverse($ddrefimg);
-                //print_r($refimgname);?>
-                <a href="<?= $ddeliver_file->meta_value;?>" data-toggle="lightbox" data-title="<?= $ddrefimgname[0];?>" data-gallery="gallery">
-                  <span class="col-sm-8"><?= $ddrefimgname[0];?></span>
-                </a>
-              <?php }?>
+                  /*$ddrefimg = explode('/', $ddeliver_file->meta_value);
+                  $ddrefimgname = array_reverse($ddrefimg);
+                  print_r($refimgname);
+                  <a href="<?= $ddeliver_file->meta_value;?>" data-toggle="lightbox" data-title="<?= $ddrefimgname[0];?>" data-gallery="gallery">
+                    <span class="col-sm-8"><?= $ddrefimgname[0];?></span>
+                  </a>*/
+                  $drefimgarray = array_filter(explode(',',$ddeliver_file->meta_value));
+                  foreach($drefimgarray as $drimga){
+                  $drimgaresult = str_replace("'", '', $drimga);
+                  $ddrefimg = explode('/', $drimgaresult);
+                  $ddrefimgname = array_reverse($ddrefimg);?>
+                  <a href="<?= $drimgaresult;?>" data-toggle="lightbox" data-title="<?= $ddrefimgname[0];?>" data-gallery="gallery">
+                    <span class="col-sm-8"><?= $ddrefimgname[0];?></span>
+                  </a> 
+                  <?php }
+                }?>
             </div>
             <div class="form-group">
               <?php $dtask_deliver_description = getTaskRequestMeta("task_deliver_description", $id);?>
@@ -321,13 +339,13 @@
       },
       excluded: ':disabled',
       fields: {
-        deliver_file: {
+        "deliver_file[]": {
           validators: {
             file: {
-              extension: 'jpg,jpeg,png,pdf',
-              type: 'image/jpg,image/jpeg,image/png,application/pdf',
+              extension: 'jpg,jpeg,png,gif,pdf',
+              type: 'image/jpg,image/jpeg,image/png,image/gif,application/pdf',
               //maxSize: 2048 * 1024,
-              message: 'The selected file is not valid'
+              message: 'The selected file is not valid (only jpg,jpeg,png,gif,pdf allow)'
             }
           }
         },
