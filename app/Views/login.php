@@ -7,7 +7,7 @@
             {$site_logo=$site_logo->option_value;}else{$site_logo = base_url()."/public/assets/dist/img/logo.png";}?>
     <img src="<?= $site_logo;?>" alt="Logo" class="brand-image img-circle elevation-3" style="width: 20%;"><br>
     <!--<span class="brand-text font-weight-light">TheIToons</span><br>-->
-    <b>Login</b>
+    <b>Loginn</b>
   </div>
   <!-- /.login-logo -->
   <div class="card">
